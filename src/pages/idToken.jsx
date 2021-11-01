@@ -92,6 +92,7 @@ export default class IdToken extends React.Component {
         } else {
             return(
                 <>
+                    <div> UID: {this.state.uid}</div> 
                     <div> IDTOKEN: {this.state.token}</div> 
                     <input
                     type={"button"}
