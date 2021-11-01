@@ -1,5 +1,5 @@
 import './App.css';
-
+import IdToken from './pages/idToken';
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
@@ -12,11 +12,16 @@ const firebaseConfig = {
   measurementId: "G-9TVY77QJ8T"
 };
 
-const app = initializeApp(firebaseConfig);
 
 function App() {
+  
+  initializeApp(firebaseConfig);
+
   return (
-    <div> BOTHUB </div>
+    <>
+      <div> BOTHUB </div>
+      <IdToken></IdToken>
+    </>
   );
 }
 
