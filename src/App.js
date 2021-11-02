@@ -1,5 +1,8 @@
 import './App.css';
+import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import IdToken from './pages/idToken';
+import Home from './pages/Home';
+import PrivateRoute from "./PrivateRoute";
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
@@ -18,10 +21,13 @@ function App() {
   initializeApp(firebaseConfig);
 
   return (
-    <>
-      <div> BOTHUB </div>
-      <IdToken></IdToken>
-    </>
+    <Router>
+      <Switch>
+        <Route exact path="/" component={Home}/>
+        <Route exact path="/idToken" component={IdToken}/>
+        <PrivateRoute exact path="/bleh" component={Home} />
+      </Switch>
+    </Router>
   );
 }
 
