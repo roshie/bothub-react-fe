@@ -1,14 +1,28 @@
 import React from "react";
 import { getAuth, getIdToken, signOut, onAuthStateChanged, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-
+import { Row, Col, Button, Container } from "react-bootstrap";
 
 export default class IdToken extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             token: false,
-            uid: null
+            uid: null,
+            copied: false
         }
+    }
+
+    setUidIDToken(uid, user) {
+        getIdToken(user).then((idToken) => {
+            this.setState({
+                token: idToken,
+                uid: uid
+            })
+          }, (error) => {
+            this.setState({
+               token: false
+            })
+        });
     }
 
     componentDidMount() {
@@ -16,21 +30,8 @@ export default class IdToken extends React.Component {
          onAuthStateChanged(auth, (user) => {
             if (user) {
                 const uid = user.uid;
-                getIdToken(user).then((idToken) => {
-                    this.setState({
-                        token: idToken,
-                        uid: uid
-                    })
-                    console.log("UID", uid);
-                    console.log("idToken", idToken)
-
-                  }, (error) => {
-                    this.setState({
-                       token: false
-                    })
-                  });
-            } else {
-            }
+                this.setUidIDToken(uid, user);
+            } 
         })
     }
 
@@ -38,28 +39,12 @@ export default class IdToken extends React.Component {
     signInwithGoogle() {
         const auth = getAuth();
         const provider = new GoogleAuthProvider();
-        var uid = null; var token = null;
-        signInWithPopup(auth, provider)
-        .then((result) => {
-            getIdToken(result.user).then((idToken) => {
-                token = idToken;
-                uid = result.user.uid
-                console.log("UID", result.user.uid);
-                console.log("idToken", idToken)
-                
-              }, (error) => {
-                this.setState({
-                   token: false
-                })
-              });
-              this.setState({
-                token: token,
-                uid: uid
-            })
 
-        }).catch((error) => {
-            // Handle Errors here.
-            
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                this.setUidIDToken(result.user.uid, result.user);
+            }).catch((error) => {
+                console.log(error.message)
         });
     }
 
@@ -72,42 +57,44 @@ export default class IdToken extends React.Component {
             })
             
           }).catch((error) => {
-            // An error happened.
-          });
-          window.location.reload();
+            console.log(error.message)
+        });
+        window.location.reload();
     }
 
     render () {
         if (!this.state.token) {
             return (
-                <> 
-                    <input
-                    type={"button"}
-                    style={{ textTransform:"capitalize"}}
-                    onClick={this.signInwithGoogle}
-                    value={"Sign In with Google"}
-                    />
-                </>
+                <div className="vh-100 p-5" style={{backgroundColor: 'black', fontWeight: 'bold', fontFamily: 'monospace', color: 'white', pointer: 'cursor'}}>
+                    <Container className="d-flex flex-column justify-content-center align-items-center border rounded h-100">
+                        <Row className="justify-content-center my-4">
+                            <Button as={Col} onClick={this.signInwithGoogle} variant="dark" className="btn btn-outline-light">Sign In with Google</Button>
+                        </Row>
+                    </Container>
+                </div>
             );
         } else {
             return(
-                <>
-                    <div> UID: {this.state.uid}</div> 
-                    <div> IDTOKEN: {this.state.token}</div> 
-                    <input
-                    type={"button"}
-                    style={{ textTransform:"capitalize"}}
-                    onClick={this.logout}
-                    value={"Logout"}
-                    />
-                    <input
-                    type={"button"}
-                    style={{ textTransform:"capitalize"}}
-                    onClick={() => {window.location.reload()}}
-                    value={"Refresh"}
-                    />
-                </>
-                )
+                <div className="vh-100 p-5 font-weight-bold text-light cursor-pointer" style={{backgroundColor: 'black', fontFamily: 'monospace'}}>
+                    <Container className="d-flex flex-column justify-content-center align-items-center border rounded h-100">
+                        <Row className="text-center">
+                            <h4>ID Tokens</h4>
+                        </Row>
+                        <Row className="my-2">
+                            <div> UID: {this.state.uid}</div> 
+                        </Row>
+                        <Row>
+                            <div> IDTOKEN: <Button onClick={() => {navigator.clipboard.writeText(this.state.token); this.setState({ copied: true})}} variant="dark" className="btn btn-outline-light my-1">{this.state.copied ? "Done!" : "Copy"}</Button></div> 
+                            <textarea readOnly rows="7" cols="30" value={this.state.token} ></textarea>
+                        </Row>
+                        <Row className="justify-content-center my-4">
+                            <Button as={Col} onClick={this.logout} variant="dark" className="btn btn-outline-light">Logout</Button>
+                            <Button as={Col} onClick={() => {window.location.reload()}} variant="dark" className="mx-2 btn btn-outline-light">Refresh</Button> 
+                        </Row>
+                    </Container>
+                </div>
+                
+            )
         }
     }
 }

@@ -1,7 +1,16 @@
-import './App.css';
-import IdToken from './pages/idToken';
-import { initializeApp } from "firebase/app";
+import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
+import IdToken from './pages/idToken';
+import Home from './pages/Home';
+
+import PrivateRoute from "./PrivateRoute";
+import './App.scss';
+
+import { initializeApp } from "firebase/app";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+// Firebase Config
 const firebaseConfig = {
   apiKey: "AIzaSyDYWjzXg1TsC0lXtKQkGeep_IMMl7z_onQ",
   authDomain: "bothub-6a2e3.firebaseapp.com",
@@ -14,14 +23,17 @@ const firebaseConfig = {
 
 
 function App() {
-  
+  // Init Firebase
   initializeApp(firebaseConfig);
 
   return (
-    <>
-      <div> BOTHUB </div>
-      <IdToken></IdToken>
-    </>
+    <Router>
+      <Switch>
+        <Route exact path="/" component={Home}/>
+        <Route exact path="/idToken" component={IdToken}/>
+        <PrivateRoute exact path="/bleh" component={Home} />
+      </Switch>
+    </Router>
   );
 }
 
