@@ -11,26 +11,26 @@ export default class IdToken extends React.Component {
         }
     }
 
+    setUidIDToken(uid, user) {
+        getIdToken(user).then((idToken) => {
+            this.setState({
+                token: idToken,
+                uid: uid
+            })
+          }, (error) => {
+            this.setState({
+               token: false
+            })
+        });
+    }
+
     componentDidMount() {
         const auth = getAuth();
          onAuthStateChanged(auth, (user) => {
             if (user) {
                 const uid = user.uid;
-                getIdToken(user).then((idToken) => {
-                    this.setState({
-                        token: idToken,
-                        uid: uid
-                    })
-                    console.log("UID", uid);
-                    console.log("idToken", idToken)
-
-                  }, (error) => {
-                    this.setState({
-                       token: false
-                    })
-                  });
-            } else {
-            }
+                this.setUidIDToken(uid, user);
+            } 
         })
     }
 
@@ -38,28 +38,12 @@ export default class IdToken extends React.Component {
     signInwithGoogle() {
         const auth = getAuth();
         const provider = new GoogleAuthProvider();
-        var uid = null; var token = null;
-        signInWithPopup(auth, provider)
-        .then((result) => {
-            getIdToken(result.user).then((idToken) => {
-                token = idToken;
-                uid = result.user.uid
-                console.log("UID", result.user.uid);
-                console.log("idToken", idToken)
-                
-              }, (error) => {
-                this.setState({
-                   token: false
-                })
-              });
-              this.setState({
-                token: token,
-                uid: uid
-            })
 
-        }).catch((error) => {
-            // Handle Errors here.
-            
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                this.setUidIDToken(result.user.uid, result.user);
+            }).catch((error) => {
+                console.log(error.message)
         });
     }
 
@@ -72,9 +56,9 @@ export default class IdToken extends React.Component {
             })
             
           }).catch((error) => {
-            // An error happened.
-          });
-          window.location.reload();
+            console.log(error.message)
+        });
+        window.location.reload();
     }
 
     render () {

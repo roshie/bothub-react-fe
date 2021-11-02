@@ -1,10 +1,15 @@
-import './App.css';
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
+
 import IdToken from './pages/idToken';
 import Home from './pages/Home';
+
 import PrivateRoute from "./PrivateRoute";
+import './App.scss';
+
 import { initializeApp } from "firebase/app";
 
+
+// Firebase Config
 const firebaseConfig = {
   apiKey: "AIzaSyDYWjzXg1TsC0lXtKQkGeep_IMMl7z_onQ",
   authDomain: "bothub-6a2e3.firebaseapp.com",
@@ -17,7 +22,7 @@ const firebaseConfig = {
 
 
 function App() {
-  
+  // Init Firebase
   initializeApp(firebaseConfig);
 
   return (
