@@ -7,6 +7,7 @@ import PrivateRoute from "./PrivateRoute";
 import './App.scss';
 
 import { initializeApp } from "firebase/app";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 // Firebase Config

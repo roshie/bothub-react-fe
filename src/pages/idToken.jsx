@@ -68,14 +68,14 @@ export default class IdToken extends React.Component {
                 <div className="vh-100 p-5" style={{backgroundColor: 'black', fontWeight: 'bold', fontFamily: 'monospace', color: 'white', pointer: 'cursor'}}>
                     <Container className="d-flex flex-column justify-content-center align-items-center border rounded h-100">
                         <Row className="justify-content-center my-4">
-                            <Button as={Col} onClick={this.signInwithGoogle} variant="primary" style={{color: 'white', border: '1px solid white', borderRadius: '10px'}}>Sign In with Google</Button>
+                            <Button as={Col} onClick={this.signInwithGoogle} variant="dark" className="btn btn-outline-light">Sign In with Google</Button>
                         </Row>
                     </Container>
                 </div>
             );
         } else {
             return(
-                <div className="vh-100 p-5" style={{backgroundColor: 'black', fontWeight: 'bold', fontFamily: 'monospace', color: 'white', pointer: 'cursor'}}>
+                <div className="vh-100 p-5 font-weight-bold text-light cursor-pointer" style={{backgroundColor: 'black', fontFamily: 'monospace'}}>
                     <Container className="d-flex flex-column justify-content-center align-items-center border rounded h-100">
                         <Row className="text-center">
                             <h4>ID Tokens</h4>
@@ -84,12 +84,12 @@ export default class IdToken extends React.Component {
                             <div> UID: {this.state.uid}</div> 
                         </Row>
                         <Row>
-                            <div> IDTOKEN: <input type="button" onClick={() => {navigator.clipboard.writeText(this.state.token); this.setState({ copied: true})}} value={this.state.copied ? "Done!" : "Copy"} className="btn my-1" style={{color: 'white', border: '1px solid white', borderRadius: '10px'}}/></div> 
+                            <div> IDTOKEN: <Button onClick={() => {navigator.clipboard.writeText(this.state.token); this.setState({ copied: true})}} variant="dark" className="btn btn-outline-light my-1">{this.state.copied ? "Done!" : "Copy"}</Button></div> 
                             <textarea readOnly rows="7" cols="30" value={this.state.token} ></textarea>
                         </Row>
                         <Row className="justify-content-center my-4">
-                            <Button as={Col} onClick={this.logout} variant="primary" style={{color: 'white', border: '1px solid white', borderRadius: '10px'}}>Logout</Button>
-                            <Button as={Col} onClick={() => {window.location.reload()}} variant="secondary" className="mx-2" style={{color: 'white', border: '1px solid white', borderRadius: '10px'}}>Refresh</Button> 
+                            <Button as={Col} onClick={this.logout} variant="dark" className="btn btn-outline-light">Logout</Button>
+                            <Button as={Col} onClick={() => {window.location.reload()}} variant="dark" className="mx-2 btn btn-outline-light">Refresh</Button> 
                         </Row>
                     </Container>
                 </div>
