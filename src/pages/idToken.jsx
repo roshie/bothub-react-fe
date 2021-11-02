@@ -1,13 +1,14 @@
 import React from "react";
 import { getAuth, getIdToken, signOut, onAuthStateChanged, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-
+import { Row, Col, Button, Container } from "react-bootstrap";
 
 export default class IdToken extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             token: false,
-            uid: null
+            uid: null,
+            copied: false
         }
     }
 
@@ -64,33 +65,35 @@ export default class IdToken extends React.Component {
     render () {
         if (!this.state.token) {
             return (
-                <> 
-                    <input
-                    type={"button"}
-                    style={{ textTransform:"capitalize"}}
-                    onClick={this.signInwithGoogle}
-                    value={"Sign In with Google"}
-                    />
-                </>
+                <div className="vh-100 p-5" style={{backgroundColor: 'black', fontWeight: 'bold', fontFamily: 'monospace', color: 'white', pointer: 'cursor'}}>
+                    <Container className="d-flex flex-column justify-content-center align-items-center border rounded h-100">
+                        <Row className="justify-content-center my-4">
+                            <Button as={Col} onClick={this.signInwithGoogle} variant="primary" style={{color: 'white', border: '1px solid white', borderRadius: '10px'}}>Sign In with Google</Button>
+                        </Row>
+                    </Container>
+                </div>
             );
         } else {
             return(
-                <div style={{'fontWeight': 'bold', 'fontFamily': 'monospace'}}>
-                    <div> UID: {this.state.uid}</div> 
-                    <div> IDTOKEN: {this.state.token}</div> 
-                    <input
-                    type={"button"}
-                    style={{ textTransform:"capitalize"}}
-                    onClick={this.logout}
-                    value={"Logout"}
-                    />
-                    <input
-                    type={"button"}
-                    style={{ textTransform:"capitalize"}}
-                    onClick={() => {window.location.reload()}}
-                    value={"Refresh"}
-                    />
+                <div className="vh-100 p-5" style={{backgroundColor: 'black', fontWeight: 'bold', fontFamily: 'monospace', color: 'white', pointer: 'cursor'}}>
+                    <Container className="d-flex flex-column justify-content-center align-items-center border rounded h-100">
+                        <Row className="text-center">
+                            <h4>ID Tokens</h4>
+                        </Row>
+                        <Row className="my-2">
+                            <div> UID: {this.state.uid}</div> 
+                        </Row>
+                        <Row>
+                            <div> IDTOKEN: <input type="button" onClick={() => {navigator.clipboard.writeText(this.state.token); this.setState({ copied: true})}} value={this.state.copied ? "Done!" : "Copy"} className="btn my-1" style={{color: 'white', border: '1px solid white', borderRadius: '10px'}}/></div> 
+                            <textarea readOnly rows="7" cols="30" value={this.state.token} ></textarea>
+                        </Row>
+                        <Row className="justify-content-center my-4">
+                            <Button as={Col} onClick={this.logout} variant="primary" style={{color: 'white', border: '1px solid white', borderRadius: '10px'}}>Logout</Button>
+                            <Button as={Col} onClick={() => {window.location.reload()}} variant="secondary" className="mx-2" style={{color: 'white', border: '1px solid white', borderRadius: '10px'}}>Refresh</Button> 
+                        </Row>
+                    </Container>
                 </div>
+                
             )
         }
     }
