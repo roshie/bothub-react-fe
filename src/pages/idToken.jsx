@@ -75,7 +75,7 @@ export default class IdToken extends React.Component {
             );
         } else {
             return(
-                <>
+                <div style={{'fontWeight': 'bold', 'fontFamily': 'monospace'}}>
                     <div> UID: {this.state.uid}</div> 
                     <div> IDTOKEN: {this.state.token}</div> 
                     <input
@@ -90,8 +90,8 @@ export default class IdToken extends React.Component {
                     onClick={() => {window.location.reload()}}
                     value={"Refresh"}
                     />
-                </>
-                )
+                </div>
+            )
         }
     }
 }
