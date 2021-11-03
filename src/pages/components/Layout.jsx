@@ -26,7 +26,7 @@ export default function Layout(props) {
                         </span>
                         <span className="navbar-brand mb-0 h1"></span>
                         <span className="navbar-brand mb-0 h1 d-none d-md-block">
-                            <Item href={props.page === "home" ? "#" : routes.home} active={props.page === "home" ? true : false}>Home</Item>
+                            <Item href={props.page === "home" ? "#home" : routes.home} active={props.page === "home" ? true : false}>Home</Item>
                             <Item href={props.page === "home" ? "#categories" : `${routes.home}#categories`} active={false}>Categories</Item>
                             <Item href={props.page === "home" ? "#3dPrinting" : `${routes.home}#3dPrinting`} active={false}>3D Printing</Item>
                             {props.loginState ?
@@ -50,7 +50,7 @@ export default function Layout(props) {
                     <Modal.Title className="text-light">Menu</Modal.Title>
                 </Modal.Header>
                 <Modal.Body className="bg-primary d-flex flex-column">
-                    <Item href={props.page === "home" ? "#" : routes.home} active={props.page === "home" ? true : false}>Home</Item>
+                    <Item href={props.page === "home" ? "#home" : routes.home} active={props.page === "home" ? true : false}>Home</Item>
                     <Item href={props.page === "home" ? "#categories" : `${routes.home}#categories`} active={false}>Categories</Item>
                     <Item href={props.page === "home" ? "#3dPrinting" : `${routes.home}#3dPrinting`} active={false}>3D Printing</Item>
                     {props.loginState ?
