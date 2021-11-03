@@ -15,6 +15,24 @@ export default function Layout(props) {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    const setAndClose = () => {
+        setShow(false);
+        scroll()
+    }
+
+    useEffect(() => {
+        scroll()
+    }, [])
+
+
+    const scroll = () => {
+        if (props.page === "home") {
+            const href = window.location.href.split('/').pop()
+            console.log("href: ", href)
+            // if (href != '') document.getElementById(href).scrollIntoView()
+        }
+    }
+
     return (
         <>
             <Headroom>
@@ -50,9 +68,9 @@ export default function Layout(props) {
                     <Modal.Title className="text-light">Menu</Modal.Title>
                 </Modal.Header>
                 <Modal.Body className="bg-primary d-flex flex-column">
-                    <Item href={props.page === "home" ? "#home" : routes.home} active={props.page === "home" ? true : false} onClick={handleClose}>Home</Item>
-                    <Item href={props.page === "home" ? "#categories" : `${routes.home}#categories`} active={false} onClick={handleClose}>Categories</Item>
-                    <Item href={props.page === "home" ? "#3dPrinting" : `${routes.home}#3dPrinting`} active={false} onClick={handleClose}>3D Printing</Item>
+                    <Item href={props.page === "home" ? "#home" : routes.home} active={props.page === "home" ? true : false} onClick={setAndClose}>Home</Item>
+                    <Item href={props.page === "home" ? "#categories" : `${routes.home}#categories`} active={false} onClick={setAndClose}>Categories</Item>
+                    <Item href={props.page === "home" ? "#3dPrinting" : `${routes.home}#3dPrinting`} active={false} onClick={setAndClose}>3D Printing</Item>
                     {props.loginState ?
                         <>
                             <Item href={props.page === "profile" ? "#" : routes.profile} active={props.page === "profile" ? true : false}>Profile</Item>

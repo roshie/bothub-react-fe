@@ -1,7 +1,8 @@
+import { useRef } from "react";
 import Layout from "./components/Layout"
 
 
-function LandingPage() {
+function LandingPage(props) {
     return (
         <section className="vh-100" id="home" name="home">
             <div className="row m-auto">
@@ -14,7 +15,7 @@ function LandingPage() {
     );
 }
 
-function Categories() {
+function Categories(props) {
     return (
         <section id="categories" className="vh-100 text-light" name="categories">
             <div className="row m-auto">
@@ -24,7 +25,7 @@ function Categories() {
     );
 }
 
-function D3Printing() {
+function D3Printing(props) {
     return (
         <section id="3dPrinting" className="vh-100 text-light" name="3dPrinting">
             <div className="row m-auto">
@@ -35,6 +36,7 @@ function D3Printing() {
 }
 
 export default function Home(props) {
+
     return (
         <Layout loginState={props.login} page="home">
             <LandingPage />
