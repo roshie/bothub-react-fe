@@ -1,6 +1,6 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { Spinner } from "react-bootstrap";
 import { routes } from "./App";
 

@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
-import { faInstagram, faFacebook, faLinkedin, faYoutube } from '@fortawesome/free-brands-svg-icons';  
 import Headroom from 'react-headroom';  
 import { useState, useEffect } from 'react';
 import { routes } from '../../App';
@@ -64,9 +63,20 @@ export default function Layout(props) {
                     }  
                 </Modal.Body>
             </Modal>
-
             {props.children}
-            <footer> </footer>
+
+            <footer className="bg-secondary">
+                <div className="foot bg-secondary"></div>
+                <div className="col" style={{marginLeft: '10%', marginRight: '10%'}}>
+                    <h3 className="fw-bolder text-light">Contact</h3>
+                    <div className="row mt-4">
+                        <div className="col-12 col-md-4">Mail</div>
+                        <div className="col-12 col-md-4">Insta</div>
+                        <div className="col-12 col-md-4">Youtube</div>
+                    </div>
+                    
+                </div>
+            </footer>
             
         </>
     );
