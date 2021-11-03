@@ -1,7 +1,27 @@
+// $theme-colors: (
+//   "primary": #191e31,
+//   "secondary": #b60000,
+//   "info": #192245,
+// );
+
+// Required
+@import "../node_modules/bootstrap/scss/functions";
+
+// Default variable overrides
+$primary: #121627;
+$secondary: #b60000;
+$info: #192245;
+
 $theme-colors: (
-  "info": tomato,
-  "danger": teal,
+  "primary": $primary,
+  "secondary": $secondary,
+  "info": $info,
 );
 
-/* import bootstrap to set changes */
-@import "~bootstrap/scss/bootstrap";
+body {
+  background-color: $primary;
+}
+
+// Required
+@import "../node_modules/bootstrap/scss/variables";
+@import "../node_modules/bootstrap/scss/mixins";
