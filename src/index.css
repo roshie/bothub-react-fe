@@ -20,3 +20,14 @@ footer {
   transform: skewY(6deg);
   transform-origin: top right;
 }
+
+.tagline {
+  font-size: 3.5rem;
+}
+
+@media screen and (max-width: 768px) {
+  .tagline {
+    font-size: 2rem;
+    text-align: center;
+  }
+}
