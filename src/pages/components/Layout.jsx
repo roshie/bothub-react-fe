@@ -4,7 +4,7 @@ import { faInstagram, faFacebook, faLinkedin, faYoutube } from '@fortawesome/fre
 import Headroom from 'react-headroom';  
 import { useState, useEffect } from 'react';
 import { routes } from '../../App';
-import logout from '../../PrivateRoute'
+import logout from '../../logout'
 import { Modal } from 'react-bootstrap';
 
 

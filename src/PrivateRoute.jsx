@@ -4,16 +4,6 @@ import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { Spinner } from "react-bootstrap";
 import { routes } from "./App";
 
-
-function logout() {
-    const auth = getAuth();
-    signOut(auth).then(() => {
-        console.log("Signed out")
-      }).catch((error) => {
-        console.log(error.message)
-    });
-    window.location.reload();
-}
 export default class PrivateRoute extends React.Component {
     constructor(props) {
         super(props);
@@ -34,6 +24,9 @@ export default class PrivateRoute extends React.Component {
                 })
             } else {
                 console.log("AuthState: False")
+                this.setState({
+                    isLoaded: true
+                })
             }
         })
 
@@ -46,7 +39,7 @@ export default class PrivateRoute extends React.Component {
             return (
                 <div className="d-flex justify-content-center align-items-center"
                         style={{ height: "100vh", width: "100vw" }}>
-                    <Spinner animation="border" />
+                    <Spinner animation="border" className="text-light"/>
                 </div>
             );
 
