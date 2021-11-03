@@ -50,13 +50,13 @@ export default function Layout(props) {
                     <Modal.Title className="text-light">Menu</Modal.Title>
                 </Modal.Header>
                 <Modal.Body className="bg-primary d-flex flex-column">
-                    <Item href={props.page === "home" ? "#home" : routes.home} active={props.page === "home" ? true : false}>Home</Item>
-                    <Item href={props.page === "home" ? "#categories" : `${routes.home}#categories`} active={false}>Categories</Item>
-                    <Item href={props.page === "home" ? "#3dPrinting" : `${routes.home}#3dPrinting`} active={false}>3D Printing</Item>
+                    <Item href={props.page === "home" ? "#home" : routes.home} active={props.page === "home" ? true : false} onClick={handleClose}>Home</Item>
+                    <Item href={props.page === "home" ? "#categories" : `${routes.home}#categories`} active={false} onClick={handleClose}>Categories</Item>
+                    <Item href={props.page === "home" ? "#3dPrinting" : `${routes.home}#3dPrinting`} active={false} onClick={handleClose}>3D Printing</Item>
                     {props.loginState ?
                         <>
                             <Item href={props.page === "profile" ? "#" : routes.profile} active={props.page === "profile" ? true : false}>Profile</Item>
-                            <Item href="NA" active={false}>Logout</Item>
+                            <Item href="NA" active={false} onClick={logout}>Logout</Item>
                         </>
                         :
                             <Item href={`${routes.login}?redirect=${props.page}`} active={false}>Login</Item>
@@ -86,7 +86,7 @@ function Item (props) {
     return (
         <a
         href={props.href !== 'NA' ? props.href : '#'}
-        onClick={props.href === 'NA' ? logout : () => true}
+        onClick={props.onClick}
         className={`navbar-link m-2 fs-6 ${props.active ? 'text-secondary' : 'text-light'}`} 
         style={{textDecoration: 'none', cursor: 'pointer'}}>
             {props.children}
