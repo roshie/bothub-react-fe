@@ -2,6 +2,7 @@ import React from "react";
 import { getAuth, getIdToken, signOut, onAuthStateChanged, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { Row, Col, Button, Container } from "react-bootstrap";
 
+// idToken - For Dev purpose
 export default class IdToken extends React.Component {
     constructor(props) {
         super(props)
