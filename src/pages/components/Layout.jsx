@@ -15,9 +15,9 @@ export default function Layout(props) {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const setAndClose = () => {
+    const setAndClose = (e) => {
         setShow(false);
-        scroll()
+        scroll(e.target.href)
     }
 
     useEffect(() => {
@@ -25,18 +25,21 @@ export default function Layout(props) {
     }, [])
 
 
-    const scroll = () => {
+    const scroll = (path=window.location.href) => {
         if (props.page === "home") {
-            const href = window.location.href.split('/').pop()
+            const href = path.split('/').pop()
             console.log("href: ", href)
-            // if (href != '') document.getElementById(href).scrollIntoView()
+            if (href.startsWith('#')) {
+                const elem = document.querySelector(href);
+                elem.scrollIntoView(true)
+            }
         }
     }
 
     return (
         <>
             <Headroom>
-                <nav className="navbar navbar-light bg-primary shadow-sm" style={{ height: '80px' }}>
+                <nav className="navbar navbar-light bg-info shadow" style={{ height: '80px' }}>
                     <div className="container-fluid justify-content-around">
                         <span className="navbar-brand mb-0 d-flex flex-column">
                             <h3 className="fw-bold text-light mb-0">BotHub.in</h3>
@@ -46,7 +49,7 @@ export default function Layout(props) {
                         <span className="navbar-brand mb-0 h1 d-none d-md-block">
                             <Item href={props.page === "home" ? "#home" : routes.home} active={props.page === "home" ? true : false}>Home</Item>
                             <Item href={props.page === "home" ? "#categories" : `${routes.home}#categories`} active={false}>Categories</Item>
-                            <Item href={props.page === "home" ? "#3dPrinting" : `${routes.home}#3dPrinting`} active={false}>3D Printing</Item>
+                            <Item href={props.page === "home" ? "#threeDPrinting" : `${routes.home}#threeDPrinting`} active={false}>3D Printing</Item>
                             {props.loginState ?
                                 <>
                                     <Item href={props.page === "profile" ? "#" : routes.profile} active={props.page === "profile" ? true : false}>Profile</Item>
@@ -70,7 +73,7 @@ export default function Layout(props) {
                 <Modal.Body className="bg-primary d-flex flex-column">
                     <Item href={props.page === "home" ? "#home" : routes.home} active={props.page === "home" ? true : false} onClick={setAndClose}>Home</Item>
                     <Item href={props.page === "home" ? "#categories" : `${routes.home}#categories`} active={false} onClick={setAndClose}>Categories</Item>
-                    <Item href={props.page === "home" ? "#3dPrinting" : `${routes.home}#3dPrinting`} active={false} onClick={setAndClose}>3D Printing</Item>
+                    <Item href={props.page === "home" ? "#threeDPrinting" : `${routes.home}#threeDPrinting`} active={false} onClick={setAndClose}>3D Printing</Item>
                     {props.loginState ?
                         <>
                             <Item href={props.page === "profile" ? "#" : routes.profile} active={props.page === "profile" ? true : false}>Profile</Item>

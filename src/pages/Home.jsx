@@ -27,7 +27,7 @@ function Categories(props) {
 
 function D3Printing(props) {
     return (
-        <section id="3dPrinting" className="vh-100 text-light" name="3dPrinting">
+        <section id="threeDPrinting" className="vh-100 text-light" name="threeDPrinting">
             <div className="row m-auto">
                 3d Printing
             </div>
