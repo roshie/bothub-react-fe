@@ -25,7 +25,7 @@ function Categories(props) {
     );
 }
 
-function D3Printing(props) {
+function threeDPrinting(props) {
     return (
         <section id="threeDPrinting" className="vh-100 text-light" name="threeDPrinting">
             <div className="row m-auto">
@@ -41,7 +41,7 @@ export default function Home(props) {
         <Layout loginState={props.login} page="home">
             <LandingPage />
             <Categories />
-            <D3Printing />
+            <threeDPrinting />
         </Layout>
     );
 }
