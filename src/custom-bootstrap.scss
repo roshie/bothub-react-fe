@@ -42,6 +42,21 @@ body {
   color: white;
 }
 
+.btn {
+  border-radius: 10px !important;
+  box-shadow: 0 0 1rem 0px rgba(0, 0, 0, 0.425) !important;
+}
+
+.card {
+  background-color: $info !important;
+  border-radius: 20px !important;
+  box-shadow: 0 0 5rem 0px rgba(0, 0, 0, 0.3) !important;
+}
+
+.btn-secondary {
+  border: 1px solid $secondary;
+}
+
 .text-secondary {
   color: $secondary !important;
 }
@@ -54,4 +69,8 @@ body {
 
 .text-info {
   color: $info !important;
+}
+
+.modal-content {
+  background-color: $primary;
 }

@@ -20,9 +20,13 @@ footer {
   transform: skewY(6deg);
   transform-origin: top right;
 }
-.hello
-{
-  justify-content: center;
+
+.radius-10 {
+  border-radius: 10px !important;
+}
+
+.radius-20 {
+  border-radius: 20px !important;
 }
 
 .tagline {
