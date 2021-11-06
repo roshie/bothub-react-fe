@@ -29,7 +29,7 @@ export function Product(props) {
     );
 
     //  Use like this. eg:
-    //  <Product url="#" imgThumbnail="IOT.jfif" productTitle="Bosch Washing machine" productPrice="25000" />
+    // <Product url="#" imgThumbnail="IOT.jfif" productTitle="Bosch Washing machine" productPrice="25000" />
 }
 
 const goTo = (url) => window.location.href(url)

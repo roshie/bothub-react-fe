@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import IdToken from './pages/idToken';
 import Home from './pages/Home';
 import Login from './pages/Login';
+import Products from './pages/Products';
 
 import PrivateRoute from "./PrivateRoute";
 import 'bootstrap/scss/bootstrap.scss'
@@ -29,6 +30,7 @@ export const routes = {
   home: '/',
   idToken: '/idToken',
   profile: '/profile',
+  products: '/products'
 }
 
 function App() {
@@ -41,6 +43,8 @@ function App() {
         <Route exact path={routes.idToken} component={IdToken}/>
         <PrivateRoute exact path={routes.home} component={Home} />
         <PrivateRoute exact path={routes.login} component={Login} />
+        <PrivateRoute exact path={routes.products} component={Products} />
+        
         {/* Add more ... */}
       </Switch>
     </Router>
