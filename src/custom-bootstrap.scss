@@ -75,3 +75,9 @@ body {
 .modal-content {
   background-color: $primary;
 }
+.btn-link{
+  border: none;
+  background-color: transparent;
+  color: $secondary;
+  text-decoration: none;
+}
