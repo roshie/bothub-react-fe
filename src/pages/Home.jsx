@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import Layout from "./components/Layout";
 import { Category } from "./components/Cards"
 

@@ -22,6 +22,7 @@ export default function Layout(props) {
 
     useEffect(() => {
         scroll()
+        // eslint-disable-next-line
     }, [])
 
 
@@ -36,7 +37,7 @@ export default function Layout(props) {
             }
         }
     }
-
+    
     return (
         <>
             <Headroom>
@@ -60,9 +61,9 @@ export default function Layout(props) {
                                     <Item href={`${routes.login}?redirect=${props.page}`} active={false}>Login</Item>
                             }   
                         </span>
-                        <a className="navbar-toggler d-block d-md-none" type="button" onClick={handleShow}>
+                        <button className="navbar-toggler d-block d-md-none" type="button" onClick={handleShow}>
                             <FontAwesomeIcon icon={faBars} className="text-secondary"/>
-                        </a>
+                        </button>
                     </div>
                 </nav>
             </Headroom>
