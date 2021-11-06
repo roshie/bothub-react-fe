@@ -26,12 +26,13 @@ export default function Layout(props) {
 
 
     const scroll = (path=window.location.href) => {
+        console.log(path)
         if (props.page === "home") {
             const href = path.split('/').pop()
             console.log("href: ", href)
             if (href.startsWith('#')) {
-                // const elem = document.querySelector(href);
-                // elem.scrollIntoView(true)
+                const elem = document.querySelector(href);
+                elem.scrollIntoView(true)
             }
         }
     }
@@ -67,7 +68,7 @@ export default function Layout(props) {
             </Headroom>
 
             <Modal show={show} onHide={handleClose} size="lg">
-                <Modal.Header closeButton style={{'border': 'none'}} className="bg-primary">
+                <Modal.Header closeButton style={{'border': 'none'}} className="bg-info">
                     <Modal.Title className="text-light">Menu</Modal.Title>
                 </Modal.Header>
                 <Modal.Body className="bg-primary d-flex flex-column">
@@ -87,7 +88,7 @@ export default function Layout(props) {
             {props.children}
 
             <footer className="bg-secondary">
-                <div className="foot bg-secondary"></div>
+                <div className="foot bg-secondary shadow"></div>
                 <div className="col" style={{marginLeft: '10%', marginRight: '10%'}}>
                     <h3 className="fw-bolder text-light">Contact</h3>
                     <div className="row mt-4">

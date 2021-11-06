@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import Layout from "./components/Layout";
-import { Card } from "react-bootstrap";
+import { Category } from "./components/Cards"
 
 function LandingPage(props) {
   return (
@@ -20,66 +20,33 @@ function LandingPage(props) {
 function Categories(props) {
   return (
     <section id="categories" className=" text-light" name="categories">
-      <div className="row m-auto w-75">
-        <div data-aos="fade-in" data-aos-duration="2000">
-          <div
-            className="text-center pt-5 h2 "
-            style={{ fontWeight: "bolder" }}
-          >
-            Categories
-          </div>
-          <div class="row mt-4 ">
-  <div class="col-sm-4 mb-3 ">
-  <div class="card" style={{backgroundColor:'#192245',borderRadius:'20px'}}>
-    
-    <div class="card-body text-center " >
-    <img src="IOT.jfif" class="card-img-top" style={{borderRadius:'20px'}} alt="..."/>
-    
-      <h5 class="card-title mt-4">IOT Components</h5>
-      <a href="#" class="btn btn-danger mt-2" >View More</a>
-    </div>
-  </div>
-  </div>
-  <div class="col-sm-4 mb-3">
-  <div class="card" style={{backgroundColor:'#192245',borderRadius:'20px'}}>
-    
-    <div class="card-body text-center " >
-    <img src="IOT.jfif" class="card-img-top" style={{borderRadius:'20px'}} alt="..."/>
-    
-      <h5 class="card-title mt-4">IOT Components</h5>
-      <a href="#" class="btn btn-danger mt-2" >View More</a>
-    </div>
-  </div>
-  </div>
-  <div class="col-sm-4 mb-3">
-    <div class="card" style={{backgroundColor:'#192245',borderRadius:'20px'}}>
-    
-      <div class="card-body text-center " >
-      <img src="IOT.jfif" class="card-img-top" style={{borderRadius:'20px'}} alt="..."/>
-      
-        <h5 class="card-title mt-4">IOT Components</h5>
-        <a href="#" class="btn btn-danger mt-2" >View More</a>
-      </div>
-    </div>
-  </div>
-</div>
-          </div>
-          </div>
-      
+        <div className="row m-auto w-75">
+            <div
+                className="text-center pt-5 h2 "
+                style={{ fontWeight: "bolder" }}
+            >
+                Shop by Category
+            </div>
+            <div className="row mt-4 mx-auto p-0 justify-content-center">
+                <div className="col-md-4 my-3">
+                    <Category imgPath="IOT.jfif" categoryTitle="IOT Components" categoryId="66767677"/>
+                </div>
+            </div>
+        </div>
     </section>
   );
 }
 
-function threeDPrinting(props) {
-  return (
-    <section
-      id="threeDPrinting"
-      className="vh-100 text-light"
-      name="threeDPrinting"
-    >
-      <div className="row m-auto">3d Printing</div>
-    </section>
-  );
+function D3Printing(props) {
+    return (
+      <section
+        id="threeDPrinting"
+        className="vh-100 text-light"
+        name="threeDPrinting"
+      >
+        <div className="row m-auto">3d Printing</div>
+      </section>
+    );
 }
 
 export default function Home(props) {
@@ -87,7 +54,11 @@ export default function Home(props) {
     <Layout loginState={props.login} page="home">
       <LandingPage />
       <Categories />
-      <threeDPrinting />
+      <D3Printing />
     </Layout>
   );
 }
+
+
+
+    
