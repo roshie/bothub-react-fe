@@ -2,6 +2,8 @@ import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 import IdToken from './pages/idToken';
 import Home from './pages/Home';
+import Product from './pages/Product';
+import Products from "./pages/Products";
 import Authenticate from './pages/Authenticate';
 
 import PrivateRoute from "./PrivateRoute";
@@ -30,6 +32,8 @@ export const routes = {
   home: '/',
   idToken: '/idToken',
   profile: '/profile',
+  product: '/product',
+  products: '/products',
 }
 
 function App() {
@@ -43,6 +47,8 @@ function App() {
         <PrivateRoute exact path={routes.login} component={Authenticate} page="login"/>
         <PrivateRoute exact path={routes.signUp} component={Authenticate} page="signUp"/>
         <PrivateRoute exact path={routes.home} component={Home} />
+        <PrivateRoute exact path={routes.product} component={Product} />
+        <PrivateRoute exact path={routes.products} component={Products} />
         {/* Add more ... */}
       </Switch>
     </Router>
