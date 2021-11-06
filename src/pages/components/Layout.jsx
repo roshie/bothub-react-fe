@@ -31,7 +31,7 @@ export default function Layout(props) {
         if (props.page === "home") {
             const href = path.split('/').pop()
             console.log("href: ", href)
-            if (href.startsWith('#') && href!='#') {
+            if (href.startsWith('#') && href!=='#') {
                 const elem = document.querySelector(href);
                 elem.scrollIntoView(true)
             }

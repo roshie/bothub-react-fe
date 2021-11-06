@@ -11,7 +11,9 @@ export default function Authenticate(props) {
 
     useEffect(() => {
         document.title = `${props.page === "login"? "Login" : "Sign Up"} | Bothub`
-    }, [])
+    // eslint-disable-next-line
+        }, [])
+    
 
     return (
         <> { props.login ?
