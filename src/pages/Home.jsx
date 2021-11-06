@@ -1,5 +1,6 @@
 import Layout from "./components/Layout";
 import { Category } from "./components/Cards"
+import { useEffect } from "react";
 
 function LandingPage(props) {
   return (
@@ -49,13 +50,16 @@ function D3Printing(props) {
 }
 
 export default function Home(props) {
-  return (
-    <Layout loginState={props.login} page="home">
-      <LandingPage />
-      <Categories />
-      <D3Printing />
-    </Layout>
-  );
+    useEffect(() => {
+        document.title = "Bothub | A Shop for all Automation Projects"
+    }, [])
+    return (
+        <Layout loginState={props.login} page="home">
+        <LandingPage />
+        <Categories />
+        <D3Printing />
+        </Layout>
+    );
 }
 
 
