@@ -6,7 +6,7 @@ import Layout from "./components/Layout";
 
 export default function Product(props) {
   return (
-    <Layout>
+    <Layout loginState={props.login} page="product">
       <div className="row my-2 m-2">
         <div className="col-12 col-md-6">
           <Carousel variant="dark" style={{ borderRadius: "20px" }}>

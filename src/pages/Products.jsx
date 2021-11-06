@@ -2,7 +2,7 @@ import { Product } from "./components/Cards";
 import Layout from "./components/Layout";
 export default function Products(props) {
   return (
-    <Layout>
+    <Layout loginState={props.login} page="products">
       <section id="products" className=" text-light" name="products">
         <div className="row m-auto w-75">
           <div
