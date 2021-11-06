@@ -21,6 +21,11 @@ footer {
   transform-origin: top right;
 }
 
+.hero {
+  min-height: 100vh;
+  margin-top: -50px;
+}
+
 .radius-10 {
   border-radius: 10px !important;
 }
@@ -29,11 +34,81 @@ footer {
   border-radius: 20px !important;
 }
 
+@media screen and (max-width: 768px) {
+  .cen{
+   text-align: center;
+   }
+ }
+
+ /* --------------------------------------------------------------- */
+/* landing page */
+/* ---------------------------------------------------------------- */
 .tagline {
-  font-size: 3.5rem;
+  font-size: 4rem;
+}
+
+#Explore {
+  position: relative;
+  height: 60px;
+  width: 200px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.pic {
+  height: 30rem;
+  margin-left: 30%;
 }
 
 @media screen and (max-width: 768px) {
+  .tagline {
+    font-size: 3rem;
+    text-align: center;
+  }
+  .pic {
+    display: none;
+  }
+}
+/* ------------------------------------------------------------------------------------------------ */
+/* 3D printing */
+/* ----------------------------------------------------------------------------------------------- */
+.pict {
+  height: 30rem;
+  margin-left: 45%;
+}
+
+#View {
+  position: relative;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+@media screen and (width: 1024px) {
+  .pict {
+    height: 25rem;
+    margin-left: 30%;
+  }
+}
+
+@media screen and (width: 768px) {
+  .pict {
+    height: 20rem;
+    margin-top: 30px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .pict {
+    height: 18rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+
   .tagline {
     font-size: 2rem;
     text-align: center;
