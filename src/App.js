@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 import IdToken from './pages/idToken';
 import Home from './pages/Home';
-import Login from './pages/Login';
+import Authenticate from './pages/Authenticate';
 
 import PrivateRoute from "./PrivateRoute";
 import 'bootstrap/scss/bootstrap.scss'
@@ -26,6 +26,7 @@ const firebaseConfig = {
 // Routes
 export const routes = {
   login: '/login',
+  signUp: '/sign-up',
   home: '/',
   idToken: '/idToken',
   profile: '/profile',
@@ -39,8 +40,9 @@ function App() {
     <Router>
       <Switch>
         <Route exact path={routes.idToken} component={IdToken}/>
+        <PrivateRoute exact path={routes.login} component={Authenticate} page="login"/>
+        <PrivateRoute exact path={routes.signUp} component={Authenticate} page="signUp"/>
         <PrivateRoute exact path={routes.home} component={Home} />
-        <PrivateRoute exact path={routes.login} component={Login} />
         {/* Add more ... */}
       </Switch>
     </Router>
