@@ -48,12 +48,14 @@ export default class PrivateRoute extends React.Component {
             const Component = this.props.component;
 
             if (user) {
-                return <Component login={true} user={user}/>
+                return <Component login={true} user={user} {...this.props}/>
             } else if (this.props.shouldLogin === true) {
-                return <Redirect to={{pathname: routes.login}}/>;
+                return <Redirect to={{pathname: `${routes.login}?redirect=${getPageName(this.props.path)}`}}/>;
             } else {
-                return <Component login={false}/>
+                return <Component login={false} {...this.props}/>
             }
         }
     }
 }
+
+const getPageName = (path) => Object.keys(routes).find(key => routes[key] === path);
