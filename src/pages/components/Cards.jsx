@@ -27,6 +27,9 @@ export function Product(props) {
             </div>
         </div>
     );
+
+    //  Use like this. eg:
+    //  <Product url="#" imgThumbnail="IOT.jfif" productTitle="Bosch Washing machine" productPrice="25000" />
 }
 
 const goTo = (url) => window.location.href(url)
