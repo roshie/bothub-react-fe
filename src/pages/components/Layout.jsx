@@ -37,6 +37,27 @@ export default function Layout(props) {
             }
         }
     }
+
+    const MenuItems = props => {
+        return (
+            <>
+                <Item href={props.page === "home" ? "#home" : routes.home} active={props.page === "home" ? true : false} onClick={setAndClose}>Home</Item>
+                <Item href={props.page === "home" ? "#categories" : `${routes.home}#categories`} active={false} onClick={setAndClose}>Categories</Item>
+                <Item href={props.page === "home" ? "#threeDPrinting" : `${routes.home}#threeDPrinting`} active={false} onClick={setAndClose}>3D Printing</Item>
+                {props.loginState ?
+                    <>
+                        <Item href={props.page === "profile" ? "#" : routes.profile} active={props.page === "profile" ? true : false}>Profile</Item>
+                        <Item href="NA" active={false} onClick={logout}>Logout</Item>
+                    </>
+                    :
+                    <>
+                        <Item href={props.page === "home" ? `${routes.login}` : `${routes.login}?redirect=${props.page}`} active={false}>Login</Item>
+                        <Item href={routes.signUp} active={false}>Sign Up</Item>
+                    </>
+                } 
+            </>
+        );
+    }
     
     return (
         <>
@@ -49,17 +70,7 @@ export default function Layout(props) {
                         </span>
                         <span className="navbar-brand mb-0 h1"></span>
                         <span className="navbar-brand mb-0 h1 d-none d-md-block">
-                            <Item href={props.page === "home" ? "#home" : routes.home} active={props.page === "home" ? true : false}>Home</Item>
-                            <Item href={props.page === "home" ? "#categories" : `${routes.home}#categories`} active={false}>Categories</Item>
-                            <Item href={props.page === "home" ? "#threeDPrinting" : `${routes.home}#threeDPrinting`} active={false}>3D Printing</Item>
-                            {props.loginState ?
-                                <>
-                                    <Item href={props.page === "profile" ? "#" : routes.profile} active={props.page === "profile" ? true : false}>Profile</Item>
-                                    <Item href="NA" active={false}>Logout</Item>
-                                </>
-                                :
-                                    <Item href={`${routes.login}?redirect=${props.page}`} active={false}>Login</Item>
-                            }   
+                            <MenuItems {...props} />  
                         </span>
                         <button className="navbar-toggler d-block d-md-none" type="button" onClick={handleShow}>
                             <FontAwesomeIcon icon={faBars} className="text-secondary"/>
@@ -73,17 +84,7 @@ export default function Layout(props) {
                     <Modal.Title className="text-light">Menu</Modal.Title>
                 </Modal.Header>
                 <Modal.Body className="bg-primary d-flex flex-column">
-                    <Item href={props.page === "home" ? "#home" : routes.home} active={props.page === "home" ? true : false} onClick={setAndClose}>Home</Item>
-                    <Item href={props.page === "home" ? "#categories" : `${routes.home}#categories`} active={false} onClick={setAndClose}>Categories</Item>
-                    <Item href={props.page === "home" ? "#threeDPrinting" : `${routes.home}#threeDPrinting`} active={false} onClick={setAndClose}>3D Printing</Item>
-                    {props.loginState ?
-                        <>
-                            <Item href={props.page === "profile" ? "#" : routes.profile} active={props.page === "profile" ? true : false}>Profile</Item>
-                            <Item href="NA" active={false} onClick={logout}>Logout</Item>
-                        </>
-                        :
-                            <Item href={`${routes.login}?redirect=${props.page}`} active={false}>Login</Item>
-                    }  
+                     <MenuItems {...props} />
                 </Modal.Body>
             </Modal>
             {props.children}
@@ -105,13 +106,19 @@ export default function Layout(props) {
     );
 }
 
+
+
 function Item (props) {
+
+    const propParams = {
+        onClick: props.onClick,
+        className: `navbar-link m-2 fs-6 ${props.active ? 'text-secondary' : 'text-light'}`,
+        style: {textDecoration: 'none', cursor: 'pointer'}
+    }
+    if (props.href !== 'NA') propParams['href'] = props.href
+
     return (
-        <a
-        href={props.href !== 'NA' ? props.href : '#'}
-        onClick={props.onClick}
-        className={`navbar-link m-2 fs-6 ${props.active ? 'text-secondary' : 'text-light'}`} 
-        style={{textDecoration: 'none', cursor: 'pointer'}}>
+        <a {...propParams}>
             {props.children}
         </a>
     );
