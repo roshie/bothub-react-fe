@@ -20,6 +20,10 @@ footer {
   transform: skewY(6deg);
   transform-origin: top right;
 }
+.hello
+{
+  justify-content: center;
+}
 
 .tagline {
   font-size: 3.5rem;

@@ -30,8 +30,8 @@ export default function Layout(props) {
             const href = path.split('/').pop()
             console.log("href: ", href)
             if (href.startsWith('#')) {
-                const elem = document.querySelector(href);
-                elem.scrollIntoView(true)
+                // const elem = document.querySelector(href);
+                // elem.scrollIntoView(true)
             }
         }
     }
