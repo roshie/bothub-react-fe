@@ -23,10 +23,10 @@ export default function viewOrders(props) {
                        <img src = "IOT.jfif"/>
                     </div>
                     <div className="col-sm-9">
+                        <h6>Dispatched</h6>
                         <h2>Washing Machine</h2>
                         <p>Discription</p>
                         <h4>Rs 25,000</h4>
-                        <h6>Dispatched</h6>
                     </div>
                     </div>
                     <div className="text-center mt-2">
