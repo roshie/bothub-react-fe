@@ -17,7 +17,7 @@ export function Category(props) {
 export function Product(props) {
 
     return (
-        <div className="card" onClick={goTo(props.url)}>
+        <div className="card" onClick={() => goTo(props.url)}>
             <div className="card-body text-center" >
                 <img src={props.imgThumbnail} className="card-img-top mb-2 radius-20" alt="..."/>
                 <h5 className="card-title my-2 fw-bold">{props.productTitle}</h5>
@@ -30,4 +30,4 @@ export function Product(props) {
     // <Product url="#" imgThumbnail="IOT.jfif" productTitle="Bosch Washing machine" productPrice="25000" />
 }
 
-const goTo = (url) => window.location.href(url)
+const goTo = (url) => window.location.replace(url)

@@ -1,25 +1,80 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from 'react-responsive-carousel';
+import { Carousel } from "react-bootstrap";
+import Layout from "./components/Layout";
 
 export default function Product(props) {
-    return (
-            <Carousel>
-                <div>
-                    <img src="IOT.jfif" />
-                    <p className="legend">Legend 1</p>
-                </div>
-                <div>
-                    <img src="IOT.jfif" />
-                    <p className="legend">Legend 2</p>
-                </div>
-                <div>
-                    <img src="IOT.jfif" />
-                    <p className="legend">Legend 3</p>
-                </div>
-            </Carousel>
-        );
-    }
-
-    ReactDOM.render(<Product/>, document.getElementById('root'));
+  return (
+    <Layout loginState={props.login} page="product">
+      <div className="row my-2 m-2">
+        <div className="col-12 col-md-6">
+          <Carousel variant="dark" style={{ borderRadius: "20px" }}>
+            <Carousel.Item>
+              <img
+                className="d-block w-100 radius-20"
+                style={{ height: "500px" }}
+                src="example.jpg"
+                alt="First slide"
+              />
+            </Carousel.Item>
+            <Carousel.Item>
+              <img
+                className="d-block w-100 radius-20"
+                style={{ height: "500px" }}
+                src="example.jpg"
+                alt="Second slide"
+              />
+            </Carousel.Item>
+            <Carousel.Item>
+              <img
+                className="d-block w-100 radius-20"
+                style={{ height: "500px" }}
+                src="example.jpg"
+                alt="Third slide"
+              />
+            </Carousel.Item>
+          </Carousel>
+        </div>
+        <div className="col-12 col-md-6">
+          <div className="card w-100 h-75 my-4">
+            <div className="card-body">
+              <h2 className="card-title my-2 fw-bold" style={{ color: "#fff" }}>
+                Product title
+              </h2>
+              <h3 className="h3 mt-4" style={{ color: "#fff" }}>
+                Price
+              </h3>
+            </div>
+            <div className="column">
+              <button
+                class="btn btn-secondary"
+                style={{ width: "350px", height: "50px", marginLeft: "10px" }}
+                href="#"
+              >
+                Buy now
+              </button>{" "}
+              &nbsp; &nbsp; &nbsp;
+              <button
+                class="btn btn-secondary"
+                style={{ width: "330px", height: "50px" }}
+                href="#"
+              >
+                Customize
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="embed m-2 d-flex justify-content-center" style={{alignContent:"center", alignItems:"center"}}>
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/4uREqbCNT-c"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen
+        ></iframe>
+      </div>
+    </Layout>
+  );
+}

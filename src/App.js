@@ -5,13 +5,14 @@ import Home from './pages/Home';
 import Product from './pages/Product';
 import Products from "./pages/Products";
 import Authenticate from './pages/Authenticate';
-
+import emailVerified from "./pages/emailVerified";
 import PrivateRoute from "./PrivateRoute";
 import 'bootstrap/scss/bootstrap.scss'
 import './custom-bootstrap.scss';
 import './App.scss';
 
 import { initializeApp } from "firebase/app";
+
 
 
 // Firebase Config
@@ -34,6 +35,7 @@ export const routes = {
   profile: '/profile',
   product: '/product',
   products: '/products',
+  emailVerified: '/email-verified',
 }
 
 function App() {
@@ -44,6 +46,7 @@ function App() {
     <Router>
       <Switch>
         <Route exact path={routes.idToken} component={IdToken}/>
+        <Route exact path={routes.emailVerified} component={emailVerified}/>
         <PrivateRoute exact path={routes.login} component={Authenticate} page="login"/>
         <PrivateRoute exact path={routes.signUp} component={Authenticate} page="signUp"/>
         <PrivateRoute exact path={routes.home} component={Home} />
