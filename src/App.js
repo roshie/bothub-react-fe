@@ -6,6 +6,7 @@ import Product from './pages/Product';
 import Products from "./pages/Products";
 import Authenticate from './pages/Authenticate';
 import emailVerified from "./pages/emailVerified";
+import viewOrders from './pages/viewOrders';
 import PrivateRoute from "./PrivateRoute";
 import 'bootstrap/scss/bootstrap.scss'
 import './custom-bootstrap.scss';
@@ -38,6 +39,7 @@ export const routes = {
   products: '/products',
   emailVerified: '/email-verified',
   checkout:'/checkout',
+  viewOrders: '/viewOrders',
 }
 
 function App() {
@@ -55,6 +57,7 @@ function App() {
         <PrivateRoute exact path={routes.product} component={Product} />
         <PrivateRoute exact path={routes.products} component={Products} />
         <PrivateRoute exact path={routes.checkout} component={Checkout} />
+        <PrivateRoute exact path={routes.viewOrders} component={viewOrders} />
         {/* Add more ... */}
       </Switch>
     </Router>
