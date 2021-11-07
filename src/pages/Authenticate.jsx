@@ -23,8 +23,12 @@ export default function Authenticate(props) {
              :
             
              // If Not Logged in
-             <div className="min-vh-100 p-auto"> 
-                { props.page === "login"? "Login" : "Sign Up" }
+             <div className="min-vh-100 d-flex justify-content-center align-items-center"> 
+                <div className="d-flex justify-content-center align-items-center flex-column">
+                    <h3>{ props.page === "login"? "Login" : "Sign Up" }</h3>
+
+                </div>
+                
              </div>
 
         } </>
