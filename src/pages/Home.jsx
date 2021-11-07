@@ -114,6 +114,33 @@ function D3Printing(props) {
     );
 }
 
+function Ideas(props) {
+  return (
+    <section
+      id="ideas"
+      className="min-vh-100 text-light d-flex justify-content-center align-items-center"
+      name="idea"
+    >
+        <div className="row w-75 justify-content-center h-100 w-100 mx-5 py-5">
+          <div className="col-12 col-lg-6 text-center my-5">
+              <div className="card">
+                Drop Here!
+                <input type="text" name="" id="" />
+              </div>
+          </div>  
+          <div className="col-12 col-lg-6 d-flex justify-content-center flex-column align-items-center my-5">
+
+              <div className="fw-bold text-light mb-2 mt-4 fs-5">IdeaStorm</div>
+              <div className="fw-bold text-light tagline text-center">Your Ideas are welcome</div>
+              {/* <div className="fw-bold text-light mb-2 fs-5 text-center mt-2">We provied 3D Printing services</div>
+              <div><button className="btn-lg btn btn-secondary fw-bold my-2 mt-3">View Details</button></div> */}
+          </div>  
+             
+        </div>   
+    </section>
+  );
+}
+
 export default function Home(props) {
     useEffect(() => {
         document.title = "Bothub | A Stop for all Automation Devices"
@@ -124,6 +151,7 @@ export default function Home(props) {
           <LandingPage />
           <Categories />
           <D3Printing />
+          <Ideas />
         </Layout>
     );
 }
