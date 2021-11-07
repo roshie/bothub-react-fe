@@ -53,7 +53,7 @@ function D3Printing(props) {
           <div className="row w-75">
             <div className="col-lg-4 col-md-12 col-sm-12 col-xs-12 padding_zero d-flex justify-content-center flex-column">
                 <div className="fw-bold text-light mb-2 mt-4" style={{fontSize: '25px'}}>3D Printing</div>
-                <div className="fw-bold text-light tagline">You Design, We Develope</div>
+                <div className="fw-bold text-light tagline">You Design, We Develop</div>
                 <div className="fw-bold text-light mb-2" style={{fontSize: '20px'}}>We provied 3D Printing services</div>
                 <a href="#"><button id="View" className="btn-lg btn btn-secondary fw-bold my-2">View Details</button></a>
             </div>  
@@ -80,7 +80,3 @@ export default function Home(props) {
         </Layout>
     );
 }
-
-
-
-    
