@@ -42,7 +42,7 @@ export const routes = {
   profile: '/profile',
   emailVerified: '/email-verified',
   checkout:'/checkout',
-  viewOrders: '/viewOrders',
+  viewOrders: '/view-orders',
 }
 
 function App() {
