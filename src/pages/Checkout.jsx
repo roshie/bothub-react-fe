@@ -15,18 +15,32 @@ export default function Checkout(props) {
                     </div>
                     <div className="col-12 col-md-6">
                         <h4>
-                            Update your shipping address
+                            Update your Details
                         </h4>
                         <Form>
                             <Form.Group className="mb-3" controlId="shippingAddress">
-                                <Form.Label>Email address</Form.Label>
-                                <Form.Control type="email" placeholder="Enter email" />
+                                <Form.Label>Shippingaddress</Form.Label>
+                                <Form.Control type="email" placeholder="Enter address" />
                                 <Form.Text className="text-muted">
                                     We'll never share your email with anyone else.
                                 </Form.Text>
                             </Form.Group>
                         </Form>
+
+                        <Form>
+                            <Form.Group className="mb-3" controlId="shippingAddress">
+                                <Form.Label>Contact Number</Form.Label>
+                                <Form.Control type="Number" placeholder="Enter number" />
+                                <Form.Text className="text-muted">
+                                    We'll never share your number with anyone else.
+                                </Form.Text>
+                            </Form.Group>
+                        </Form>
+                        
+
                     </div>
+
+                    
                 </div>
             </div>
 
