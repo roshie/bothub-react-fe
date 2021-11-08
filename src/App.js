@@ -14,6 +14,7 @@ import './App.scss';
 
 import { initializeApp } from "firebase/app";
 import Checkout from "./pages/Checkout";
+import OrderSummary from "./pages/OrderSummary";
 
 
 
@@ -40,6 +41,7 @@ export const routes = {
   emailVerified: '/email-verified',
   checkout:'/checkout',
   viewOrders: '/viewOrders',
+  ordersummary: '/ordersummary',
 }
 
 function App() {
@@ -58,6 +60,7 @@ function App() {
         <PrivateRoute exact path={routes.products} component={Products} />
         <PrivateRoute exact path={routes.checkout} component={Checkout} />
         <PrivateRoute exact path={routes.viewOrders} component={viewOrders} />
+        <PrivateRoute exact path={routes.ordersummary} component={OrderSummary} />
         {/* Add more ... */}
       </Switch>
     </Router>
