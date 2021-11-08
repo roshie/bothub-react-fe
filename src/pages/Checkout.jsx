@@ -30,7 +30,7 @@ export default function Checkout(props) {
                         <Form>
                             <Form.Group className="mb-3" controlId="shippingAddress">
                                 <Form.Label>Contact Number</Form.Label>
-                                <Form.Control type="Number" placeholder="Enter Number" />
+                                <Form.Control type="Number" placeholder="Enter number" />
                                 <Form.Text className="text-muted">
                                     We'll never share your number with anyone else.
                                 </Form.Text>
