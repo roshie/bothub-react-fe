@@ -49,7 +49,7 @@ export default function Product(props) {
               <a
                 class="btn btn-secondary"
                 style={{ width: "350px", height: "50px", marginLeft: "10px" }}
-                href="#"
+                href="/checkout"
               >
                 Buy now
              </a>{" "}
