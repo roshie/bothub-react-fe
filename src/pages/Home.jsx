@@ -41,7 +41,7 @@ function LandingPage(props) {
                     <a href="#categories" className="btn-lg btn btn-secondary fw-bold my-2 fs-5 bg-gradient">Explore</a>
                 </div>
             </div>  
-            <div className="col-12 col-lg-6 text-center d-none d-lg-block px-0">
+            <div className="col-12 col-lg-6 text-center d-none d-lg-block px-0 overflow-hidden">
                 <Carousel className="h-100 w-100">
                     <Carousel.Item className="h-100">
                         <img src={img1} alt=".." className="h-100" style={{width: '150%'}}/>

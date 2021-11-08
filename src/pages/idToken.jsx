@@ -19,6 +19,8 @@ export default class IdToken extends React.Component {
                 token: idToken,
                 uid: uid
             })
+            localStorage.uid = uid
+            localStorage.idToken = idToken
           }, (error) => {
             this.setState({
                token: false
