@@ -114,7 +114,7 @@ export default function Authenticate(props) {
 
     const movePage = (emailVerified) => {
         if (!emailVerified) {
-            window.location.href = '/' // Redirect to user details
+            window.location.href = routes.verify
             console.log("Email-not-verified")
         }
         else if (emailVerified)

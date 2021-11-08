@@ -43,6 +43,7 @@ export const routes = {
   emailVerified: '/email-verified',
   checkout:'/checkout',
   viewOrders: '/view-orders',
+  verify: '/verify'
 }
 
 function App() {
