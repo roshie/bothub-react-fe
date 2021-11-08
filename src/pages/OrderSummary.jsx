@@ -20,21 +20,20 @@ export default function OrderSummary(props) {
             <strong>Payment Status:</strong> {props.orderStatus}
           </p>
           <div className="column m-2">
-            <button
-              class="btn btn-secondary"
-              style={{ width: "200px", height: "50px",marginTop:"20px" }}
-              href="#"
-            >
-              Download invoice
-            </button>
+            <a 
+            class="btn btn-secondary" 
+            style={{width: "200px", height: "50px", marginTop: "20px", textAlign: "center"}} 
+            href="robots.txt">
+                Download invoice
+            </a>
             &nbsp; &nbsp; &nbsp;
-            <button
+            <a 
               class="btn btn-success"
-              style={{ width: "200px", height: "50px",marginTop:"20px" }}
-              href="#"
+              style={{ width: "200px", height: "50px", marginTop: "20px" }}
+              href="https://api.whatsapp.com/send?phone=9790013652"
             >
-               Whatsapp us
-            </button>
+              Whatsapp us
+            </a>
           </div>
         </div>
         <div className="col-12 col-md-6">
