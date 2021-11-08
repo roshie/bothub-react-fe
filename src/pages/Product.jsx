@@ -54,13 +54,14 @@ export default function Product(props) {
                 Buy now
               </button>{" "}
               &nbsp; &nbsp; &nbsp;
-              <button
+              <a 
                 class="btn btn-secondary"
                 style={{ width: "330px", height: "50px" }}
-                href={"https://api.whatsapp.com/send?phone=9790013652"}
+                href="https://api.whatsapp.com/send?phone=9790013652"
               >
                 Customize
-              </button>
+                </a>
+              {/* </button> */}
             </div>
           </div>
         </div>
