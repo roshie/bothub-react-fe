@@ -1,8 +1,10 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth, onAuthStateChanged, getIdToken} from "firebase/auth";
 import { Spinner } from "react-bootstrap";
 import { routes } from "./App";
+import { backendAppUrl } from './config'
+import logout from './logout';
 
 export default class PrivateRoute extends React.Component {
     constructor(props) {
@@ -13,24 +15,56 @@ export default class PrivateRoute extends React.Component {
         };
     }
 
+    setUserFalse = () => {
+        this.setState({
+            user: false,
+            isLoaded: true
+        })
+    }
+
     componentDidMount() {
         const auth = getAuth();
+
          onAuthStateChanged(auth, (user) => {
             if (user) {
-                console.log("AuthState: True")
-                this.setState({
-                    user,
-                    isLoaded: true
-                })
-            } else {
-                console.log("AuthState: False")
-                this.setState({
-                    isLoaded: true
-                })
-            }
-        })
 
+                const data = {
+                    uid: user.uid,
+                    idToken: '',
+                }
+                getIdToken(user).then((idToken) => { 
+                    data.idToken = idToken;
+                }).then(() => {
+                
+                    fetch(`${backendAppUrl}/users/auth-status`, {
+                        method: 'POST', 
+                        headers: {
+                        'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data),
+                    })
+                    .then(res => res.json())
+                    .then(
+                        (auth) => {
+                            if (auth.status == 'true') {
+                                this.setState({
+                                    user,
+                                    isLoaded: true
+                                })   
+                                localStorage.uid = data.uid
+                                localStorage.idToken = data.idToken                        
+                            } else this.setUserFalse()
+                        },
+                        (error) => {
+                            this.setUserFalse()
+                            console.log(error)
+                        }
+                    )
+                })
+            } else this.setUserFalse()
+        })
     }
+
 
     render() {
         const {isLoaded, user} = this.state;
@@ -39,7 +73,7 @@ export default class PrivateRoute extends React.Component {
             return (
                 <div className="d-flex justify-content-center align-items-center"
                         style={{ height: "100vh", width: "100vw" }}>
-                    <Spinner animation="border" className="text-light"/>
+                    <Spinner animation="border" size="lg" className="text-light"/>
                 </div>
             );
 
