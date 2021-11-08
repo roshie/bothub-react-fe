@@ -108,10 +108,10 @@ export default function Authenticate(props) {
                                     label="Email address"
                                     className="mb-3 text-light"
                                 >
-                                    <Form.Control className="bg-primary border-primary text-light" value={email} onChange={(e) => {setEmail(e.target.value)}} type="email" placeholder="name@example.com" />
+                                    <Form.Control className="bg-primary border-primary text-light" required value={email} onChange={(e) => {setEmail(e.target.value)}} type="email" placeholder="name@example.com" />
                                 </FloatingLabel>
                                 <FloatingLabel controlId="floatingPassword" label="Password"className="mb-3 text-light">
-                                    <Form.Control className="bg-primary border-primary text-light" value={password} onChange={(e) => {setPassword(e.target.value)}} type="password" placeholder="Password" />
+                                    <Form.Control className="bg-primary border-primary text-light" required value={password} onChange={(e) => {setPassword(e.target.value)}} type="password" placeholder="Password" />
                                     <Form.Text id="passwordHelpBlock" className="text-danger" muted> {errorMsg} </Form.Text>
                                 </FloatingLabel>
                                 <Col className="text-center mt-4">
