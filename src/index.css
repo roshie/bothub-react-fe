@@ -65,6 +65,10 @@ footer {
 .d3printer {
 }
 
+.loginCard {
+  max-width: 500px;
+}
+
 @media screen and (max-width: 768px) {
   .tagline {
     font-size: 3rem;
