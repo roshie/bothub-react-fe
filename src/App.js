@@ -43,11 +43,6 @@ export const routes = {
   emailVerified: '/email-verified',
   checkout:'/checkout',
   viewOrders: '/viewOrders',
-<<<<<<< HEAD
-
-=======
-  ordersummary: '/ordersummary',
->>>>>>> 7a069cbe7a3f67c49beea3411db0d47701342295
 }
 
 function App() {
