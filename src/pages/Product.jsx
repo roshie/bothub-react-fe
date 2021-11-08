@@ -46,21 +46,22 @@ export default function Product(props) {
               </h3>
             </div>
             <div className="column">
-              <button
+              <a
                 class="btn btn-secondary"
-                style={{ width: "350px", height: "50px", marginLeft: "10px" }}
-                href="#"
+                style={{ width: "300px", height: "50px", marginLeft: "20px" }}
+                href="/checkout"
               >
                 Buy now
-              </button>{" "}
+             </a>{" "}
               &nbsp; &nbsp; &nbsp;
-              <button
+              <a 
                 class="btn btn-secondary"
-                style={{ width: "330px", height: "50px" }}
-                href="#"
+                style={{ width: "330px", height: "50px"  }}
+                href="https://api.whatsapp.com/send?phone=9790013652"
               >
                 Customize
-              </button>
+                </a>
+              {/* </button> */}
             </div>
           </div>
         </div>

@@ -11,7 +11,7 @@ import { backendAppUrl } from '../config'
 
 
 export default function Authenticate(props) {
-    const params = new URLSearchParams(props.path); 
+    const params = new URLSearchParams(props.path);
     const redirectTo = params.get('redirect');
 
     var [email, setEmail] = useState('')
@@ -133,8 +133,8 @@ export default function Authenticate(props) {
                         </div>
                     </div>
                 </div>
-                
-             </div>
+
+            </div>
 
         } </>
     );

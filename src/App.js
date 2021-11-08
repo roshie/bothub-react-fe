@@ -4,6 +4,7 @@ import IdToken from './pages/idToken';
 import Home from './pages/Home';
 import Product from './pages/Product';
 import Products from "./pages/Products";
+import Profile from "./pages/Profile";
 import Authenticate from './pages/Authenticate';
 import emailVerified from "./pages/emailVerified";
 import viewOrders from './pages/viewOrders';
@@ -14,6 +15,7 @@ import './App.scss';
 
 import { initializeApp } from "firebase/app";
 import Checkout from "./pages/Checkout";
+import OrderSummary from "./pages/OrderSummary";
 
 
 
@@ -37,6 +39,7 @@ export const routes = {
   profile: '/profile',
   product: '/product',
   products: '/products',
+  profile: '/profile',
   emailVerified: '/email-verified',
   checkout:'/checkout',
   viewOrders: '/viewOrders',
@@ -56,8 +59,10 @@ function App() {
         <PrivateRoute exact path={routes.home} component={Home} />
         <PrivateRoute exact path={routes.product} component={Product} />
         <PrivateRoute exact path={routes.products} component={Products} />
+        <PrivateRoute exact path={routes.profile} component={Profile} />
         <PrivateRoute exact path={routes.checkout} component={Checkout} />
         <PrivateRoute exact path={routes.viewOrders} component={viewOrders} />
+        <PrivateRoute exact path={routes.ordersummary} component={OrderSummary} />
         {/* Add more ... */}
       </Switch>
     </Router>
