@@ -46,13 +46,13 @@ export default function Product(props) {
               </h3>
             </div>
             <div className="column">
-              <button
+              <a
                 class="btn btn-secondary"
                 style={{ width: "350px", height: "50px", marginLeft: "10px" }}
                 href="#"
               >
                 Buy now
-              </button>{" "}
+             </a>{" "}
               &nbsp; &nbsp; &nbsp;
               <a 
                 class="btn btn-secondary"
