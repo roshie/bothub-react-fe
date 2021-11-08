@@ -48,7 +48,7 @@ export default function Product(props) {
             <div className="column">
               <a
                 class="btn btn-secondary"
-                style={{ width: "350px", height: "50px", marginLeft: "10px" }}
+                style={{ width: "300px", height: "50px", marginLeft: "20px" }}
                 href="/checkout"
               >
                 Buy now
@@ -56,7 +56,7 @@ export default function Product(props) {
               &nbsp; &nbsp; &nbsp;
               <a 
                 class="btn btn-secondary"
-                style={{ width: "330px", height: "50px" }}
+                style={{ width: "330px", height: "50px"  }}
                 href="https://api.whatsapp.com/send?phone=9790013652"
               >
                 Customize
