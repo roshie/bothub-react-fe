@@ -112,7 +112,7 @@ function ResetPassword(props) {
         setResultMsg({state: false, msg: "The Password may be weak. Please try again"})
       });
     } else {
-      setLoading(true)
+      setLoading(false)
       setResultMsg({state: false, msg: "The passwords does not match"})
     }
   }
