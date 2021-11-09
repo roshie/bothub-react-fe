@@ -62,14 +62,7 @@ function EmailVerified(props) {
               </div>
             </div>
         :
-            <div className="card bg-info h-100 mx-3">
-              <div className="card-body p-5">
-                <h2 className="fw-bold ">The Link was expired</h2>
-                <h4>Please verify your email again.</h4>
-
-                <Link to={routes.home}><h6 className="text-secondary fw-bold text-light mt-5">BotHub.in</h6></Link>
-              </div>
-            </div>
+            <LinkExpired />
         }
     </div>
   );
@@ -149,16 +142,22 @@ function ResetPassword(props) {
               </div>
             </>
             : 
-            <div className="card bg-info h-100 mx-3">
-              <div className="card-body p-5">
-                <h2 className="fw-bold ">The Link was expired</h2>
-                <h4>Please Try again.</h4>
-
-                <Link to={routes.home}><h6 className="text-secondary fw-bold text-light mt-5">BotHub.in</h6></Link>
-              </div>
-            </div>
+            <LinkExpired />
             }
         </div>
     </div>
+  );
+}
+
+function LinkExpired() {
+  return (
+      <div className="card bg-info h-100 mx-3">
+        <div className="card-body p-5">
+          <h2 className="fw-bold ">The Link was expired</h2>
+          <h4>Please Try again.</h4>
+
+          <Link to={routes.home} className="text-decoration-none"><h6 className="text-secondary fw-bold text-light mt-5">BotHub.in</h6></Link>
+        </div>
+      </div>
   );
 }
