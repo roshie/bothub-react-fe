@@ -135,13 +135,13 @@ function ResetPassword(props) {
                             <FloatingLabel controlId="floatingPassword" label="Password"className="mb-3 text-light">
                                   <Form.Control className="bg-primary border-primary text-light" required value={confirmPassword} onChange={(e) => {setConfirmPassword(e.target.value)}} type="password" placeholder="Password" />
                               </FloatingLabel>
-                          <Col className={`text-center text-danger text-${resultMsg.state ? 'success' : 'danger'}`}>
+                          <Col className={`text-center text-danger ${resultMsg.state ? 'text-success' : 'text-danger'}`}>
                               {resultMsg.msg}
                           </Col>
 
                           <Col className="text-center mt-4">
                               <Button variant="secondary" disabled={loading} onClick={resetPasswordFn}>
-                                  {loading ?  <Spinner animation="border" size="lg" className="text-light"/> : "Reset Password"}
+                                  {loading ?  <Spinner animation="border" size="sm" className="text-light"/> : "Reset Password"}
                               </Button>
                           </Col>
                       </Form>
