@@ -1,7 +1,7 @@
 import Layout from "./components/Layout";
 import { Col, Collapse, Form, Row, Button, Spinner } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import { routes , getToken } from "../App";
+import { routes, getToken } from "../App";
 import { backendAppUrl, getRequestParams } from '../config'
 
 
@@ -11,119 +11,115 @@ export default function Profile(props) {
   const [password, setPassword] = useState(false);
   const [editPersonal, setEditPersonal] = useState(false);
   const [state, setState] = useState({
-      
-      fullName:'',
-      email:'',
-      phoneNumber:'',
-      address:'',
-      city:'',
-      _state:'',
-      country:'',
-      pincode:'',
-      landmark:''
+
+    fullName: '',
+    email: '',
+    phoneNumber: '',
+    address: '',
+    city: '',
+    _state: '',
+    country: '',
+    pincode: '',
+    landmark: ''
   })
-  const [oldData,setOldData]= useState({})
-  const [passwords,setPasswords] = useState({
-    currentPassword:'',
-    newPassword:'',
-    confirmPassword:''
+  const [oldData, setOldData] = useState({})
+  const [passwords, setPasswords] = useState({
+    currentPassword: '',
+    newPassword: '',
+    confirmPassword: ''
   })
   const [pageLoaded, setPageLoaded] = useState(false);
   const [passwordChangeLoaded, setPasswordChangeLoaded] = useState(false);
   const [userInfoLoaded, setUserInfoLoaded] = useState(false);
   const [shippingInfoLoaded, setShippingInfoLoaded] = useState(false);
 
-useEffect(()=>{
-    const data={
-        uid: localStorage.uid,
-        idToken: localStorage.idToken
-    }
-    fetch(`${backendAppUrl}/users`, {
-        ...getRequestParams('GET', data)
-    })
-    .then((response) => {
-        if (response.ok) {
-            const result = response.json();
-            if (result.detail === "db-error") {
-                console.error("error")
-            } else  {
-                setOldData(result)
-              setState({
-                ...state,
-                fullName:(result.fullName===null) ? '' : result.fullName,
-                email:(result.email===null) ? '' : result.email,
-                phoneNumber:(result.mobileNumber===null) ? '' : result.mobileNumber,
-                address:(result.address===null) ? '' : result.address,
-                city:(result.city===null) ? '' : result.city,
-                _state:(result.state===null) ? '' : result.state,
-                country:(result.country===null) ? '' : result.country,
-                pincode:(result.pinCode===null) ? '' : result.pinCode,
-                landmark:(result.landMark===null) ? '' : result.landMark
-              })
-            }
-          } else {
-            console.error(response.json().detail);
-            
-          }
-    },
-    (err) => {
-        console.log(err)
-        
-    })
-    //eslint-disable-next-line
-},[])
-const submitPersonalInfo=()=>{
+  useEffect(() => {
     const data = {
-        ...oldData,
-        fullName:state.fullName,
-        mobileNumber:state.phoneNumber,
-        uid:localStorage.uid,
-        idToken:getToken()
+      uid: localStorage.uid,
+      idToken: localStorage.idToken
     }
     fetch(`${backendAppUrl}/users`, {
-        ...getRequestParams('PUT', data)
-    }) .then((res)=>{
-        res=res.json()
-        if(res==="success")
-        {
-            setOldData({
-                ...oldData,
-                fullName:state.fullName,
-                mobileNumber:state.phoneNumber,
+      ...getRequestParams('GET', data)
+    })
+      .then((response) => {
+        if (response.ok) {
+          const result = response.json();
+          if (result.detail === "db-error") {
+            console.error("error")
+          } else {
+            setOldData(result)
+            setState({
+              ...state,
+              fullName: (result.fullName === null) ? '' : result.fullName,
+              email: (result.email === null) ? '' : result.email,
+              phoneNumber: (result.mobileNumber === null) ? '' : result.mobileNumber,
+              address: (result.address === null) ? '' : result.address,
+              city: (result.city === null) ? '' : result.city,
+              _state: (result.state === null) ? '' : result.state,
+              country: (result.country === null) ? '' : result.country,
+              pincode: (result.pinCode === null) ? '' : result.pinCode,
+              landmark: (result.landMark === null) ? '' : result.landMark
             })
-        }
-        else if(res.detail==="db-error")
-        {
+          }
+        } else {
+          console.error(response.json().detail);
 
         }
-    })
-}
-const submitShippingInfo=()=>{
+      },
+        (err) => {
+          console.log(err)
+
+        })
+    //eslint-disable-next-line
+  }, [])
+  const submitPersonalInfo = () => {
     const data = {
-        ...oldData,
-        address: (state.address==='') ? null : state.address,
-        city: (state.city==='') ? null : state.city,
-        state: (state._state==='') ? null : state._state,
-        country: (state.country==='') ? null : state.country,
-        pinCode: (state.pincode==='') ? null : state.pincode,
-        landMark: (state.landmark==='') ? null : state.landmark,
-        uid:localStorage.uid,
-        idToken:getToken()
+      ...oldData,
+      fullName: state.fullName,
+      mobileNumber: state.phoneNumber,
+      uid: localStorage.uid,
+      idToken: getToken()
     }
     fetch(`${backendAppUrl}/users`, {
-        ...getRequestParams('PUT', data)
-    }) .then((res)=>{
-        res=res.json()
-        if(res==="success")
-        {
-            
-        }
-        else if(res.detail==="db-error")
-        {
-            
-        }
+      ...getRequestParams('PUT', data)
+    }).then((res) => {
+      res = res.json()
+      if (res === "success") {
+        setOldData({
+          ...oldData,
+          fullName: state.fullName,
+          mobileNumber: state.phoneNumber,
+        })
+      }
+      else if (res.detail === "db-error") {
+
+      }
     })
-}
+  }
+  const submitShippingInfo = () => {
+    const data = {
+      ...oldData,
+      address: (state.address === '') ? null : state.address,
+      city: (state.city === '') ? null : state.city,
+      state: (state._state === '') ? null : state._state,
+      country: (state.country === '') ? null : state.country,
+      pinCode: (state.pincode === '') ? null : state.pincode,
+      landMark: (state.landmark === '') ? null : state.landmark,
+      uid: localStorage.uid,
+      idToken: getToken()
+    }
+    fetch(`${backendAppUrl}/users`, {
+      ...getRequestParams('PUT', data)
+    }).then((res) => {
+      res = res.json()
+      if (res === "success") {
+
+      }
+      else if (res.detail === "db-error") {
+
+      }
+    })
+  }
 
 
 
@@ -141,7 +137,7 @@ const submitShippingInfo=()=>{
   return (
     <Layout loginState={props.login} page="profile">
       <div className="d-flex align-items-center justify-content-center min-vh-100">
-      <Spinner animation="border" className="text-light" />
+        <Spinner animation="border" className="text-light" />
         <div className="col-12 col-lg-8">
           <div className="row fs-2 m-3 fw-bold">Hello, Keerthi </div>
           <div
@@ -175,7 +171,7 @@ const submitShippingInfo=()=>{
                       <Form.Label
                         className="text-light my-2"
                         label="password"
-                
+
                       >
                         Full Name
                       </Form.Label>
@@ -184,8 +180,8 @@ const submitShippingInfo=()=>{
                         placeholder="John Doe"
                         required
                         value={state.fullName}
-                        onChange={(e)=>{setState({...state,fullName:e.target.value})}}
-                        
+                        onChange={(e) => { setState({ ...state, fullName: e.target.value }) }}
+
                       />
                     </Col>
                   </Row>
@@ -204,8 +200,8 @@ const submitShippingInfo=()=>{
                         placeholder="+91 88073 00000"
                         required
                         value={state.phoneNumber}
-                        onChange={(e)=>{setState({...state,phoneNumber:e.target.value})}}
-                        
+                        onChange={(e) => { setState({ ...state, phoneNumber: e.target.value }) }}
+
                       />
                     </Col>
                   </Row>
@@ -220,10 +216,10 @@ const submitShippingInfo=()=>{
                       </Form.Label>
                       <Form.Control
                         className="bg-primary border-primary text-light"
-                        type="email" 
+                        type="email"
                         placeholder="bothub@gmail.com"
                         value={state.email}
-                        onChange={(e)=>{setState({...state,email:e.target.value})}}
+                        onChange={(e) => { setState({ ...state, email: e.target.value }) }}
                         readOnly
                       />
                     </Col>
@@ -231,8 +227,8 @@ const submitShippingInfo=()=>{
 
                   <Row className="my-5 mx-2">
                     <Button variant="secondary"
-                    type="submit"
-                    onClick={submitPersonalInfo}
+                      type="submit"
+                      onClick={submitPersonalInfo}
                     >
                       Save
                       <Spinner
@@ -273,9 +269,9 @@ const submitShippingInfo=()=>{
                         Address
                       </Form.Label>
                       <Form.Control className="bg-primary border-primary text-light"
-                      value={state.address}
-                      onChange={(e)=>{setState({...state,address:e.target.value})}}
-                       />
+                        value={state.address}
+                        onChange={(e) => { setState({ ...state, address: e.target.value }) }}
+                      />
                     </Col>
                   </Row>
                   <Row>
@@ -287,9 +283,9 @@ const submitShippingInfo=()=>{
                       >
                         City
                       </Form.Label>
-                      <Form.Control className="bg-primary border-primary text-light" 
-                      value={state.city}
-                      onChange={(e)=>{setState({...state,city:e.target.value})}}
+                      <Form.Control className="bg-primary border-primary text-light"
+                        value={state.city}
+                        onChange={(e) => { setState({ ...state, city: e.target.value }) }}
                       />
                     </Col>
                     <Col>
@@ -301,9 +297,9 @@ const submitShippingInfo=()=>{
                         {" "}
                         State
                       </Form.Label>
-                      <Form.Control className="bg-primary border-primary text-light" 
-                      value={state._state}
-                      onChange={(e)=>{setState({...state,_state:e.target.value})}}
+                      <Form.Control className="bg-primary border-primary text-light"
+                        value={state._state}
+                        onChange={(e) => { setState({ ...state, _state: e.target.value }) }}
                       />
                     </Col>
                   </Row>
@@ -314,8 +310,8 @@ const submitShippingInfo=()=>{
                         Country
                       </Form.Label>
                       <Form.Control className="bg-primary border-primary text-light"
-                       value={state.country}
-                       onChange={(e)=>{setState({...state,country:e.target.value})}}
+                        value={state.country}
+                        onChange={(e) => { setState({ ...state, country: e.target.value }) }}
                       />
                     </Col>
                     <Col>
@@ -323,9 +319,9 @@ const submitShippingInfo=()=>{
                         {" "}
                         Pincode
                       </Form.Label>
-                      <Form.Control className="bg-primary border-primary text-light" 
-                       value={state.pincode}
-                       onChange={(e)=>{setState({...state,pincode:e.target.value})}}
+                      <Form.Control className="bg-primary border-primary text-light"
+                        value={state.pincode}
+                        onChange={(e) => { setState({ ...state, pincode: e.target.value }) }}
                       />
                     </Col>
                   </Row>
@@ -338,15 +334,15 @@ const submitShippingInfo=()=>{
                       >
                         Landmark
                       </Form.Label>
-                      <Form.Control className="bg-primary border-primary text-light" 
-                       value={state.landmark}
-                       onChange={(e)=>{setState({...state,landmark:e.target.value})}}
-                       />
+                      <Form.Control className="bg-primary border-primary text-light"
+                        value={state.landmark}
+                        onChange={(e) => { setState({ ...state, landmark: e.target.value }) }}
+                      />
                     </Col>
                   </Row>
 
                   <Row className="my-5 mx-2">
-                    <Button variant="secondary"  onClick={submitShippingInfo} >
+                    <Button variant="secondary" onClick={submitShippingInfo} >
                       Update
                       <Spinner
                         animation="border"
@@ -390,7 +386,7 @@ const submitShippingInfo=()=>{
                         type="password"
                         placeholder="Current Password"
                         value={passwords.currentPassword}
-                        onChange={(e)=>{setPasswords({...passwords,currentPassword:e.target.value})}}
+                        onChange={(e) => { setPasswords({ ...passwords, currentPassword: e.target.value }) }}
                       />
                     </Col>
                   </Row>
@@ -408,7 +404,7 @@ const submitShippingInfo=()=>{
                         type="password"
                         placeholder="New Password"
                         value={passwords.newPassword}
-                        onChange={(e)=>{setPasswords({...passwords,newPassword:e.target.value})}}
+                        onChange={(e) => { setPasswords({ ...passwords, newPassword: e.target.value }) }}
                       />
                     </Col>
                   </Row>
@@ -419,14 +415,14 @@ const submitShippingInfo=()=>{
                         className="text-light mt-3 mb-2 my-2"
                         label="password"
                       >
-                        Confirm New Password      
+                        Confirm New Password
                       </Form.Label>
                       <Form.Control
                         className="bg-primary border-primary text-light"
                         type="password"
                         placeholder="Confirm New Password"
                         value={passwords.confirmPassword}
-                        onChange={(e)=>{setPasswords({...passwords,confirmPassword:e.target.value})}}
+                        onChange={(e) => { setPasswords({ ...passwords, confirmPassword: e.target.value }) }}
                       />
                     </Col>
                   </Row>
