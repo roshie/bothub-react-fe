@@ -86,7 +86,7 @@ export default function Authenticate(props) {
         if (props.page !== 'login') {
             if (password.length < 8) {
                 setLoading(false)
-                setValidation({email: true})
+                setValidation(...validation, {email: true})
                 setErrorMsg('The password should be atleast 8 characters long.')
             } else {
                 const data = {
@@ -111,10 +111,10 @@ export default function Authenticate(props) {
                 console.error(errorCode)
 
                 if (errorCode === "auth/wrong-password") {
-                    setValidation({password: true})
+                    setValidation(...validation, {password: true})
                     setErrorMsg("The Password is Incorrect.")
                 } else if (errorCode === "auth/user-not-found") {
-                    setValidation({email: true})
+                    setValidation(...validation, {email: true})
                     setErrorMsg("User not found.")
                 } else {
                     setErrorMsg(error.code)
