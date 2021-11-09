@@ -5,6 +5,8 @@ import { useState, useEffect } from 'react';
 import { routes } from '../../App';
 import logout from '../../logout'
 import { Modal } from 'react-bootstrap';
+import { faEnvelope,faPhoneAlt,faAddressCard,faMapMarkerAlt,faPlus,faBuilding} from '@fortawesome/free-solid-svg-icons'
+import { faInstagram, faFacebook, faLinkedin, faYoutube} from '@fortawesome/free-brands-svg-icons'
 
 
 
@@ -94,11 +96,39 @@ export default function Layout(props) {
                 <div className="col" style={{marginLeft: '10%', marginRight: '10%'}}>
                     <h3 className="fw-bolder text-light">Contact</h3>
                     <div className="row mt-4">
-                        <div className="col-12 col-md-4">Mail</div>
-                        <div className="col-12 col-md-4">Insta</div>
-                        <div className="col-12 col-md-4">Youtube</div>
+                        <div className="col-12 col-md-4">
+                            <h5><FontAwesomeIcon icon={faBuilding} /><i class="fa fa-building mx-2"></i>BotHub</h5>
+                            <div className="mt-3 mx-4">
+                            <p>Build your Ideas with our Experts.</p>
+                            <h5><a href="https://zuetechnologies.com/">About us</a></h5>
+                            </div>
+                        </div>
+                        <div className="col-12 col-md-4">
+                        <h5><FontAwesomeIcon icon={faPlus} /><i class="fa fa-plus mx-2"></i>Connect us</h5>
+                        <div className="mt-3 mx-4">
+                        <p><FontAwesomeIcon icon={faPhoneAlt} /><i class="fa fa-phonealt mx-2"></i>
+                            Mobile: 8870795518</p>
+                        <p><FontAwesomeIcon icon={faEnvelope} /><i class="fa fa-envelope mx-2"></i>
+                            Email: bothub.zue@gmail.com</p>
+                        </div>
+
+                        </div>
+                        <div className="col-12 col-md-4">
+                        <h5><FontAwesomeIcon icon={faAddressCard} /><i class="fa fa-addresscard mx-2"></i>Address</h5>
+                        <div className="mt-3 mx-4">
+                            <p>9B, Anboli Nagar,</p> 
+                            <p>Chitra Nagar, Saravanampatti, </p>
+                            <p>Coimbatore,</p>
+                            <p>Tamil Nadu - 641006.</p>
+                        </div>
+                        </div>
                     </div>
                     
+                    <div class="container text-center">
+                        <p class="copyright-text br">Copyright &copy; 2021|| All Rights Reserved by <a href="#">BotHub.in</a></p>
+                        <p class="copyright-text">Developed by <a href="https://github.com/TeamCheems">Team Cheems</a></p>
+                        
+                    </div>
                 </div>
             </footer>
             
