@@ -146,7 +146,7 @@ export default function Authenticate(props) {
              // If Not Logged in
              <div className="min-vh-100 d-flex justify-content-center align-items-center"> 
                 <div className="col-10 col-sm-9 col-md-7 col-xl-5 row justify-content-center my-5">
-                    <h1 className="text-center fw-bold">BotHub.in</h1>
+                    <Link to={routes.home} className="text-center text-light text-decoration-none fw-bold fs-1 smooth-transition">BotHub.in</Link>
                     <div className="text-center fs-5 mb-4">{ props.page === "login"? "Login to your Account" : "Sign Up" }</div>
                     <div className="card col-12 col-md-10 m-2">
                         <div className="card-body w-100">
@@ -218,7 +218,7 @@ export function ForgotPassword(props) {
     return (
         <div className="min-vh-100 d-flex justify-content-center align-items-center"> 
                 <div className="col-10 col-sm-9 col-md-7 col-xl-5 row justify-content-center my-5">
-                    <h1 className="text-center fw-bold">BotHub.in</h1>
+                    <Link to={routes.home} className="text-center text-light text-decoration-none fw-bold fs-1 smooth-transition">BotHub.in</Link>
                     <div className="text-center fs-6 mb-4">Send Reset Password Email</div>
                     <div className="card col-12 col-md-10 m-2">
                         <div className="card-body w-100">

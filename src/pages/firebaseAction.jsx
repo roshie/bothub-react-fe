@@ -124,7 +124,7 @@ function ResetPassword(props) {
             <Spinner animation="border" size="lg" className="text-light"/>
           : (validRequest === "true") ? 
           <>
-              <h1 className="text-center fw-bold">BotHub.in</h1>
+              <Link to={routes.home} className="text-center text-light text-decoration-none fw-bold fs-1 smooth-transition">BotHub.in</Link>
               <div className="text-center fs-5 mb-4">Reset Password for {email}</div>
               <div className="card col-12 col-md-10 m-2">
                   <div className="card-body w-100">

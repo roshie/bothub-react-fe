@@ -75,9 +75,13 @@ body {
 .modal-content {
   background-color: $primary;
 }
-.btn-link{
+.btn-link {
   border: none;
   background-color: transparent;
   color: $secondary;
   text-decoration: none;
+}
+
+.smooth-transition {
+  transition: all 0.8s ease;
 }
