@@ -3,6 +3,7 @@ import { Col, Collapse, Form, Row, Button, Spinner } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { routes , getToken } from "../App";
 import { backendAppUrl, getRequestParams } from '../config'
+import { getAuth, reauthenticateWithCredential, updatePassword } from "@firebase/auth";
 
 
 
@@ -29,9 +30,9 @@ export default function Profile(props) {
     confirmPassword:''
   })
   const [pageLoaded, setPageLoaded] = useState(false);
-  const [passwordChangeLoaded, setPasswordChangeLoaded] = useState(false);
-  const [userInfoLoaded, setUserInfoLoaded] = useState(false);
-  const [shippingInfoLoaded, setShippingInfoLoaded] = useState(false);
+  const [passwordChangeLoaded, setPasswordChangeLoaded] = useState({ msg: '', status: false});
+  const [userInfoLoaded, setUserInfoLoaded] = useState({ msg: '', status: false});
+  const [shippingInfoLoaded, setShippingInfoLoaded] = useState({ msg: '', status: false});
 
 useEffect(()=>{
     const data={
@@ -61,89 +62,102 @@ useEffect(()=>{
                 landmark:(result.landMark===null) ? '' : result.landMark
               })
             }
+            setPageLoaded(true)
           } else {
             console.error(response.json().detail);
-            
+            setPageLoaded(true)
           }
     },
     (err) => {
         console.log(err)
-        
+        setPageLoaded(true)
     })
     //eslint-disable-next-line
-},[])
-const submitPersonalInfo=()=>{
-    const data = {
-        ...oldData,
-        fullName:state.fullName,
-        mobileNumber:state.phoneNumber,
-        uid:localStorage.uid,
-        idToken:getToken()
+    },[])
+    const submitPersonalInfo=()=>{
+        setUserInfoLoaded({ msg: '', status: true})
+        const data = {
+            ...oldData,
+            fullName:state.fullName,
+            mobileNumber:state.phoneNumber,
+            uid:localStorage.uid,
+            idToken:getToken()
+        }
+        fetch(`${backendAppUrl}/users`, {
+            ...getRequestParams('PUT', data)
+        }) 
+        .then((res)=>{
+            res=res.json()
+            if(res==="success") { 
+                setOldData({
+                    ...oldData,
+                    fullName:state.fullName,
+                    mobileNumber:state.phoneNumber,
+                })
+                setUserInfoLoaded({ msg: 'Done!', status: false})
+            }
+            else if(res.detail==="db-error") {    
+              setUserInfoLoaded({ msg: 'Updation Failed!', status: false})
+            }
+        })
     }
-    fetch(`${backendAppUrl}/users`, {
-        ...getRequestParams('PUT', data)
-    }) .then((res)=>{
-        res=res.json()
-        if(res==="success")
-        {
-            setOldData({
-                ...oldData,
-                fullName:state.fullName,
-                mobileNumber:state.phoneNumber,
-            })
+    const submitShippingInfo=()=>{
+      setShippingInfoLoaded({ msg: '', status: true})
+        const data = {
+            ...oldData,
+            address: (state.address==='') ? null : state.address,
+            city: (state.city==='') ? null : state.city,
+            state: (state._state==='') ? null : state._state,
+            country: (state.country==='') ? null : state.country,
+            pinCode: (state.pincode==='') ? null : state.pincode,
+            landMark: (state.landmark==='') ? null : state.landmark,
+            uid:localStorage.uid,
+            idToken:getToken()
         }
-        else if(res.detail==="db-error")
-        {
-
-        }
-    })
-}
-const submitShippingInfo=()=>{
-    const data = {
-        ...oldData,
-        address: (state.address==='') ? null : state.address,
-        city: (state.city==='') ? null : state.city,
-        state: (state._state==='') ? null : state._state,
-        country: (state.country==='') ? null : state.country,
-        pinCode: (state.pincode==='') ? null : state.pincode,
-        landMark: (state.landmark==='') ? null : state.landmark,
-        uid:localStorage.uid,
-        idToken:getToken()
+        fetch(`${backendAppUrl}/users`, {
+            ...getRequestParams('PUT', data)
+        }) .then((res)=>{
+            res=res.json()
+            if(res==="success") {
+              setShippingInfoLoaded({ msg: 'Done!', status: false})
+            }
+            else if(res.detail==="db-error") {
+              setShippingInfoLoaded({ msg: 'Updation Failed!', status: false})
+            }
+        })
     }
-    fetch(`${backendAppUrl}/users`, {
-        ...getRequestParams('PUT', data)
-    }) .then((res)=>{
-        res=res.json()
-        if(res==="success")
-        {
+
+    const updatePassword = () => {
+      setPasswordChangeLoaded({msg: '', status: true})
+      // step 1: match passwords
+      // step 2 : authenticate
+
+      if (newPassword === confirmPassword) {
+        const user = getAuth().currentUser
+
+        reauthenticateWithCredential(user, currentPassword).then(() => {
+          updatePassword(user, newPassword).then(() => {
+            setPasswordChangeLoaded({msg: 'Done!', status: false})
+          }).catch((error) => {
+            if (error.code == "auth/weak-password")
+              setPasswordChangeLoaded({msg: 'Password should be atleast 8 characters of length', status: false})
+          });
             
-        }
-        else if(res.detail==="db-error")
-        {
-            
-        }
-    })
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
+        }).catch((error) => {
+          if (error.code == "auth/wrong-password")
+            setPasswordChangeLoaded({msg: 'The current password is invalid.', status: false})
+        });
+      } else {
+        setPasswordChangeLoaded({msg: 'Passwords does not match', status: false})
+      }
+    }
 
   return (
     <Layout loginState={props.login} page="profile">
       <div className="d-flex align-items-center justify-content-center min-vh-100">
-      <Spinner animation="border" className="text-light" />
+      {pageLoaded ? 
         <div className="col-12 col-lg-8">
-          <div className="row fs-2 m-3 fw-bold">Hello, Keerthi </div>
+          <div className="row fs-2 m-3 fw-bold">Hello{state.fullName !== ''? `, ${state.fullName}`: '' }</div>
           <div
             className="row m-2"
             onClick={() => {
@@ -230,25 +244,27 @@ const submitShippingInfo=()=>{
                   </Row>
 
                   <Row className="my-5 mx-2">
+                    <small className="text-light">{userInfoLoaded.msg}</small>
                     <Button variant="secondary"
                     type="submit"
                     onClick={submitPersonalInfo}
-                    >
-                      Save
+                    disabled={userInfoLoaded.status}
+                    > {
+                      userInfoLoaded.status ?
                       <Spinner
                         animation="border"
                         size="sm"
                         className="text-light"
                       />
+                      : "Save"
+                    }
+                      
                     </Button>
                   </Row>
                 </Form>
               </div>
             </Collapse>
           </div>
-
-
-
 
 
 
@@ -298,7 +314,6 @@ const submitShippingInfo=()=>{
                         label="State"
                         as={Col}
                       >
-                        {" "}
                         State
                       </Form.Label>
                       <Form.Control className="bg-primary border-primary text-light" 
@@ -320,7 +335,6 @@ const submitShippingInfo=()=>{
                     </Col>
                     <Col>
                       <Form.Label className="text-light mt-3 my-2" as={Col}>
-                        {" "}
                         Pincode
                       </Form.Label>
                       <Form.Control className="bg-primary border-primary text-light" 
@@ -346,13 +360,14 @@ const submitShippingInfo=()=>{
                   </Row>
 
                   <Row className="my-5 mx-2">
-                    <Button variant="secondary"  onClick={submitShippingInfo} >
-                      Update
-                      <Spinner
+                  <small className="text-light">{shippingInfoLoaded.msg}</small>
+                    <Button variant="secondary" disabled={shippingInfoLoaded.status} onClick={submitShippingInfo} >
+                      
+                      {shippingInfoLoaded.status ? <Spinner
                         animation="border"
                         size="sm"
                         className="text-light"
-                      />
+                      /> : "Update" }
                     </Button>
                   </Row>
                 </Form>
@@ -389,6 +404,7 @@ const submitShippingInfo=()=>{
                         className="bg-primary border-primary text-light"
                         type="password"
                         placeholder="Current Password"
+                        required
                         value={passwords.currentPassword}
                         onChange={(e)=>{setPasswords({...passwords,currentPassword:e.target.value})}}
                       />
@@ -407,6 +423,7 @@ const submitShippingInfo=()=>{
                         className="bg-primary border-primary text-light"
                         type="password"
                         placeholder="New Password"
+                        required
                         value={passwords.newPassword}
                         onChange={(e)=>{setPasswords({...passwords,newPassword:e.target.value})}}
                       />
@@ -425,6 +442,7 @@ const submitShippingInfo=()=>{
                         className="bg-primary border-primary text-light"
                         type="password"
                         placeholder="Confirm New Password"
+                        required
                         value={passwords.confirmPassword}
                         onChange={(e)=>{setPasswords({...passwords,confirmPassword:e.target.value})}}
                       />
@@ -432,13 +450,14 @@ const submitShippingInfo=()=>{
                   </Row>
 
                   <Row className="my-5 mx-2">
-                    <Button variant="secondary">
-                      Update Password
+                    <small className="text-danger">{passwordChangeLoaded.msg}</small>
+                    <Button variant="secondary" disabled={passwordChangeLoaded.status} type="submit" onClick={updatePassword}>
+                      {passwordChangeLoaded.status ? 
                       <Spinner
                         animation="border"
                         size="sm"
                         className="text-light"
-                      />
+                      /> : "Update Password" }
                     </Button>
                   </Row>
                 </Form>
@@ -446,7 +465,10 @@ const submitShippingInfo=()=>{
             </Collapse>
           </div>
         </div>
-      </div>
+        : 
+        <Spinner animation="border" className="text-light" />
+        }
+      </div> 
     </Layout>
   );
 }
