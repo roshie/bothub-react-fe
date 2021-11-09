@@ -5,8 +5,8 @@ import Home from './pages/Home';
 import Product from './pages/Product';
 import Products from "./pages/Products";
 import Profile from "./pages/Profile";
-import Authenticate from './pages/Authenticate';
-import emailVerified from "./pages/emailVerified";
+import Authenticate, { ForgotPassword } from './pages/Authenticate';
+import FirebaseAction from "./pages/firebaseAction";
 import viewOrders from './pages/viewOrders';
 import PrivateRoute from "./PrivateRoute";
 import 'bootstrap/scss/bootstrap.scss'
@@ -20,7 +20,7 @@ import OrderSummary from "./pages/OrderSummary";
 
 
 // Firebase Config
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: "AIzaSyDYWjzXg1TsC0lXtKQkGeep_IMMl7z_onQ",
   authDomain: "bothub-6a2e3.firebaseapp.com",
   projectId: "bothub-6a2e3",
@@ -35,15 +35,17 @@ export const routes = {
   login: '/login',
   signUp: '/sign-up',
   home: '/',
+  error404: '/error404',
   idToken: '/idToken',
   profile: '/profile',
   product: '/product',
   products: '/products',
   profile: '/profile',
-  emailVerified: '/email-verified',
   checkout:'/checkout',
   viewOrders: '/view-orders',
-  verify: '/verify'
+  verify: '/verify',
+  forgotPassword: '/forgot-password',
+  firebaseAction: '/firebase-action'
 }
 
 function App() {
@@ -54,7 +56,8 @@ function App() {
     <Router>
       <Switch>
         <Route exact path={routes.idToken} component={IdToken}/>
-        <Route exact path={routes.emailVerified} component={emailVerified}/>
+        <Route exact path={routes.forgotPassword} component={ForgotPassword}/>
+        <Route exact path={routes.firebaseAction} component={FirebaseAction}/>
         <PrivateRoute exact path={routes.login} component={Authenticate} page="login"/>
         <PrivateRoute exact path={routes.signUp} component={Authenticate} page="signUp"/>
         <PrivateRoute exact path={routes.home} component={Home} />

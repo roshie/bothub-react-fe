@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 import { getAuth, onAuthStateChanged, getIdToken} from "firebase/auth";
 import { Spinner } from "react-bootstrap";
 import { routes } from "./App";
-import { backendAppUrl } from './config'
+import { backendAppUrl, getRequestParams } from './config'
 import logout from './logout';
 
 export default class PrivateRoute extends React.Component {
@@ -37,11 +37,7 @@ export default class PrivateRoute extends React.Component {
                 }).then(() => {
                 
                     fetch(`${backendAppUrl}/users/auth-status`, {
-                        method: 'POST', 
-                        headers: {
-                        'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(data),
+                        ...getRequestParams('POST', data)
                     })
                     .then(res => res.json())
                     .then(

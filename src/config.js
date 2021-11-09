@@ -9,3 +9,14 @@ export const backendAppUrl = "http://localhost:8000"
 // export const customerAppUrl = ""
 // export const adminAppUrl = "https://bothub.vercel.app"
 // export const backendAppUrl = "https://bothub-be.herokuapp.com"
+
+
+export function getRequestParams(method, data) {
+    return {
+        method, 
+        headers: {
+        'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data),
+    }
+}
