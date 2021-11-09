@@ -1,13 +1,12 @@
 import Layout from "./components/Layout";
-import { Collapse } from "react-bootstrap";
-import { useState } from "react";
-import BackgroundSlider from "react-background-slider";
+// import { Collapse } from "react-bootstrap";
+// import { useState } from "react";
 import { routes } from "../App";
 
 export default function Profile(props) {
-  const [open, setOpen] = useState(false);
-  const [address, setAddress] = useState(false);
-  const [password, setPassword] = useState(false);
+  // const [open, setOpen] = useState(false);
+  // const [address, setAddress] = useState(false);
+  // const [password, setPassword] = useState(false);
   return (
     <Layout loginState={props.login} page="profile">
         <div className="d-flex align-items-center justify-content-center min-vh-100">
