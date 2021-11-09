@@ -8,6 +8,7 @@ import Profile from "./pages/Profile";
 import Authenticate, { ForgotPassword } from './pages/Authenticate';
 import FirebaseAction from "./pages/firebaseAction";
 import viewOrders from './pages/viewOrders';
+import userDetails from './pages/userDetails';
 import PrivateRoute from "./PrivateRoute";
 import 'bootstrap/scss/bootstrap.scss'
 import './custom-bootstrap.scss';
@@ -67,6 +68,7 @@ function App() {
         <PrivateRoute exact path={routes.checkout} component={Checkout} shouldLogin={true} />
         <PrivateRoute exact path={routes.viewOrders} component={viewOrders} shouldLogin={true} />
         <PrivateRoute exact path={routes.orderSummary} component={OrderSummary} shouldLogin={true}/>
+        <PrivateRoute exact path={routes.userDetails} component={userDetails} />
         <Redirect to={routes.error404} component={Home} />
         {/* Add more ... */}
       </Switch>
