@@ -19,7 +19,7 @@ export default function viewOrders(props) {
                 <div className="mx-5">
                     <div className="mt-5 row">
                     <div className="col-lg-6 text-center d-flex justify-content-center flex-column">
-                       <img src = "IOT.jfif"/>
+                       <img src = "IOT.jfif" alt="..."/>
                     </div>
                     <div className="col-lg-6 text-center mt-4">
                         <p>Dispatched</p> {props.orderStatus}
@@ -30,7 +30,7 @@ export default function viewOrders(props) {
                     </div>
                     </div>
                     <div className="text-center mt-2">
-                        <a href="#"><button type="button" class="btn btn-secondary fw-bold my-2">View Details</button></a>
+                        <button type="button" class="btn btn-secondary fw-bold my-2">View Details</button>
                     </div>
 
                 </div>

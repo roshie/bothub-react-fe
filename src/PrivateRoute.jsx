@@ -4,7 +4,6 @@ import { getAuth, onAuthStateChanged, getIdToken} from "firebase/auth";
 import { Spinner } from "react-bootstrap";
 import { routes } from "./App";
 import { backendAppUrl, getRequestParams } from './config'
-import logout from './logout';
 
 export default class PrivateRoute extends React.Component {
     constructor(props) {
@@ -47,7 +46,7 @@ export default class PrivateRoute extends React.Component {
                     .then(res => res.json())
                     .then(
                         (auth) => {
-                            if (auth.status == 'true') {
+                            if (auth.status === 'true') {
                                 this.setState({
                                     user,
                                     isLoaded: true

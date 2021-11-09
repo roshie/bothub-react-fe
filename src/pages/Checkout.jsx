@@ -1,9 +1,7 @@
-import { Redirect } from "react-router";
-import { routes } from "../App";
-import { useEffect } from "react";
 import { Product } from "./components/Cards";
 import Layout from "./components/Layout";
 import { Form } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export default function Checkout(props) {
     return (
@@ -50,7 +48,7 @@ export default function Checkout(props) {
                 <div className="mx-5">
                     <div className="row">
                     <div className="col-lg-6 text-center d-flex justify-content-center flex-column">
-                       <img src = "IOT.jfif"/>
+                       <img src = "IOT.jfif" alt=".."/>
                     </div>
                     <div className="col-lg-6 text-center mt-4">
                         <h2>Order Summary</h2>
@@ -66,12 +64,11 @@ export default function Checkout(props) {
                     <p>
                         <strong>Payment Status:</strong> {props.orderStatus}
                     </p>
-                    <a 
+                    <Link 
                         class="btn btn-secondary btn-lg text-center mt-2"
-                        href="#"
                         >
                         Place Order
-                        </a>
+                        </Link>
                     </div>
                     </div>
                 </div>

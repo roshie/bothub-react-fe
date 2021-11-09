@@ -39,7 +39,7 @@ function EmailVerified(props) {
     }).catch((error) => {
       setEV('not-verified')
     });
-    // Eslint-disable-next-line
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
@@ -90,7 +90,7 @@ function ResetPassword(props) {
     }).catch((error) => {
       setValid('false')
     });
-    // Eslint-disable-next-line
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const resetPasswordFn = () => {

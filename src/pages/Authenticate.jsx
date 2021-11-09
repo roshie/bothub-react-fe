@@ -5,7 +5,6 @@ import { FloatingLabel, Form, Button, Col, Spinner } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { Link } from "react-router-dom";
-import { DecorElemBorder, DecorElemBox } from "./components/decorElements";
 import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth"
 import { backendAppUrl, getRequestParams } from '../config'
 
@@ -33,10 +32,10 @@ export default function Authenticate(props) {
         .then((response) => {
             if (response.ok) {
                 const result = response.json();
-                if (result.detail == "exists") {
+                if (result.detail === "exists") {
                     setErrorMsg('An account with this Email ID already exists. Try Logging in.')
                     setLoading(false)
-                } else if (result.detail == "success") {
+                } else if (result.detail === "success") {
                     // remove loader
                     setLoading(false)
                     movePage(false)
@@ -84,7 +83,7 @@ export default function Authenticate(props) {
         setErrorMsg('')
         setValidation({email: false, password: false})
         setLoading(true)
-        if (props.page != 'login') {
+        if (props.page !== 'login') {
             if (password.length < 8) {
                 setLoading(false)
                 setValidation({email: true})
@@ -211,7 +210,6 @@ export function ForgotPassword(props) {
           })
           .catch((error) => {
             const errorCode = error.code;
-            const errorMessage = error.message;
             console.log(errorCode)
             setResultMsg("Oops, There was a problem. Please try again")
           });

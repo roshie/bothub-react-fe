@@ -107,7 +107,7 @@ function D3Printing(props) {
                 <div><button className="btn-lg btn btn-secondary fw-bold my-2 mt-3">View Details</button></div>
             </div>  
             <div className="col-12 col-lg-6 text-center my-5">
-                <img className="d3printer" src="3d-printer.png"/>
+                <img className="d3printer" src="3d-printer.png" alt="3DPrinter"/>
             </div>     
           </div>   
       </section>

@@ -40,7 +40,6 @@ export const routes = {
   profile: '/profile',
   product: '/product',
   products: '/products',
-  profile: '/profile',
   checkout:'/checkout',
   viewOrders: '/view-orders',
   verify: '/verify',
