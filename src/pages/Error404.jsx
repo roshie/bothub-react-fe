@@ -1,9 +1,9 @@
-import {Link} from "react-router-dom"
-import {routes} from '../App.js'
-import {useEffect} from "react";
+import { Link } from "react-router-dom"
+import { routes } from '../App.js'
+import { useEffect } from "react";
 export default function Error404(props) {
 
-useEffect(()=>{document.title = "Page Not Found | Bothub"})
+    useEffect(() => { document.title = "Page Not Found | Bothub" })
     return (
         <div className="min-vh-100 d-flex justify-content-center align-items-center">
 
