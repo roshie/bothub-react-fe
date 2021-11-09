@@ -68,7 +68,7 @@ function App() {
         <PrivateRoute exact path={routes.checkout} component={Checkout} shouldLogin={true} />
         <PrivateRoute exact path={routes.viewOrders} component={viewOrders} shouldLogin={true} />
         <PrivateRoute exact path={routes.orderSummary} component={OrderSummary} shouldLogin={true}/>
-        <PrivateRoute exact path={routes.userDetails} component={userDetails} shouldLogin={true}/>
+        <PrivateRoute exact path={routes.userDetails} component={userDetails} />
         {/* <Redirect to={routes.error404} component={Home} /> */}
         {/* Add more ... */}
       </Switch>
