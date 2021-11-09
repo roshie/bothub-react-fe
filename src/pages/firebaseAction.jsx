@@ -9,7 +9,7 @@ import { applyActionCode, getAuth, verifyPasswordResetCode, confirmPasswordReset
 
 
 export default function FirebaseAction(props) {
-  const params = new URLSearchParams(props.path);
+  const params = new URLSearchParams(window.location.href);
   const mode = params.get('mode');
   const oobCode = params.get('oobCode')
   const apiKey = params.get('apiKey')
