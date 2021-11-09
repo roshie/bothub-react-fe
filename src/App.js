@@ -9,6 +9,7 @@ import Authenticate, { ForgotPassword } from './pages/Authenticate';
 import FirebaseAction from "./pages/firebaseAction";
 import viewOrders from './pages/viewOrders';
 import userDetails from './pages/userDetails';
+import Error404 from './pages/Error404';
 import PrivateRoute from "./PrivateRoute";
 import 'bootstrap/scss/bootstrap.scss'
 import './custom-bootstrap.scss';
@@ -59,6 +60,7 @@ function App() {
         <Route exact path={routes.idToken} component={IdToken}/>
         <Route exact path={routes.forgotPassword} component={ForgotPassword}/>
         <Route exact path={routes.firebaseAction} component={FirebaseAction}/>
+        <Route exact path={routes.error404} component={Error404}/>
         <PrivateRoute exact path={routes.login} component={Authenticate} page="login"/>
         <PrivateRoute exact path={routes.signUp} component={Authenticate} page="signUp"/>
         <PrivateRoute exact path={routes.home} component={Home} />
@@ -69,7 +71,7 @@ function App() {
         <PrivateRoute exact path={routes.viewOrders} component={viewOrders} shouldLogin={true} />
         <PrivateRoute exact path={routes.orderSummary} component={OrderSummary} shouldLogin={true}/>
         <PrivateRoute exact path={routes.verify} component={userDetails} shouldLogin={true}/>
-        <Redirect to={routes.error404} component={Home} />
+        <Redirect to={routes.error404} component={Error404} />
         {/* Add more ... */}
       </Switch>
     </Router>
