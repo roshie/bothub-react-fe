@@ -1,7 +1,7 @@
 import Layout from "./components/Layout";
 import { Col, Collapse, Form, Row, Button, Spinner } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import { routes , getToken } from "../App";
+import { routes, getToken } from "../App";
 import { backendAppUrl, getRequestParams } from '../config'
 import { getAuth, reauthenticateWithCredential, updatePassword } from "@firebase/auth";
 
@@ -12,37 +12,37 @@ export default function Profile(props) {
   const [password, setPassword] = useState(false);
   const [editPersonal, setEditPersonal] = useState(false);
   const [state, setState] = useState({
-      
-      fullName:'',
-      email:'',
-      phoneNumber:'',
-      address:'',
-      city:'',
-      _state:'',
-      country:'',
-      pincode:'',
-      landmark:''
+
+    fullName: '',
+    email: '',
+    phoneNumber: '',
+    address: '',
+    city: '',
+    _state: '',
+    country: '',
+    pincode: '',
+    landmark: ''
   })
-  const [oldData,setOldData]= useState({})
-  const [passwords,setPasswords] = useState({
-    currentPassword:'',
-    newPassword:'',
-    confirmPassword:''
+  const [oldData, setOldData] = useState({})
+  const [passwords, setPasswords] = useState({
+    currentPassword: '',
+    newPassword: '',
+    confirmPassword: ''
   })
   const [pageLoaded, setPageLoaded] = useState(false);
   const [passwordChangeLoaded, setPasswordChangeLoaded] = useState({ msg: '', status: false});
   const [userInfoLoaded, setUserInfoLoaded] = useState({ msg: '', status: false});
   const [shippingInfoLoaded, setShippingInfoLoaded] = useState({ msg: '', status: false});
 
-useEffect(()=>{
-    const data={
-        uid: localStorage.uid,
-        idToken: localStorage.idToken
+  useEffect(() => {
+    const data = {
+      uid: localStorage.uid,
+      idToken: localStorage.idToken
     }
     fetch(`${backendAppUrl}/users`, {
-        ...getRequestParams('GET', data)
+      ...getRequestParams('GET', data)
     })
-    .then((response) => {
+      .then((response) => {
         if (response.ok) {
             const result = response.json();
             if (result.detail === "db-error") {
@@ -189,7 +189,7 @@ useEffect(()=>{
                       <Form.Label
                         className="text-light my-2"
                         label="password"
-                
+
                       >
                         Full Name
                       </Form.Label>
@@ -198,8 +198,8 @@ useEffect(()=>{
                         placeholder="John Doe"
                         required
                         value={state.fullName}
-                        onChange={(e)=>{setState({...state,fullName:e.target.value})}}
-                        
+                        onChange={(e) => { setState({ ...state, fullName: e.target.value }) }}
+
                       />
                     </Col>
                   </Row>
@@ -218,8 +218,8 @@ useEffect(()=>{
                         placeholder="+91 88073 00000"
                         required
                         value={state.phoneNumber}
-                        onChange={(e)=>{setState({...state,phoneNumber:e.target.value})}}
-                        
+                        onChange={(e) => { setState({ ...state, phoneNumber: e.target.value }) }}
+
                       />
                     </Col>
                   </Row>
@@ -234,10 +234,10 @@ useEffect(()=>{
                       </Form.Label>
                       <Form.Control
                         className="bg-primary border-primary text-light"
-                        type="email" 
+                        type="email"
                         placeholder="bothub@gmail.com"
                         value={state.email}
-                        onChange={(e)=>{setState({...state,email:e.target.value})}}
+                        onChange={(e) => { setState({ ...state, email: e.target.value }) }}
                         readOnly
                       />
                     </Col>
@@ -289,9 +289,9 @@ useEffect(()=>{
                         Address
                       </Form.Label>
                       <Form.Control className="bg-primary border-primary text-light"
-                      value={state.address}
-                      onChange={(e)=>{setState({...state,address:e.target.value})}}
-                       />
+                        value={state.address}
+                        onChange={(e) => { setState({ ...state, address: e.target.value }) }}
+                      />
                     </Col>
                   </Row>
                   <Row>
@@ -303,9 +303,9 @@ useEffect(()=>{
                       >
                         City
                       </Form.Label>
-                      <Form.Control className="bg-primary border-primary text-light" 
-                      value={state.city}
-                      onChange={(e)=>{setState({...state,city:e.target.value})}}
+                      <Form.Control className="bg-primary border-primary text-light"
+                        value={state.city}
+                        onChange={(e) => { setState({ ...state, city: e.target.value }) }}
                       />
                     </Col>
                     <Col>
@@ -316,9 +316,9 @@ useEffect(()=>{
                       >
                         State
                       </Form.Label>
-                      <Form.Control className="bg-primary border-primary text-light" 
-                      value={state._state}
-                      onChange={(e)=>{setState({...state,_state:e.target.value})}}
+                      <Form.Control className="bg-primary border-primary text-light"
+                        value={state._state}
+                        onChange={(e) => { setState({ ...state, _state: e.target.value }) }}
                       />
                     </Col>
                   </Row>
@@ -329,17 +329,17 @@ useEffect(()=>{
                         Country
                       </Form.Label>
                       <Form.Control className="bg-primary border-primary text-light"
-                       value={state.country}
-                       onChange={(e)=>{setState({...state,country:e.target.value})}}
+                        value={state.country}
+                        onChange={(e) => { setState({ ...state, country: e.target.value }) }}
                       />
                     </Col>
                     <Col>
                       <Form.Label className="text-light mt-3 my-2" as={Col}>
                         Pincode
                       </Form.Label>
-                      <Form.Control className="bg-primary border-primary text-light" 
-                       value={state.pincode}
-                       onChange={(e)=>{setState({...state,pincode:e.target.value})}}
+                      <Form.Control className="bg-primary border-primary text-light"
+                        value={state.pincode}
+                        onChange={(e) => { setState({ ...state, pincode: e.target.value }) }}
                       />
                     </Col>
                   </Row>
@@ -352,10 +352,10 @@ useEffect(()=>{
                       >
                         Landmark
                       </Form.Label>
-                      <Form.Control className="bg-primary border-primary text-light" 
-                       value={state.landmark}
-                       onChange={(e)=>{setState({...state,landmark:e.target.value})}}
-                       />
+                      <Form.Control className="bg-primary border-primary text-light"
+                        value={state.landmark}
+                        onChange={(e) => { setState({ ...state, landmark: e.target.value }) }}
+                      />
                     </Col>
                   </Row>
 
@@ -406,7 +406,7 @@ useEffect(()=>{
                         placeholder="Current Password"
                         required
                         value={passwords.currentPassword}
-                        onChange={(e)=>{setPasswords({...passwords,currentPassword:e.target.value})}}
+                        onChange={(e) => { setPasswords({ ...passwords, currentPassword: e.target.value }) }}
                       />
                     </Col>
                   </Row>
@@ -425,7 +425,7 @@ useEffect(()=>{
                         placeholder="New Password"
                         required
                         value={passwords.newPassword}
-                        onChange={(e)=>{setPasswords({...passwords,newPassword:e.target.value})}}
+                        onChange={(e) => { setPasswords({ ...passwords, newPassword: e.target.value }) }}
                       />
                     </Col>
                   </Row>
@@ -436,7 +436,7 @@ useEffect(()=>{
                         className="text-light mt-3 mb-2 my-2"
                         label="password"
                       >
-                        Confirm New Password      
+                        Confirm New Password
                       </Form.Label>
                       <Form.Control
                         className="bg-primary border-primary text-light"
@@ -444,7 +444,7 @@ useEffect(()=>{
                         placeholder="Confirm New Password"
                         required
                         value={passwords.confirmPassword}
-                        onChange={(e)=>{setPasswords({...passwords,confirmPassword:e.target.value})}}
+                        onChange={(e) => { setPasswords({ ...passwords, confirmPassword: e.target.value }) }}
                       />
                     </Col>
                   </Row>
