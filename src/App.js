@@ -60,10 +60,10 @@ function App() {
         <PrivateRoute exact path={routes.home} component={Home} />
         <PrivateRoute exact path={routes.product} component={Product} />
         <PrivateRoute exact path={routes.products} component={Products} />
-        <PrivateRoute exact path={routes.profile} component={Profile} />
-        <PrivateRoute exact path={routes.checkout} component={Checkout} />
-        <PrivateRoute exact path={routes.viewOrders} component={viewOrders} />
-        <PrivateRoute exact path={routes.ordersummary} component={OrderSummary} />
+        <PrivateRoute exact path={routes.profile} component={Profile} shouldLogin={true}/>
+        <PrivateRoute exact path={routes.checkout} component={Checkout} shouldLogin={true} />
+        <PrivateRoute exact path={routes.viewOrders} component={viewOrders} shouldLogin={true} />
+        <PrivateRoute exact path={routes.ordersummary} component={OrderSummary} shouldLogin={true}/>
         {/* Add more ... */}
       </Switch>
     </Router>
