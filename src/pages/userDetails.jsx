@@ -26,7 +26,7 @@ export default function userDetails() {
                                 className="mb-3 col-md-6 text-light"
 
                             >
-                                <Form.Control className="bg-primary border-primary text-light" required type="number" placeholder="+919999988888" />
+                                <Form.Control className="bg-primary border-primary text-light" required type="tel" placeholder="+919999988888" />
                             </FloatingLabel>
                             <FloatingLabel
                                 controlId="floatingInput"
