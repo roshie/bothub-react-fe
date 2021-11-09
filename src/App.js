@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
-
+import { Redirect } from "react-router";
 import IdToken from './pages/idToken';
 import Home from './pages/Home';
 import Product from './pages/Product';
@@ -45,7 +45,8 @@ export const routes = {
   viewOrders: '/view-orders',
   verify: '/verify',
   forgotPassword: '/forgot-password',
-  firebaseAction: '/firebase-action'
+  firebaseAction: '/firebase-action',
+  orderSummary: '/order-summary'
 }
 
 function App() {
@@ -66,7 +67,8 @@ function App() {
         <PrivateRoute exact path={routes.profile} component={Profile} shouldLogin={true}/>
         <PrivateRoute exact path={routes.checkout} component={Checkout} shouldLogin={true} />
         <PrivateRoute exact path={routes.viewOrders} component={viewOrders} shouldLogin={true} />
-        <PrivateRoute exact path={routes.ordersummary} component={OrderSummary} shouldLogin={true}/>
+        <PrivateRoute exact path={routes.orderSummary} component={OrderSummary} shouldLogin={true}/>
+        <Redirect to={routes.error404} component={Home} />
         {/* Add more ... */}
       </Switch>
     </Router>

@@ -1,6 +1,6 @@
 import Layout from "./components/Layout";
 import { Category } from "./components/Cards"
-import { useEffect, useRef, useState, useLayoutEffect, createRef } from "react";
+import { useEffect, useState, useLayoutEffect } from "react";
 import BackgroundSlider from "react-background-slider";
 import { Carousel } from "react-bootstrap";
 
@@ -73,7 +73,7 @@ function LandingPage(props) {
 
 function Categories(props) {
   return (
-    <section id="categories" className="text-light py-5" name="categories">
+    <section id="categories" className="text-light my-5" name="categories">
         <div className="row m-auto w-75">
             <div
                 className="text-center h2 "

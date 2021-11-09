@@ -11,8 +11,9 @@ import { backendAppUrl, getRequestParams } from '../config'
 
 
 export default function Authenticate(props) {
-    const params = new URLSearchParams(props.path);
+    const params = new URLSearchParams(props.location.search);
     const redirectTo = params.get('redirect');
+    console.log(window.location.pathname, 'redirectTo: ', redirectTo)
 
     var [email, setEmail] = useState('')
     var [password, setPassword] = useState('')
