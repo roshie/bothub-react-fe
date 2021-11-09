@@ -17,7 +17,7 @@ import './App.scss';
 import { initializeApp } from "firebase/app";
 import Checkout from "./pages/Checkout";
 import OrderSummary from "./pages/OrderSummary";
-
+import { getAuth, getIdToken } from "@firebase/auth";
 
 
 // Firebase Config
@@ -68,7 +68,7 @@ function App() {
         <PrivateRoute exact path={routes.checkout} component={Checkout} shouldLogin={true} />
         <PrivateRoute exact path={routes.viewOrders} component={viewOrders} shouldLogin={true} />
         <PrivateRoute exact path={routes.orderSummary} component={OrderSummary} shouldLogin={true}/>
-        <PrivateRoute exact path={routes.verify} component={userDetails} />
+        <PrivateRoute exact path={routes.verify} component={userDetails} shouldLogin={true}/>
         <Redirect to={routes.error404} component={Home} />
         {/* Add more ... */}
       </Switch>
@@ -77,3 +77,11 @@ function App() {
 }
 
 export default App;
+
+function getToken() {
+  const auth = getAuth();
+  const user = auth.currentUser;
+  getIdToken(user).then((idToken) => { 
+      return idToken;
+  })
+}
