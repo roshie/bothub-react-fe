@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
-// import { Redirect } from "react-router";
+import { Redirect } from "react-router";
 import IdToken from './pages/idToken';
 import Home from './pages/Home';
 import Product from './pages/Product';
@@ -67,7 +67,7 @@ function App() {
         <PrivateRoute exact path={routes.checkout} component={Checkout} shouldLogin={true} />
         <PrivateRoute exact path={routes.viewOrders} component={viewOrders} shouldLogin={true} />
         <PrivateRoute exact path={routes.orderSummary} component={OrderSummary} shouldLogin={true}/>
-        {/* <Redirect to={routes.error404} component={Home} /> */}
+        <Redirect to={routes.error404} component={Home} />
         {/* Add more ... */}
       </Switch>
     </Router>

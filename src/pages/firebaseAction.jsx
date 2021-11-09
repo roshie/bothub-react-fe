@@ -9,10 +9,12 @@ import { applyActionCode, getAuth, verifyPasswordResetCode, confirmPasswordReset
 
 
 export default function FirebaseAction(props) {
-  const params = new URLSearchParams(window.location.href);
+  const url = new URL(window.location.href)
+  const params = url.searchParams;
   const mode = params.get('mode');
   const oobCode = params.get('oobCode')
   const apiKey = params.get('apiKey')
+  console.log("mode", mode, oobCode, apiKey)
 
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
@@ -23,7 +25,8 @@ export default function FirebaseAction(props) {
   } else if (mode === "resetPassword") {
     return <ResetPassword oobCode={oobCode} apiKey={apiKey} auth={auth}/>
 
-  } else {
+  } 
+  else {
     return <Redirect to={routes.error404} />;
   }
 }
