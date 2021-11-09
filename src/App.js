@@ -80,7 +80,7 @@ function App() {
 
 export default App;
 
-function getToken() {
+export function getToken() {
   const auth = getAuth();
   const user = auth.currentUser;
   getIdToken(user).then((idToken) => { 
