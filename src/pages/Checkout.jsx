@@ -111,7 +111,9 @@ export default function Checkout(props) {
                           Verify
                         </Button>
                       </div>
-                      <div className="text-success small text-end">Success</div>
+                      <div className="text-success small text-end">
+                        {"Mail Sent! Check your inbox."}
+                      </div>
                     </Form.Group>
                   </Row>
                   <Row>

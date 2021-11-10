@@ -1,10 +1,11 @@
 import Layout from "./components/Layout";
 import { Col, Collapse, Form, Row, Button, Spinner } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import { routes, getToken } from "../App";
+import { routes } from "../App";
 import { backendAppUrl, getRequestParams } from "../config";
 import {
   getAuth,
+  getIdToken,
   reauthenticateWithCredential,
   updatePassword,
 } from "@firebase/auth";
@@ -45,6 +46,7 @@ export default function Profile(props) {
   });
 
   useEffect(() => {
+    console.log("Provider", getAuth().currentUser.providerId);
     fetch(
       `${backendAppUrl}/users?uid=${localStorage.uid}&idToken=${localStorage.idToken}`,
       {
@@ -92,51 +94,65 @@ export default function Profile(props) {
   }, []);
   const submitPersonalInfo = () => {
     setUserInfoLoaded({ msg: "", status: true });
-    const data = {
-      ...oldData,
-      fullName: state.fullName,
-      mobileNumber: state.phoneNumber,
-      uid: localStorage.uid,
-      idToken: getToken(),
-    };
-    fetch(`${backendAppUrl}/users`, {
-      ...getRequestParams("PUT", data),
-    }).then((res) => {
-      res = res.json();
-      if (res === "success") {
-        setOldData({
-          ...oldData,
-          fullName: state.fullName,
-          mobileNumber: state.phoneNumber,
+    getIdToken(getAuth().currentUser).then((idToken) => {
+      const data = {
+        ...oldData,
+        fullName: state.fullName,
+        mobileNumber: state.phoneNumber,
+        uid: localStorage.uid,
+        idToken: idToken,
+      };
+      fetch(`${backendAppUrl}/users`, {
+        ...getRequestParams("PUT", data),
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          if (res === "success") {
+            setOldData({
+              ...oldData,
+              fullName: state.fullName,
+              mobileNumber: state.phoneNumber,
+            });
+            setUserInfoLoaded({ msg: "Done!", status: false });
+          } else if (res.detail === "db-error") {
+            setUserInfoLoaded({ msg: "Updation Failed!", status: false });
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+          setUserInfoLoaded({ msg: "Updation Failed!", status: false });
         });
-        setUserInfoLoaded({ msg: "Done!", status: false });
-      } else if (res.detail === "db-error") {
-        setUserInfoLoaded({ msg: "Updation Failed!", status: false });
-      }
     });
   };
   const submitShippingInfo = () => {
     setShippingInfoLoaded({ msg: "", status: true });
-    const data = {
-      ...oldData,
-      address: state.address === "" ? null : state.address,
-      city: state.city === "" ? null : state.city,
-      state: state._state === "" ? null : state._state,
-      country: state.country === "" ? null : state.country,
-      pinCode: state.pincode === "" ? null : state.pincode,
-      landMark: state.landmark === "" ? null : state.landmark,
-      uid: localStorage.uid,
-      idToken: getToken(),
-    };
-    fetch(`${backendAppUrl}/users`, {
-      ...getRequestParams("PUT", data),
-    }).then((res) => {
-      res = res.json();
-      if (res === "success") {
-        setShippingInfoLoaded({ msg: "Done!", status: false });
-      } else if (res.detail === "db-error") {
-        setShippingInfoLoaded({ msg: "Updation Failed!", status: false });
-      }
+    getIdToken(getAuth().currentUser).then((idToken) => {
+      const data = {
+        ...oldData,
+        address: state.address === "" ? null : state.address,
+        city: state.city === "" ? null : state.city,
+        state: state._state === "" ? null : state._state,
+        country: state.country === "" ? null : state.country,
+        pinCode: state.pincode === "" ? null : state.pincode,
+        landMark: state.landmark === "" ? null : state.landmark,
+        uid: localStorage.uid,
+        idToken: idToken,
+      };
+      fetch(`${backendAppUrl}/users`, {
+        ...getRequestParams("PUT", data),
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          if (res === "success") {
+            setShippingInfoLoaded({ msg: "Done!", status: false });
+          } else if (res.detail === "db-error") {
+            setShippingInfoLoaded({ msg: "Updation Failed!", status: false });
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+          setShippingInfoLoaded({ msg: "Updation Failed!", status: false });
+        });
     });
   };
 
@@ -432,120 +448,122 @@ export default function Profile(props) {
               </Collapse>
             </div>
 
-            <div className="row m-2">
-              <div
-                className="card d-flex justify-content-center on-hover smooth-transition cursor-pointer"
-                onClick={() => setPassword(!password)}
-                aria-controls="addressDiv"
-                aria-expanded={password}
-              >
-                <div className="fs-6 m-3">Change Password</div>
-              </div>
-              <Collapse in={password}>
+            {getAuth().currentUser.providerId !== "google.com" && (
+              <div className="row m-2">
                 <div
-                  className="col-12 card px-4 px-md-5 py-4 my-2"
-                  id="addressDiv"
+                  className="card d-flex justify-content-center on-hover smooth-transition cursor-pointer"
+                  onClick={() => setPassword(!password)}
+                  aria-controls="addressDiv"
+                  aria-expanded={password}
                 >
-                  <Form onSubmit={() => false}>
-                    <Row>
-                      <Col>
-                        <Form.Label
-                          className="text-light my-2"
-                          label="password"
-                          type="password"
-                          placeholder="Password"
-                        >
-                          Current Password
-                        </Form.Label>
-                        <Form.Control
-                          className="bg-primary border-primary text-light"
-                          type="password"
-                          placeholder="Current Password"
-                          required
-                          value={passwords.currentPassword}
-                          onChange={(e) => {
-                            setPasswords({
-                              ...passwords,
-                              currentPassword: e.target.value,
-                            });
-                          }}
-                        />
-                      </Col>
-                    </Row>
-
-                    <Row>
-                      <Col>
-                        <Form.Label
-                          className="text-light mt-3 mb-2 my-2"
-                          label="password"
-                        >
-                          New Password
-                        </Form.Label>
-                        <Form.Control
-                          className="bg-primary border-primary text-light"
-                          type="password"
-                          placeholder="New Password"
-                          required
-                          value={passwords.newPassword}
-                          onChange={(e) => {
-                            setPasswords({
-                              ...passwords,
-                              newPassword: e.target.value,
-                            });
-                          }}
-                        />
-                      </Col>
-                    </Row>
-
-                    <Row>
-                      <Col>
-                        <Form.Label
-                          className="text-light mt-3 mb-2 my-2"
-                          label="password"
-                        >
-                          Confirm New Password
-                        </Form.Label>
-                        <Form.Control
-                          className="bg-primary border-primary text-light"
-                          type="password"
-                          placeholder="Confirm New Password"
-                          required
-                          value={passwords.confirmPassword}
-                          onChange={(e) => {
-                            setPasswords({
-                              ...passwords,
-                              confirmPassword: e.target.value,
-                            });
-                          }}
-                        />
-                      </Col>
-                    </Row>
-
-                    <Row className="my-5 mx-2">
-                      <small className="text-danger">
-                        {passwordChangeLoaded.msg}
-                      </small>
-                      <Button
-                        variant="secondary"
-                        disabled={passwordChangeLoaded.status}
-                        type="submit"
-                        onClick={changePassword}
-                      >
-                        {passwordChangeLoaded.status ? (
-                          <Spinner
-                            animation="border"
-                            size="sm"
-                            className="text-light"
-                          />
-                        ) : (
-                          "Update Password"
-                        )}
-                      </Button>
-                    </Row>
-                  </Form>
+                  <div className="fs-6 m-3">Change Password</div>
                 </div>
-              </Collapse>
-            </div>
+                <Collapse in={password}>
+                  <div
+                    className="col-12 card px-4 px-md-5 py-4 my-2"
+                    id="addressDiv"
+                  >
+                    <Form onSubmit={() => false}>
+                      <Row>
+                        <Col>
+                          <Form.Label
+                            className="text-light my-2"
+                            label="password"
+                            type="password"
+                            placeholder="Password"
+                          >
+                            Current Password
+                          </Form.Label>
+                          <Form.Control
+                            className="bg-primary border-primary text-light"
+                            type="password"
+                            placeholder="Current Password"
+                            required
+                            value={passwords.currentPassword}
+                            onChange={(e) => {
+                              setPasswords({
+                                ...passwords,
+                                currentPassword: e.target.value,
+                              });
+                            }}
+                          />
+                        </Col>
+                      </Row>
+
+                      <Row>
+                        <Col>
+                          <Form.Label
+                            className="text-light mt-3 mb-2 my-2"
+                            label="password"
+                          >
+                            New Password
+                          </Form.Label>
+                          <Form.Control
+                            className="bg-primary border-primary text-light"
+                            type="password"
+                            placeholder="New Password"
+                            required
+                            value={passwords.newPassword}
+                            onChange={(e) => {
+                              setPasswords({
+                                ...passwords,
+                                newPassword: e.target.value,
+                              });
+                            }}
+                          />
+                        </Col>
+                      </Row>
+
+                      <Row>
+                        <Col>
+                          <Form.Label
+                            className="text-light mt-3 mb-2 my-2"
+                            label="password"
+                          >
+                            Confirm New Password
+                          </Form.Label>
+                          <Form.Control
+                            className="bg-primary border-primary text-light"
+                            type="password"
+                            placeholder="Confirm New Password"
+                            required
+                            value={passwords.confirmPassword}
+                            onChange={(e) => {
+                              setPasswords({
+                                ...passwords,
+                                confirmPassword: e.target.value,
+                              });
+                            }}
+                          />
+                        </Col>
+                      </Row>
+
+                      <Row className="my-5 mx-2">
+                        <small className="text-danger">
+                          {passwordChangeLoaded.msg}
+                        </small>
+                        <Button
+                          variant="secondary"
+                          disabled={passwordChangeLoaded.status}
+                          type="submit"
+                          onClick={changePassword}
+                        >
+                          {passwordChangeLoaded.status ? (
+                            <Spinner
+                              animation="border"
+                              size="sm"
+                              className="text-light"
+                            />
+                          ) : (
+                            "Update Password"
+                          )}
+                        </Button>
+                      </Row>
+                    </Form>
+                  </div>
+                </Collapse>
+              </div>
+            )}
           </div>
         ) : (
           <Spinner animation="border" className="text-light" />

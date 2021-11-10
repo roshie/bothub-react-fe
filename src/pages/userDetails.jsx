@@ -1,7 +1,7 @@
 import { Form, Button, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { routes, getToken } from "../App";
-import { getAuth, sendEmailVerification } from "@firebase/auth";
+import { routes } from "../App";
+import { getAuth, getIdToken, sendEmailVerification } from "@firebase/auth";
 import { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
 import { backendAppUrl, getRequestParams } from "../config";
@@ -50,46 +50,50 @@ export default function UserDetails() {
       setErrorMsg("Please fill the required details.");
       setLoading(false);
     } else {
-      const data = {
-        fullName: state.fullName,
-        mobileNmber: state.mobileNmber,
-        address: state.address === "" ? null : state.address,
-        city: state.city === "" ? null : state.city,
-        state: state.state === "" ? null : state.state,
-        country: state.country === "" ? null : state.country,
-        pinCode: state.pinCode === "" ? null : state.pinCode,
-        landMark: state.landMark === "" ? null : state.landMark,
-        uid: localStorage.uid,
-        idToken: getToken(),
-      };
+      getIdToken(getAuth().currentUser).then((idToken) => {
+        const data = {
+          fullName: state.fullName,
+          mobileNmber: state.mobileNmber,
+          address: state.address === "" ? null : state.address,
+          city: state.city === "" ? null : state.city,
+          state: state.state === "" ? null : state.state,
+          country: state.country === "" ? null : state.country,
+          pinCode: state.pinCode === "" ? null : state.pinCode,
+          landMark: state.landMark === "" ? null : state.landMark,
+          uid: localStorage.uid,
+          idToken,
+        };
 
-      fetch(`${backendAppUrl}/users`, {
-        ...getRequestParams("PUT", data),
-      }).then(
-        (response) => {
-          if (response.ok) {
-            const result = response.json();
-            if (result === "success") {
-              window.location.href = routes.home;
-              setLoading(false);
-            } else if (result.detail === "db-error") {
+        fetch(`${backendAppUrl}/users`, {
+          ...getRequestParams("PUT", data),
+        }).then(
+          (response) => {
+            if (response.ok) {
+              const result = response.json();
+              if (result === "success") {
+                window.location.href = routes.home;
+                setLoading(false);
+              } else if (result.detail === "db-error") {
+                setErrorMsg(
+                  "There was a problem while updating. Please try again"
+                );
+                setLoading(false);
+              }
+            } else {
+              console.error(response.json().detail);
               setErrorMsg(
                 "There was a problem while updating. Please try again"
               );
               setLoading(false);
             }
-          } else {
-            console.error(response.json().detail);
+          },
+          (err) => {
+            console.error(err);
             setErrorMsg("There was a problem while updating. Please try again");
             setLoading(false);
           }
-        },
-        (err) => {
-          console.error(err);
-          setErrorMsg("There was a problem while updating. Please try again");
-          setLoading(false);
-        }
-      );
+        );
+      });
     }
   };
 

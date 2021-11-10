@@ -79,11 +79,3 @@ function App() {
 }
 
 export default App;
-
-export function getToken() {
-  const auth = getAuth();
-  const user = auth.currentUser;
-  getIdToken(user).then((idToken) => { 
-      return idToken;
-  })
-}
