@@ -1,6 +1,9 @@
 import { Product } from "./components/Cards";
 import Layout from "./components/Layout";
+
 export default function Products(props) {
+  const categoryTag = props.categoryTag;
+
   return (
     <Layout loginState={props.login} page="products">
       <section id="products" className=" text-light" name="products">
@@ -9,12 +12,12 @@ export default function Products(props) {
             className="text-center pt-5 h2 "
             style={{ fontWeight: "bolder" }}
           >
-            IOT Components
+            {categoryTag.split("-").join(" ")}
           </div>
           <div className="row mt-4 mx-auto p-0 justify-content-center">
             <div className="col-md-4 my-3">
               <Product
-                url="/product"
+                seoTagline="bosch-washing-machine"
                 imgThumbnail="IOT.jfif"
                 productTitle="Bosch Washing machine"
                 productPrice="25000"

@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import Headroom from "react-headroom";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { routes } from "../../App";
 import logout from "../../logout";
 import { Modal } from "react-bootstrap";
@@ -119,7 +120,11 @@ export default function Layout(props) {
         >
           <div className="container-fluid justify-content-around">
             <span className="navbar-brand mb-0 d-flex flex-column">
-              <h3 className="fw-bold text-light mb-0">BotHub.in</h3>
+              <Link to={routes.home}>
+                <h3 className="fw-bold text-light mb-0 text-decoration-none on-hover-secondary">
+                  BotHub.in
+                </h3>
+              </Link>
               <span
                 className="text-light"
                 style={{ fontSize: "9px", textAlign: "end" }}

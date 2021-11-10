@@ -2,7 +2,7 @@ import Layout from "./components/Layout";
 import { Category } from "./components/Cards";
 import { useEffect, useState, useLayoutEffect } from "react";
 import BackgroundSlider from "react-background-slider";
-import { Carousel, Form, FloatingLabel } from "react-bootstrap";
+import { Carousel, Form, FloatingLabel, Button } from "react-bootstrap";
 
 import img1 from "../assets/slideshow-1.jpg";
 import img2 from "../assets/slideshow-2.jpg";
@@ -46,7 +46,7 @@ function LandingPage(props) {
             <div className="text-center text-lg-start mx-0 ms-xl-5 ms-lg-3 z-index-1">
               <a
                 href="#categories"
-                className="btn-lg btn btn-secondary fw-bold my-2 fs-5 bg-gradient"
+                className="btn-lg btn btn-secondary fw-bold my-2 fs-5 bg-gradient on-hover-light"
               >
                 Explore
               </a>
@@ -106,15 +106,13 @@ function Categories(props) {
   return (
     <section id="categories" className="text-light my-5" name="categories">
       <div className="row m-auto w-75">
-        <div className="text-center h2 " style={{ fontWeight: "bolder" }}>
-          Shop by Category
-        </div>
+        <div className="text-center h2 fw-bolder">Shop by Category</div>
         <div className="row mt-4 mx-auto p-0 justify-content-center">
           <div className="col-md-4 my-3">
             <Category
               imgPath="IOT.jfif"
-              categoryTitle="IOT Components"
-              categoryId="66767677"
+              categoryTitle={"IOT-Components".split("-").join(" ")}
+              categoryName="IOT-Components"
             />
           </div>
         </div>
@@ -140,9 +138,12 @@ function D3Printing(props) {
             We provied 3D Printing services
           </div>
           <div>
-            <button className="btn-lg btn btn-secondary fw-bold my-2 mt-3">
+            <Button
+              variant="secondary"
+              className="fw-bold my-2 mt-3 on-hover-light"
+            >
               View Details
-            </button>
+            </Button>
           </div>
         </div>
         <div className="col-12 col-lg-6 text-center my-5">

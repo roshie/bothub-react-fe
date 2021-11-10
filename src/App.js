@@ -40,8 +40,8 @@ export const routes = {
   error404: '/error404',
   idToken: '/idToken',
   profile: '/profile',
-  product: '/product',
-  products: '/products',
+  product: '/:productSeoTagline',
+  products: '/category/:categoryTag',
   checkout:'/checkout',
   viewOrders: '/view-orders',
   verify: '/verify',
@@ -64,13 +64,13 @@ function App() {
         <PrivateRoute exact path={routes.login} component={Authenticate} page="login"/>
         <PrivateRoute exact path={routes.signUp} component={Authenticate} page="signUp"/>
         <PrivateRoute exact path={routes.home} component={Home} />
-        <PrivateRoute exact path={routes.product} component={Product} />
-        <PrivateRoute exact path={routes.products} component={Products} />
         <PrivateRoute exact path={routes.profile} component={Profile} shouldLogin={true}/>
         <PrivateRoute exact path={routes.checkout} component={Checkout} shouldLogin={true} />
         <PrivateRoute exact path={routes.viewOrders} component={viewOrders} shouldLogin={true} />
         <PrivateRoute exact path={routes.orderSummary} component={OrderSummary} shouldLogin={true}/>
         <PrivateRoute exact path={routes.verify} component={UserDetails} shouldLogin={true}/>
+        <PrivateRoute exact path={routes.products} component={Products} />
+        <PrivateRoute exact path={routes.product} component={Product} />
         <Redirect to={routes.error404} component={Error404} />
         {/* Add more ... */}
       </Switch>

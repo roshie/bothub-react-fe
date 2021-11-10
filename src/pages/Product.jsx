@@ -4,6 +4,9 @@ import { Carousel } from "react-bootstrap";
 import Layout from "./components/Layout";
 
 export default function Product(props) {
+  const productSeoTagline = props.productSeoTagline;
+  console.log(productSeoTagline);
+
   return (
     <Layout loginState={props.login} page="product">
       <div className="row my-2 m-2">
@@ -52,28 +55,32 @@ export default function Product(props) {
                 href="/checkout"
               >
                 Buy now
-             </a>{" "}
+              </a>{" "}
               &nbsp; &nbsp; &nbsp;
-              <a 
+              <a
                 class="btn btn-secondary"
-                style={{ width: "330px", height: "50px"  }}
+                style={{ width: "330px", height: "50px" }}
                 href="https://api.whatsapp.com/send?phone=9790013652"
               >
                 Customize
-                </a>
+              </a>
               {/* </button> */}
             </div>
           </div>
         </div>
       </div>
-      <div className="embed m-2 d-flex justify-content-center" style={{alignContent:"center", alignItems:"center"}}>
+      <div
+        className="embed m-2 d-flex justify-content-center"
+        style={{ alignContent: "center", alignItems: "center" }}
+      >
         <iframe
           width="560"
           height="315"
           src="https://www.youtube.com/embed/4uREqbCNT-c"
           title="YouTube video player"
           frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
         ></iframe>
       </div>
     </Layout>

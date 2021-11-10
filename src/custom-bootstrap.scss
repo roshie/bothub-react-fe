@@ -93,6 +93,11 @@ body {
   color: $primary !important;
 }
 
+.on-hover-secondary:hover {
+  transition: all 0.3s ease;
+  color: $secondary !important;
+}
+
 .on-hover-light:hover {
   color: white !important;
 }
