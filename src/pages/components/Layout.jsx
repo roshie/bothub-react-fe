@@ -192,7 +192,6 @@ export default function Layout(props) {
                   <i class="fa fa-envelope mx-2"></i>
                   Email: bothub.zue@gmail.com
                 </p>
-                <div className="row col-md-6">
                 <p><a 
                 href="https://www.instagram.com/bothub_in/?hl=en"
                 className="text-decoration-none text-light on-hover-primary"
@@ -211,7 +210,6 @@ export default function Layout(props) {
                   bothub.in
                   </a>
                 </p>
-                </div>
                 <p><a 
                 href="https://www.linkedin.com/in/bot-hub-4289a8218/"
                 className="text-decoration-none text-light on-hover-primary"
