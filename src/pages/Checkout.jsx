@@ -1,6 +1,7 @@
 import { Product } from "./components/Cards";
 import Layout from "./components/Layout";
 import { Form, Row, Col, Button } from "react-bootstrap";
+import React, { useState } from "react";
 
 export default function Checkout(props) {
   const [state, setState] = useState({
