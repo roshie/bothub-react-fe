@@ -1,6 +1,6 @@
 export function Category(props) {
   return (
-    <div className="card on-hover-scale">
+    <div className="card on-hover-scale w-auto m-2">
       <div className="card-body text-center">
         <img
           src={props.imgPath}

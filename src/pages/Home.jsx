@@ -104,17 +104,29 @@ function LandingPage(props) {
 
 function Categories(props) {
   return (
-    <section id="categories" className="text-light my-5" name="categories">
-      <div className="row m-auto w-75">
-        <div className="text-center h2 fw-bolder">Shop by Category</div>
-        <div className="row mt-4 mx-auto p-0 justify-content-center">
-          <div className="col-md-4 my-3">
-            <Category
-              imgPath="IOT.jfif"
-              categoryTitle={"IOT-Components".split("-").join(" ")}
-              categoryName="IOT-Components"
-            />
-          </div>
+    <section
+      id="categories"
+      className="text-light my-5 py-3 d-flex justify-content-center"
+      name="categories"
+    >
+      <div className="row d-flex justify-content-center w-75">
+        <div className="text-center h2 fw-bolder my-4">Shop by Category</div>
+        <div className="row d-flex justify-content-center">
+          <Category
+            imgPath="IOT.jfif"
+            categoryTitle={"IOT-Components".split("-").join(" ")}
+            categoryName="IOT-Components"
+          />
+          <Category
+            imgPath="IOT.jfif"
+            categoryTitle={"IOT-Components".split("-").join(" ")}
+            categoryName="IOT-Components"
+          />
+          <Category
+            imgPath="IOT.jfif"
+            categoryTitle={"IOT-Components".split("-").join(" ")}
+            categoryName="IOT-Components"
+          />
         </div>
       </div>
     </section>
@@ -165,13 +177,15 @@ function Ideas(props) {
         <div className="col-12 col-lg-6 text-center my-5">
           <div className="card">
             <div className="card-body">
-              <h3 className="card-title">Submit your Ideas here!</h3>
+              <h3 className="card-title mt-3 fw-bolder">
+                Submit your Ideas here!
+              </h3>
               <Form className="mt-5 mb-4 mx-3">
                 <div className="row">
                   <FloatingLabel
                     controlId="floatingInput"
                     className=" mb-3 col-md-6 text-light"
-                    label="Full Name"
+                    label="&emsp;Full Name"
                   >
                     <Form.Control
                       className="bg-primary border-primary text-light"
@@ -183,7 +197,7 @@ function Ideas(props) {
                   <FloatingLabel
                     controlId="floatingInput"
                     className="mb-3 col-md-6 text-light"
-                    label="Mobile Number"
+                    label="&emsp;Mobile Number"
                   >
                     <Form.Control
                       className="bg-primary border-primary text-light"
