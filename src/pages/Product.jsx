@@ -75,7 +75,7 @@ export default function ProductPage(props) {
             View more about the product
           </div>
           <div
-            className="embed m-1 m-md-2 d-flex justify-content-center"
+            className="embed d-flex justify-content-center"
             style={{ alignContent: "center", alignItems: "center" }}
           >
             <iframe
@@ -89,7 +89,7 @@ export default function ProductPage(props) {
             ></iframe>
           </div>
         </div>
-        <div className="row w-100 m-4">
+        <div className="row w-100 p-4">
           <div className="fs-4 fw-bolder text-center my-2">See Also</div>
           <div className="row d-flex justify-content-center px-3 px-lg-5 m-0 m-md-3">
             <Product
