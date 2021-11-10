@@ -1,5 +1,6 @@
 import Layout from "./components/Layout";
 import { Button, Badge } from "react-bootstrap";
+import { routes } from "../App";
 
 export default function viewOrders(props) {
   return (
@@ -39,7 +40,7 @@ export default function viewOrders(props) {
 function OrderComponent(props) {
   return (
     <div className="card p-2 p-md-3 w-100 my-3">
-      <div className="d-flex justify-content-center">
+      <div className="d-flex">
         <div className="col-4 p-0 d-none d-sm-block my-auto">
           <img
             src={props.imgThumbnail}
@@ -49,8 +50,8 @@ function OrderComponent(props) {
           />
         </div>
         <div className="col-12 col-sm-8 ps-4 ps-md-5 p-2">
-          <div className="d-flex align-items-center flex-column justify-content-between flex-md-row h-100">
-            <div className="col-12 col-md-8">
+          <div className="d-flex align-items-center justify-content-between h-100">
+            <div className="col-8">
               <div className="d-flex flex-column justify-content-around h-100 align-items-center align-items-sm-start">
                 <div className="fs-5 fw-bolder text-center text-md-start my-1">
                   {props.productName}
@@ -58,12 +59,19 @@ function OrderComponent(props) {
                 <div className="fs-6 my-1 text-center text-md-start">
                   Ordered on: {props.orderDate}
                 </div>
-                <Button variant="secondary" className="my-2 w-50" size="sm">
+                <Button
+                  variant="secondary"
+                  className="my-2 w-50"
+                  size="sm"
+                  onClick={() => {
+                    window.location.href = routes.orderSummary;
+                  }}
+                >
                   View Order Details
                 </Button>
               </div>
             </div>
-            <div className="col-12 col-md-4 text-center text-sm-start text-md-center">
+            <div className="col-4 text-center text-sm-start text-md-center">
               <Badge
                 bg="success"
                 className="mw-75 p-2 my-2"
