@@ -18,7 +18,6 @@ import './App.scss';
 import { initializeApp } from "firebase/app";
 import Checkout from "./pages/Checkout";
 import OrderSummary from "./pages/OrderSummary";
-import { getAuth, getIdToken } from "@firebase/auth";
 
 
 // Firebase Config
