@@ -14,6 +14,8 @@ export default function Products(props) {
         <div className="row m-auto w-75 mt-4">
           <div className="text-center pt-5 h2" style={{ fontWeight: "bolder" }}>
             {categoryTag.split("-").join(" ")}
+
+            {/* Todo: Get categoryname from backend */}
           </div>
           <div className="row mt-4 mx-auto p-0 justify-content-center">
             <div className="col-md-4 my-3">

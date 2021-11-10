@@ -65,12 +65,30 @@ footer {
 .d3printer {
 }
 
+.imgFluid {
+  transition: all 0.5s ease;
+  height: 100%;
+}
+
+.w-md-75 {
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .w-md-75 {
+    width: 75% !important;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .tagline {
     font-size: 3rem;
   }
   .d3printer {
     width: 80%;
+  }
+  .imgFluid {
+    height: 70%;
   }
 }
 
@@ -89,13 +107,7 @@ footer {
 @media screen and (width: 768px) {
 }
 
-.carouselHeight {
-}
-
 @media screen and (max-width: 425px) {
-  .carouselHeight {
-    max-height: 400px;
-  }
 }
 
 a {
