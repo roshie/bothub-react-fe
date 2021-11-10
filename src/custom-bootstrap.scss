@@ -85,7 +85,10 @@ body {
 .smooth-transition {
   transition: all 0.8s ease;
 }
-.on-hover:hover
-{
-background-color: $secondary !important;
+.on-hover:hover {
+  background-color: $secondary !important;
+}
+
+.on-hover-primary:hover {
+  color: $primary !important;
 }

@@ -136,22 +136,22 @@ export default function Profile(props) {
     });
   };
 
-  const updatePassword = () => {
+  const changePassword = () => {
     setPasswordChangeLoaded({ msg: "", status: true });
     // step 1: match passwords
     // step 2 : authenticate
 
-    if (newPassword === confirmPassword) {
+    if (passwords.newPassword === passwords.confirmPassword) {
       const user = getAuth().currentUser;
 
-      reauthenticateWithCredential(user, currentPassword)
+      reauthenticateWithCredential(user, passwords.currentPassword)
         .then(() => {
-          updatePassword(user, newPassword)
+          updatePassword(user, passwords.newPassword)
             .then(() => {
               setPasswordChangeLoaded({ msg: "Done!", status: false });
             })
             .catch((error) => {
-              if (error.code == "auth/weak-password")
+              if (error.code === "auth/weak-password")
                 setPasswordChangeLoaded({
                   msg: "Password should be atleast 8 characters of length",
                   status: false,
@@ -159,7 +159,7 @@ export default function Profile(props) {
             });
         })
         .catch((error) => {
-          if (error.code == "auth/wrong-password")
+          if (error.code === "auth/wrong-password")
             setPasswordChangeLoaded({
               msg: "The current password is invalid.",
               status: false,
@@ -525,7 +525,7 @@ export default function Profile(props) {
                         variant="secondary"
                         disabled={passwordChangeLoaded.status}
                         type="submit"
-                        onClick={updatePassword}
+                        onClick={changePassword}
                       >
                         {passwordChangeLoaded.status ? (
                           <Spinner
