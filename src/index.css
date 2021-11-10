@@ -4,6 +4,7 @@ body {
   font-family: "Poppins" !important;
   font-style: normal;
   scroll-behavior: smooth;
+  transition: all 0.5s ease;
 }
 footer {
   position: relative;
@@ -72,6 +73,12 @@ footer {
 
 .w-md-75 {
   width: 100%;
+  transition: all 0.5s ease;
+}
+
+.w-lg-75 {
+  width: 100%;
+  transition: all 0.5s ease;
 }
 
 @media screen and (min-width: 768px) {
@@ -96,6 +103,9 @@ footer {
 }
 
 @media screen and (min-width: 1024px) {
+  .w-lg-75 {
+    width: 84%;
+  }
 }
 /* ------------------------------------------------------------------------------------------------ */
 /* 3D printing */
