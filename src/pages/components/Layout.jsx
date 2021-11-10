@@ -37,7 +37,6 @@ export default function Layout(props) {
   }, []);
 
   const scroll = (path = window.location.href) => {
-    console.log(path);
     if (props.page === "home") {
       const href = path.split("/").pop();
       console.log("href: ", href);
@@ -157,12 +156,12 @@ export default function Layout(props) {
       </Modal>
       {props.children}
 
-      <footer className="bg-secondary">
+      <footer className="bg-secondary h-auto py-5">
         <div className="foot bg-secondary shadow"></div>
         <div className="col" style={{ marginLeft: "10%", marginRight: "10%" }}>
           <h3 className="fw-bolder text-light">Contact</h3>
           <div className="row mt-4">
-            <div className="col-12 col-md-4">
+            <div className="col-12 col-md-4 my-3">
               <h5>
                 <FontAwesomeIcon icon={faBuilding} />
                 <i class="fa fa-building mx-2"></i>BotHub
@@ -179,10 +178,10 @@ export default function Layout(props) {
                 </h5>
               </div>
             </div>
-            <div className="col-12 col-md-4">
+            <div className="col-12 col-md-4 my-3">
               <h5>
                 <FontAwesomeIcon icon={faPlus} />
-                <i class="fa fa-plus mx-2"></i>Connect us
+                <i class="fa fa-plus mx-2"></i>Connect with us
               </h5>
               <div className="mt-3 mx-4">
                 <p>
@@ -197,7 +196,7 @@ export default function Layout(props) {
                 </p>
               </div>
             </div>
-            <div className="col-12 col-md-4">
+            <div className="col-12 col-md-4 my-3">
               <h5>
                 <FontAwesomeIcon icon={faAddressCard} />
                 <i class="fa fa-addresscard mx-2"></i>Address

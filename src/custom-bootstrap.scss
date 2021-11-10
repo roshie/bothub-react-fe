@@ -92,3 +92,12 @@ body {
 .on-hover-primary:hover {
   color: $primary !important;
 }
+
+.on-hover-light:hover {
+  color: white !important;
+}
+
+.on-hover-scale:hover {
+  transition: all 0.3s ease;
+  transform: scale(1.05);
+}
