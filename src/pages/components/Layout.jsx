@@ -18,7 +18,7 @@ import {
   faFacebook,
   faLinkedin,
   faYoutube,
-  faWhatsapp
+  faWhatsapp,
 } from "@fortawesome/free-brands-svg-icons";
 
 export default function Layout(props) {
@@ -192,49 +192,54 @@ export default function Layout(props) {
                   <i class="fa fa-envelope mx-2"></i>
                   Email: bothub.zue@gmail.com
                 </p>
-                <p><a 
-                href="https://www.instagram.com/bothub_in/?hl=en"
-                className="text-decoration-none text-light on-hover-primary"
-                >
-                  <FontAwesomeIcon icon={faInstagram} />
-                  <i class="fa fa-instagram mx-2"></i>
-                  bothub_in
+                <p>
+                  <a
+                    href="https://www.instagram.com/bothub_in/?hl=en"
+                    className="text-decoration-none text-light on-hover-primary"
+                  >
+                    <FontAwesomeIcon icon={faInstagram} />
+                    <i class="fa fa-instagram mx-2"></i>
+                    bothub_in
                   </a>
                 </p>
-                <p><a 
-                href="https://www.facebook.com/profile.php?id=100071186148837"
-                className="text-decoration-none text-light on-hover-primary"
-                >
-                  <FontAwesomeIcon icon={faFacebook} />
-                  <i class="fa fa-facebook mx-2"></i>
-                  bothub.in
+                <p>
+                  <a
+                    href="https://www.facebook.com/profile.php?id=100071186148837"
+                    className="text-decoration-none text-light on-hover-primary"
+                  >
+                    <FontAwesomeIcon icon={faFacebook} />
+                    <i class="fa fa-facebook mx-2"></i>
+                    bothub.in
                   </a>
                 </p>
-                <p><a 
-                href="https://www.linkedin.com/in/bot-hub-4289a8218/"
-                className="text-decoration-none text-light on-hover-primary"
-                >
-                  <FontAwesomeIcon icon={faLinkedin} />
-                  <i class="fa fa-linkedin mx-2"></i>
-                  Bot Hub
+                <p>
+                  <a
+                    href="https://www.linkedin.com/in/bot-hub-4289a8218/"
+                    className="text-decoration-none text-light on-hover-primary"
+                  >
+                    <FontAwesomeIcon icon={faLinkedin} />
+                    <i class="fa fa-linkedin mx-2"></i>
+                    Bot Hub
                   </a>
                 </p>
-                <p><a 
-                href="https://www.youtube.com/channel/UCfVAW1TcodkOPVLjywvER_g/featured"
-                className="text-decoration-none text-light on-hover-primary"
-                >
-                  <FontAwesomeIcon icon={faYoutube} />
-                  <i class="fa fa-youtube mx-2"></i>
-                  bothub_in
+                <p>
+                  <a
+                    href="https://www.youtube.com/channel/UCfVAW1TcodkOPVLjywvER_g/featured"
+                    className="text-decoration-none text-light on-hover-primary"
+                  >
+                    <FontAwesomeIcon icon={faYoutube} />
+                    <i class="fa fa-youtube mx-2"></i>
+                    bothub_in
                   </a>
                 </p>
-                <p><a 
-                href="#"
-                className="text-decoration-none text-light on-hover-primary"
-                >
-                  <FontAwesomeIcon icon={faWhatsapp} />
-                  <i class="fa fa-whatsapp mx-2"></i>
-                  8870795518
+                <p>
+                  <a
+                    href="https://api.whatsapp.com/send?phone=8870795518"
+                    className="text-decoration-none text-light on-hover-primary"
+                  >
+                    <FontAwesomeIcon icon={faWhatsapp} />
+                    <i class="fa fa-whatsapp mx-2"></i>
+                    8870795518
                   </a>
                 </p>
               </div>
