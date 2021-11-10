@@ -170,6 +170,7 @@ export default function Layout(props) {
               </div>
               <h5>
                 <a
+                  target="_blank"
                   className="text-decoration-none text-light on-hover-primary"
                   href="https://zuetechnologies.com/"
                 >
@@ -196,6 +197,7 @@ export default function Layout(props) {
                 </p>
                 <h4>
                   <a
+                    target="_blank"
                     href="https://www.instagram.com/bothub_in/?hl=en"
                     className="text-decoration-none text-light on-hover-primary"
                   >
@@ -204,6 +206,7 @@ export default function Layout(props) {
                   </a>
 
                   <a
+                    target="_blank"
                     href="https://www.facebook.com/profile.php?id=100071186148837"
                     className="text-decoration-none text-light on-hover-primary"
                   >
@@ -211,6 +214,7 @@ export default function Layout(props) {
                     <i class="fa fa-facebook mx-2"></i>
                   </a>
                   <a
+                    target="_blank"
                     href="https://www.linkedin.com/in/bot-hub-4289a8218/"
                     className="text-decoration-none text-light on-hover-primary"
                   >
@@ -218,6 +222,7 @@ export default function Layout(props) {
                     <i class="fa fa-linkedin mx-2"></i>
                   </a>
                   <a
+                    target="_blank"
                     href="https://www.youtube.com/channel/UCfVAW1TcodkOPVLjywvER_g/featured"
                     className="text-decoration-none text-light on-hover-primary"
                   >
@@ -225,6 +230,7 @@ export default function Layout(props) {
                     <i class="fa fa-youtube mx-2"></i>
                   </a>
                   <a
+                    target="_blank"
                     href="https://api.whatsapp.com/send?phone=8870795518"
                     className="text-decoration-none text-light on-hover-primary"
                   >
@@ -261,6 +267,7 @@ export default function Layout(props) {
             <p class="copyright-text">
               Developed by{" "}
               <a
+                target="_blank"
                 className="text-decoration-none text-light on-hover-primary"
                 href="https://github.com/TeamCheems"
               >
