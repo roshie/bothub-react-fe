@@ -40,7 +40,7 @@ export default function ProductPage(props) {
               <Carousel.Item>
                 <img
                   className="d-block w-100 radius-20"
-                  style={{ height: "500px" }}
+                  style={{ height: "500px", resizeMode: "contain" }}
                   src="example.jpg"
                   alt="Third slide"
                 />
