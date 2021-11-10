@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import { Redirect } from "react-router";
 import IdToken from './pages/idToken';
 import Home from './pages/Home';
-import Product from './pages/Product';
+import ProductPage from './pages/Product';
 import Products from "./pages/Products";
 import Profile from "./pages/Profile";
 import Authenticate, { ForgotPassword } from './pages/Authenticate';
@@ -70,7 +70,7 @@ function App() {
         <PrivateRoute exact path={routes.orderSummary} component={OrderSummary} shouldLogin={true}/>
         <PrivateRoute exact path={routes.verify} component={UserDetails} shouldLogin={true}/>
         <PrivateRoute exact path={routes.products} component={Products} />
-        <PrivateRoute exact path={routes.product} component={Product} />
+        <PrivateRoute exact path={routes.product} component={ProductPage} />
         <Redirect to={routes.error404} component={Error404} />
         {/* Add more ... */}
       </Switch>

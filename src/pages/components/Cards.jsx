@@ -7,7 +7,7 @@ export function Category(props) {
           className="card-img-top mb-2 radius-20"
           alt="Thumbnail"
         />
-        <h5 className="card-title my-2 fw-bold">{props.categoryTitle}</h5>
+        <h5 className="card-title my-2 fw-bol">{props.categoryTitle}</h5>
         <a
           href={`/category/${props.categoryName}`}
           className="btn btn-secondary fw-bold my-2 on-hover-light"
@@ -22,7 +22,7 @@ export function Category(props) {
 export function Product(props) {
   return (
     <div
-      className="card on-hover-scale"
+      className="card on-hover-scale cursor-pointer w-auto m-2"
       onClick={() => goTo(`/${props.seoTagline}`)}
     >
       <div className="card-body text-center">
@@ -31,14 +31,13 @@ export function Product(props) {
           className="card-img-top mb-2 radius-20"
           alt="..."
         />
-        <h5 className="card-title my-2 fw-bold">{props.productTitle}</h5>
-        <h3 className="text-secondary my-2 fw-bold">Rs {props.productPrice}</h3>
+        <h5 className="card-title my-3 fw-bold">{props.productTitle}</h5>
+        <h3 className="text-secondary my-2 fw-bold fs-5">
+          &#x20B9; {props.productPrice}
+        </h3>
       </div>
     </div>
   );
-
-  //  Use like this. eg:
-  // <Product url="#" imgThumbnail="IOT.jfif" productTitle="Bosch Washing machine" productPrice="25000" />
 }
 
 const goTo = (url) => (window.location.href = url);

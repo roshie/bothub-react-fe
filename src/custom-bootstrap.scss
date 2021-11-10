@@ -106,3 +106,16 @@ body {
   transition: all 0.3s ease;
   transform: scale(1.05);
 }
+
+.min-vh-75 {
+  min-height: 75vh;
+}
+
+.cursor-pointer {
+  cursor: pointer !important;
+}
+
+.btn-whatsapp {
+  color: white;
+  background-color: #25d366;
+}

@@ -89,7 +89,13 @@ footer {
 @media screen and (width: 768px) {
 }
 
+.carouselHeight {
+}
+
 @media screen and (max-width: 425px) {
+  .carouselHeight {
+    max-height: 400px;
+  }
 }
 
 a {
@@ -201,4 +207,3 @@ a:hover {
   width: 100%;
   position: absolute;
 }
-
