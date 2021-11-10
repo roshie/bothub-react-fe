@@ -221,7 +221,7 @@ function Ideas(props) {
                 <div className="text-center">
                   <a
                     href="mailto:bothub.zue@gmail.com"
-                    className="btn btn-secondary fw-bold"
+                    className="btn btn-secondary fw-bold my-2 fs-5 bg-gradient on-hover-light"
                   >
                     Submit
                   </a>
