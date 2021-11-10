@@ -3,6 +3,24 @@ import Layout from "./components/Layout";
 import { Form, Row, Col, Button } from "react-bootstrap";
 
 export default function Checkout(props) {
+  const [state, setState] = useState({
+      
+    
+    email:'',
+    phoneNumber:'',
+    address:'',
+    city:'',
+    state:'',
+    country:'',
+    pincode:'',
+    landmark:''
+})
+
+
+
+
+
+
   return (
     <Layout loginState={props.login} page="checkout">
       <section id="shippingAddress">
@@ -25,6 +43,8 @@ export default function Checkout(props) {
                         required
                         className="bg-primary border-primary text-light"
                         placeholder="No. 4, Park Street"
+                        value={state.address}
+                        onChange={(e)=>{setState({...state,address:e.target.value})}}
                       />
                     </Form.Group>
                   </Row>
@@ -37,6 +57,8 @@ export default function Checkout(props) {
                           required
                           className="bg-primary border-primary text-light"
                           placeholder="Coimbatore"
+                          value={state.city}
+                        onChange={(e)=>{setState({...state,city:e.target.value})}}
                         />
                       </Form.Group>
                     </Col>
@@ -48,6 +70,8 @@ export default function Checkout(props) {
                           required
                           className="bg-primary border-primary text-light"
                           placeholder="Tamil Nadu"
+                          value={state.state}
+                        onChange={(e)=>{setState({...state,state:e.target.value})}}
                         />
                       </Form.Group>
                     </Col>
@@ -61,6 +85,8 @@ export default function Checkout(props) {
                           required
                           className="bg-primary border-primary text-light"
                           placeholder="India"
+                          value={state.country}
+                        onChange={(e)=>{setState({...state,country:e.target.value})}}
                         />
                       </Form.Group>
                     </Col>
@@ -72,6 +98,8 @@ export default function Checkout(props) {
                           required
                           className="bg-primary border-primary text-light"
                           placeholder="650000"
+                          value={state.pincode}
+                        onChange={(e)=>{setState({...state,pincode:e.target.value})}}
                         />
                       </Form.Group>
                     </Col>
@@ -84,6 +112,8 @@ export default function Checkout(props) {
                         required
                         className="bg-primary border-primary text-light"
                         placeholder="Near Park Cafe"
+                        value={state.landmark}
+                        onChange={(e)=>{setState({...state,landmark:e.target.value})}}
                       />
                     </Form.Group>
                   </Row>
@@ -102,6 +132,8 @@ export default function Checkout(props) {
                           readOnly
                           className="bg-primary border-primary text-light"
                           placeholder="mail@example.com"
+                          value={state.email}
+                        onChange={(e)=>{setState({...state,email:e.target.value})}}
                         />
                         <Button
                           size="sm"
@@ -124,6 +156,8 @@ export default function Checkout(props) {
                         required
                         className="bg-primary border-primary text-light"
                         placeholder="9876543210"
+                        value={state.phoneNumber}
+                        onChange={(e)=>{setState({...state,phoneNumber:e.target.value})}}
                       />
                     </Form.Group>
                   </Row>
