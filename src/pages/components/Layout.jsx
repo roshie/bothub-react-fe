@@ -12,13 +12,14 @@ import {
   faAddressCard,
   faPlus,
   faBuilding,
+  faInfo
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faInstagram,
   faFacebook,
   faLinkedin,
   faYoutube,
-  faWhatsapp,
+  faWhatsapp
 } from "@fortawesome/free-brands-svg-icons";
 
 export default function Layout(props) {
@@ -166,15 +167,15 @@ export default function Layout(props) {
               </h5>
               <div className="mt-3 mx-4">
                 <p>Build your Ideas with our Experts.</p>
-                <h5>
+              </div>
+              <h5>
                   <a
                     className="text-decoration-none text-light on-hover-primary"
                     href="https://zuetechnologies.com/"
-                  >
-                    About us
+                  ><FontAwesomeIcon icon={faInfo} />
+                  <i class="fa fa-info mx-1"></i> About us
                   </a>
                 </h5>
-              </div>
             </div>
             <div className="col-12 col-md-4 my-3">
               <h5>
@@ -192,56 +193,43 @@ export default function Layout(props) {
                   <i class="fa fa-envelope mx-2"></i>
                   Email: bothub.zue@gmail.com
                 </p>
-                <p>
-                  <a
-                    href="https://www.instagram.com/bothub_in/?hl=en"
-                    className="text-decoration-none text-light on-hover-primary"
-                  >
-                    <FontAwesomeIcon icon={faInstagram} />
-                    <i class="fa fa-instagram mx-2"></i>
-                    bothub_in
+                <h4><a 
+                href="https://www.instagram.com/bothub_in/?hl=en"
+                className="text-decoration-none text-light on-hover-primary"
+                >
+                  <FontAwesomeIcon icon={faInstagram} />
+                  <i class="fa fa-instagram mx-2"></i>
                   </a>
-                </p>
-                <p>
-                  <a
-                    href="https://www.facebook.com/profile.php?id=100071186148837"
-                    className="text-decoration-none text-light on-hover-primary"
-                  >
-                    <FontAwesomeIcon icon={faFacebook} />
-                    <i class="fa fa-facebook mx-2"></i>
-                    bothub.in
+                
+                <a 
+                href="https://www.facebook.com/profile.php?id=100071186148837"
+                className="text-decoration-none text-light on-hover-primary"
+                >
+                  <FontAwesomeIcon icon={faFacebook} />
+                  <i class="fa fa-facebook mx-2"></i>
                   </a>
-                </p>
-                <p>
-                  <a
-                    href="https://www.linkedin.com/in/bot-hub-4289a8218/"
-                    className="text-decoration-none text-light on-hover-primary"
-                  >
-                    <FontAwesomeIcon icon={faLinkedin} />
-                    <i class="fa fa-linkedin mx-2"></i>
-                    Bot Hub
+                <a 
+                href="https://www.linkedin.com/in/bot-hub-4289a8218/"
+                className="text-decoration-none text-light on-hover-primary"
+                >
+                  <FontAwesomeIcon icon={faLinkedin} />
+                  <i class="fa fa-linkedin mx-2"></i>
                   </a>
-                </p>
-                <p>
-                  <a
-                    href="https://www.youtube.com/channel/UCfVAW1TcodkOPVLjywvER_g/featured"
-                    className="text-decoration-none text-light on-hover-primary"
-                  >
-                    <FontAwesomeIcon icon={faYoutube} />
-                    <i class="fa fa-youtube mx-2"></i>
-                    bothub_in
+                <a 
+                href="https://www.youtube.com/channel/UCfVAW1TcodkOPVLjywvER_g/featured"
+                className="text-decoration-none text-light on-hover-primary"
+                >
+                  <FontAwesomeIcon icon={faYoutube} />
+                  <i class="fa fa-youtube mx-2"></i>
                   </a>
-                </p>
-                <p>
-                  <a
-                    href="https://api.whatsapp.com/send?phone=8870795518"
-                    className="text-decoration-none text-light on-hover-primary"
-                  >
-                    <FontAwesomeIcon icon={faWhatsapp} />
-                    <i class="fa fa-whatsapp mx-2"></i>
-                    8870795518
+                <a 
+                href="#"
+                className="text-decoration-none text-light on-hover-primary"
+                >
+                  <FontAwesomeIcon icon={faWhatsapp} />
+                  <i class="fa fa-whatsapp mx-2"></i>
                   </a>
-                </p>
+                </h4>
               </div>
             </div>
             <div className="col-12 col-md-4 my-3">
