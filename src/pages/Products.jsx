@@ -8,24 +8,34 @@ export default function Products(props) {
     <Layout loginState={props.login} page="products">
       <section
         id="products"
-        className="min-vh-75 text-light my-auto"
+        className="min-vh-75 text-light px-auto"
         name="products"
       >
-        <div className="row m-auto w-75 mt-4">
-          <div className="text-center pt-5 h2" style={{ fontWeight: "bolder" }}>
+        <div className="row d-flex justify-content-center w-75 mx-auto">
+          <div className="text-center py-5 h2 fw-bolder h-auto">
             {categoryTag.split("-").join(" ")}
 
             {/* Todo: Get categoryname from backend */}
           </div>
-          <div className="row mt-4 mx-auto p-0 justify-content-center">
-            <div className="col-md-4 my-3">
-              <Product
-                seoTagline="bosch-washing-machine"
-                imgThumbnail={"IOT.jfif"}
-                productTitle="Bosch Washing machine"
-                productPrice="25000"
-              />
-            </div>
+          <div className="row d-flex justify-content-center">
+            <Product
+              seoTagline="bosch-washing-machine"
+              imgThumbnail={"IOT.jfif"}
+              productTitle="Bosch Washing machine"
+              productPrice="25000"
+            />
+            <Product
+              seoTagline="bosch-washing-machine"
+              imgThumbnail={"IOT.jfif"}
+              productTitle="Bosch Washing machine"
+              productPrice="25000"
+            />
+            <Product
+              seoTagline="bosch-washing-machine"
+              imgThumbnail={"IOT.jfif"}
+              productTitle="Bosch Washing machine"
+              productPrice="25000"
+            />
           </div>
         </div>
       </section>
