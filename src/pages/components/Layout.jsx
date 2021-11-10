@@ -92,14 +92,7 @@ export default function Layout(props) {
           </>
         ) : (
           <>
-            <Item
-              href={
-                props.page === "home"
-                  ? `${routes.login}`
-                  : `${routes.login}?redirect=${props.page}`
-              }
-              active={false}
-            >
+            <Item href={routes.login} active={false}>
               Login
             </Item>
             <Item href={routes.signUp} active={false}>
@@ -120,8 +113,8 @@ export default function Layout(props) {
         >
           <div className="container-fluid justify-content-around">
             <span className="navbar-brand mb-0 d-flex flex-column">
-              <Link to={routes.home}>
-                <h3 className="fw-bold text-light mb-0 text-decoration-none on-hover-secondary">
+              <Link to={routes.home} className="text-decoration-none">
+                <h3 className="fw-bold text-light mb-0 on-hover-secondary">
                   BotHub.in
                 </h3>
               </Link>
@@ -134,7 +127,7 @@ export default function Layout(props) {
             </span>
             <span className="navbar-brand mb-0 h1"></span>
             <span className="navbar-brand mb-0 h1 d-none d-md-block">
-              <MenuItems {...props} />
+              <MenuItems {...props} navBar={true} />
             </span>
             <button
               className="navbar-toggler d-block d-md-none"
@@ -156,7 +149,7 @@ export default function Layout(props) {
           <Modal.Title className="text-light">Menu</Modal.Title>
         </Modal.Header>
         <Modal.Body className="bg-primary d-flex flex-column">
-          <MenuItems {...props} />
+          <MenuItems {...props} navBar={false} />
         </Modal.Body>
       </Modal>
       {props.children}
