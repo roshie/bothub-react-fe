@@ -36,7 +36,7 @@ export default function Checkout(props) {
                           type="email"
                           required
                           className="bg-primary border-primary text-light"
-                          placeholder="Combatore"
+                          placeholder="Coimbatore"
                         />
                       </Form.Group>
                     </Col>

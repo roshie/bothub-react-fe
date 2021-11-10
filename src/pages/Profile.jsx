@@ -45,24 +45,32 @@ export default function Profile(props) {
   });
 
   useEffect(() => {
-    const data = {
-      uid: localStorage.uid,
-      idToken: localStorage.idToken,
-    };
-    fetch(`${backendAppUrl}/users`, {
-      ...getRequestParams("GET", data),
-    }).then(
-      (response) => {
-        if (response.ok) {
-          const result = response.json();
+    fetch(
+      `${backendAppUrl}/users?uid=${localStorage.uid}&idToken=${localStorage.idToken}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          console.log(result);
           if (result.detail === "db-error") {
+            setPageLoaded(true);
             console.error("error");
           } else {
+            console.log(result.email);
             setOldData(result);
             setState({
               ...state,
               fullName: result.fullName === null ? "" : result.fullName,
-              email: result.email === null ? "" : result.email,
+              email:
+                result.email === null
+                  ? getAuth().currentUser.email
+                  : result.email,
               phoneNumber:
                 result.mobileNumber === null ? "" : result.mobileNumber,
               address: result.address === null ? "" : result.address,
@@ -74,16 +82,12 @@ export default function Profile(props) {
             });
           }
           setPageLoaded(true);
-        } else {
-          console.error(response.json().detail);
+        },
+        (err) => {
+          console.log(err);
           setPageLoaded(true);
         }
-      },
-      (err) => {
-        console.log(err);
-        setPageLoaded(true);
-      }
-    );
+      );
     //eslint-disable-next-line
   }, []);
   const submitPersonalInfo = () => {
@@ -187,14 +191,14 @@ export default function Profile(props) {
                 window.location.href = routes.viewOrders;
               }}
             >
-              <div className="card d-flex justify-content-center on-hover smooth-transition ">
+              <div className="card d-flex justify-content-center on-hover smooth-transition cursor-pointer">
                 <div className="fs-6 m-3">View Orders</div>
               </div>
             </div>
 
             <div className="row m-2">
               <div
-                className="card d-flex justify-content-center on-hover smooth-transition "
+                className="card d-flex justify-content-center on-hover smooth-transition cursor-pointer"
                 onClick={() => setEditPersonal(!editPersonal)}
                 aria-controls="addressDiv"
                 aria-expanded={editPersonal}
@@ -296,7 +300,7 @@ export default function Profile(props) {
 
             <div className="row m-2">
               <div
-                className="card d-flex justify-content-center on-hover smooth-transition "
+                className="card d-flex justify-content-center on-hover smooth-transition cursor-pointer"
                 onClick={() => setAddress(!address)}
                 aria-controls="addressDiv"
                 aria-expanded={address}
@@ -430,7 +434,7 @@ export default function Profile(props) {
 
             <div className="row m-2">
               <div
-                className="card d-flex justify-content-center on-hover smooth-transition "
+                className="card d-flex justify-content-center on-hover smooth-transition cursor-pointer"
                 onClick={() => setPassword(!password)}
                 aria-controls="addressDiv"
                 aria-expanded={password}
