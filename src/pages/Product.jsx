@@ -1,124 +1,202 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel, Button } from "react-bootstrap";
+import { Carousel, Button, Spinner } from "react-bootstrap";
 import Layout from "./components/Layout";
-import { Product } from "./components/Cards";
+import { Category, Product } from "./components/Cards";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
+import { backendAppUrl } from "../config";
+import { routes } from "../App";
 
 export default function ProductPage(props) {
   const productSeoTagline = props.productSeoTagline;
-  console.log(productSeoTagline);
+
+  const [loading, setLoading] = useState(true);
+  const [products, setProducts] = useState([]);
+  const [prd, setPrd] = useState({});
+
+  useEffect(() => {
+    fetch(`${backendAppUrl}/products?seoTagline=${productSeoTagline}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        document.title = `Not Found | Bothub`;
+        if (res.detail === "db-error") {
+          setPrd("fail");
+          return null;
+        } else if (res.data === null) {
+          setPrd("no-data");
+          return null;
+        } else {
+          document.title = `${res.data.productName} | Bothub`;
+          const videoLink = new URL(res.data.videoLink);
+          res.data.videoId = videoLink.searchParams.get("v");
+          setPrd(res.data);
+          return res.data.categoryName;
+        }
+      })
+      .then((categoryTag) => {
+        fetch(`${backendAppUrl}/products/all?categoryName=${categoryTag}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((result) => result.json())
+          .then((result) => {
+            if (result.detail === "db-error") {
+              setLoading(false);
+              setProducts("fail");
+            } else if (result.data.length === 0 || result.data === null) {
+              setLoading(false);
+              setProducts("no-data");
+            } else {
+              setLoading(false);
+              if (result.data.length > 4) result.data = result.data.slice(0, 4);
+              setProducts(result.data);
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+            setLoading(false);
+            setProducts("fail");
+          });
+      })
+      .catch((err) => {
+        console.error(err);
+        setLoading(false);
+        setPrd("fail");
+      });
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <Layout loginState={props.login} page="product">
-      <div className="min-vh-100 d-flex justify-content-center align-items-center flex-column">
-        <div className="row w-100 mt-3 mx-3 mb-2 justify-content-center">
-          <div className="col-12 col-lg-6 d-flex justify-content-center justify-content-lg-end">
-            <Carousel
-              style={{
-                borderRadius: "20px",
-                maxWidth: "600px",
-              }}
-            >
-              <Carousel.Item>
-                <img
-                  className="d-block w-100 radius-20"
-                  style={{ height: "500px" }}
-                  src="example.jpg"
-                  alt="First slide"
-                />
-              </Carousel.Item>
-              <Carousel.Item>
-                <img
-                  className="d-block w-100 radius-20"
-                  style={{ height: "500px" }}
-                  src="example.jpg"
-                  alt="Second slide"
-                />
-              </Carousel.Item>
-              <Carousel.Item>
-                <img
-                  className="d-block w-100 radius-20"
-                  style={{ height: "500px", resizeMode: "contain" }}
-                  src="example.jpg"
-                  alt="Third slide"
-                />
-              </Carousel.Item>
-            </Carousel>
-          </div>
-          <div className="col-12 col-lg-6 p-3 p-md-4 d-flex justify-content-center justify-content-lg-start">
-            <div className="card h-100 w-100 p-4" style={{ maxWidth: "600px" }}>
-              <div className="d-flex flex-column justify-content-around h-100">
-                <div className="fs-3 fw-bolder m-2">Bosch Washing Machine</div>
-                <div className="fs-5 fw-bold m-2">Rs 25000</div>
-                <div className="fs-6 m-2">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Fugiat ad nostrum ipsam libero error provident, dignissimos
-                  corrupti reprehenderit, dolor tempore labore nulla dicta, vero
-                  at accusantium facere? Necessitatibus, quisquam inventore!
+      <section className="min-vh-100 d-flex justify-content-center align-items-center flex-column">
+        {loading ? (
+          <Spinner animation="border" size="lg" className="text-light" />
+        ) : (
+          <>
+            <div className="row w-100 mt-3 mx-3 mb-2 justify-content-center">
+              {prd === "fail" ? (
+                <div className="my-4 fs-5 text-center">
+                  Seems like there was a problem. Please try again.
                 </div>
-                <div className="d-flex m-2">
-                  <Button variant="secondary" className="on-hover-light m-2">
-                    Buy Now
-                  </Button>
-                  <button className="btn btn-whatsapp on-hover-light m-2">
-                    <FontAwesomeIcon icon={faWhatsapp} /> Customize
-                  </button>
+              ) : prd === "no-data" ? (
+                <div className="my-4 fs-5 text-center">
+                  Seems like the Product named{" "}
+                  <span style={{ textTransform: "capitalize" }}>
+                    "{productSeoTagline.split("-").join(" ")}"
+                  </span>{" "}
+                  is not available.
+                </div>
+              ) : (
+                <>
+                  <div className="col-12 col-lg-6 d-flex justify-content-center justify-content-lg-end">
+                    <Carousel
+                      style={{
+                        borderRadius: "20px",
+                        maxWidth: "600px",
+                      }}
+                    >
+                      {prd.imageURL.split(";").map((url) => (
+                        <Carousel.Item>
+                          <img
+                            className="d-block w-100 radius-20"
+                            style={{ height: "500px" }}
+                            src={url}
+                            alt={prd.productName}
+                          />
+                        </Carousel.Item>
+                      ))}
+                    </Carousel>
+                  </div>
+                  <div className="col-12 col-lg-6 p-3 p-md-4 d-flex justify-content-center justify-content-lg-start">
+                    <div
+                      className="card h-100 w-100 p-4"
+                      style={{ maxWidth: "600px" }}
+                    >
+                      <div className="d-flex flex-column justify-content-around h-100">
+                        <div className="fs-3 fw-bolder m-2">
+                          {prd.productName}
+                        </div>
+                        <div className="fs-5 fw-bold m-2">
+                          Rs {prd.productPrice}
+                        </div>
+                        <div className="fs-6 m-2">{prd.productDescription}</div>
+                        <div className="d-flex m-2">
+                          <Button
+                            variant="secondary"
+                            className="on-hover-light m-2"
+                            onClick={() => {
+                              window.location.href = `${routes.checkout}?pid=${prd.productId}`;
+                            }}
+                          >
+                            Buy Now
+                          </Button>
+                          <button className="btn btn-whatsapp on-hover-light m-2">
+                            <FontAwesomeIcon icon={faWhatsapp} /> Customize
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
+            {prd !== "fail" && prd !== "no-data" && (
+              <div className="row w-100 mt-2 mx-3 mb-3">
+                <div className="fs-4 fw-bolder text-center my-2 mb-4">
+                  View more about the product
+                </div>
+                <div
+                  className="embed d-flex justify-content-center"
+                  style={{ alignContent: "center", alignItems: "center" }}
+                >
+                  <iframe
+                    width="560"
+                    height="315"
+                    src={`https://www.youtube.com/embed/${prd.videoId}`}
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                  ></iframe>
                 </div>
               </div>
+            )}
+
+            <div className="row w-100 p-4">
+              <div className="fs-4 fw-bolder text-center my-2">See Also</div>
+              <div className="row d-flex justify-content-center px-3 px-lg-5 m-0 m-md-3">
+                {products === "fail" || products === "no-data"
+                  ? props.categories.map((category) => (
+                      <Category
+                        imgPath={category.imageThumbnail}
+                        categoryTitle={category.categoryName
+                          .split("-")
+                          .join(" ")}
+                        categoryName={category.categoryName}
+                      />
+                    ))
+                  : products.map((product) => (
+                      <Product
+                        seoTagline={product.seoTagline}
+                        imgThumbnail={product.imageThumbnail}
+                        productTitle={product.productName}
+                        productPrice={product.productPrice}
+                      />
+                    ))}
+              </div>
             </div>
-          </div>
-        </div>
-        <div className="row w-100 mt-2 mx-3 mb-3">
-          <div className="fs-4 fw-bolder text-center my-2">
-            View more about the product
-          </div>
-          <div
-            className="embed d-flex justify-content-center"
-            style={{ alignContent: "center", alignItems: "center" }}
-          >
-            <iframe
-              width="560"
-              height="315"
-              src="https://www.youtube.com/embed/4uREqbCNT-c"
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>
-          </div>
-        </div>
-        <div className="row w-100 p-4">
-          <div className="fs-4 fw-bolder text-center my-2">See Also</div>
-          <div className="row d-flex justify-content-center px-3 px-lg-5 m-0 m-md-3">
-            <Product
-              seoTagline="bosch-washing-machine"
-              imgThumbnail={"IOT.jfif"}
-              productTitle="Bosch Washing machine"
-              productPrice="25000"
-            />
-            <Product
-              seoTagline="bosch-washing-machine"
-              imgThumbnail={"IOT.jfif"}
-              productTitle="Bosch Washing machine"
-              productPrice="25000"
-            />
-            <Product
-              seoTagline="bosch-washing-machine"
-              imgThumbnail={"IOT.jfif"}
-              productTitle="Bosch Washing machine"
-              productPrice="25000"
-            />
-            <Product
-              seoTagline="bosch-washing-machine"
-              imgThumbnail={"IOT.jfif"}
-              productTitle="Bosch Washing machine"
-              productPrice="25000"
-            />
-          </div>
-        </div>
-      </div>
+          </>
+        )}
+      </section>
     </Layout>
   );
 }

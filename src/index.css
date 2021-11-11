@@ -12,6 +12,10 @@ footer {
   margin-top: 25vh;
 }
 
+.card-product {
+  max-width: 350px !important;
+}
+
 .foot {
   position: absolute;
   top: 0;
