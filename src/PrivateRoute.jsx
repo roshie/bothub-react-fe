@@ -11,13 +11,15 @@ export default class PrivateRoute extends React.Component {
     this.state = {
       isLoaded: false,
       user: false,
+      categories: null,
     };
   }
 
-  setUserFalse = () => {
+  setUserFalse = (categories) => {
     this.setState({
       user: false,
       isLoaded: true,
+      categories,
     });
   };
 
@@ -50,18 +52,19 @@ export default class PrivateRoute extends React.Component {
                     this.setState({
                       user,
                       isLoaded: true,
+                      categories: auth.categories.data,
                     });
                     localStorage.uid = data.uid;
                     localStorage.idToken = data.idToken;
-                  } else this.setUserFalse();
+                  } else this.setUserFalse(auth.categories);
                 },
                 (error) => {
-                  this.setUserFalse();
+                  this.setUserFalse(null);
                   console.log(error);
                 }
               );
           });
-      } else this.setUserFalse();
+      } else this.setUserFalse(null);
     });
   }
 
@@ -89,6 +92,7 @@ export default class PrivateRoute extends React.Component {
       } else if (this.props.path === "/:productSeoTagline") {
         propData.productSeoTagline = window.location.pathname.split("/").pop();
       }
+      propData.categories = this.state.categories;
 
       if (user) {
         return <Component login={true} user={user} {...propData} />;

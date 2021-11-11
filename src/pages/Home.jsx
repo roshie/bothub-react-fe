@@ -112,21 +112,13 @@ function Categories(props) {
       <div className="row d-flex justify-content-center w-75">
         <div className="text-center h2 fw-bolder my-4">Shop by Category</div>
         <div className="row d-flex justify-content-center">
-          <Category
-            imgPath="IOT.jfif"
-            categoryTitle={"IOT-Components".split("-").join(" ")}
-            categoryName="IOT-Components"
-          />
-          <Category
-            imgPath="IOT.jfif"
-            categoryTitle={"IOT-Components".split("-").join(" ")}
-            categoryName="IOT-Components"
-          />
-          <Category
-            imgPath="IOT.jfif"
-            categoryTitle={"IOT-Components".split("-").join(" ")}
-            categoryName="IOT-Components"
-          />
+          {props.categories.map((category) => (
+            <Category
+              imgPath={category.imageThumbnail}
+              categoryTitle={category.categoryName.split("-").join(" ")}
+              categoryName={category.categoryName}
+            />
+          ))}
         </div>
       </div>
     </section>
@@ -260,10 +252,11 @@ export default function Home(props) {
     document.title = "Bothub | A Stop for all Automation Devices";
     // eslint-disable-next-line
   }, []);
+
   return (
     <Layout loginState={props.login} page="home">
       <LandingPage />
-      <Categories />
+      <Categories categories={props.categories} />
       <D3Printing />
       <Ideas />
     </Layout>
