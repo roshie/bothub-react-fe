@@ -1,44 +1,85 @@
+import { useEffect, useState } from "react";
 import { Product } from "./components/Cards";
 import Layout from "./components/Layout";
+import { backendAppUrl } from "../config";
+import { Spinner } from "react-bootstrap";
 
 export default function Products(props) {
-  const categoryTag = props.categoryTag;
+  const [categoryTag, setCategoryTag] = useState(props.categoryTag);
+  const [loading, setLoading] = useState(true);
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetch(`${backendAppUrl}/products/all?categoryName=${categoryTag}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.detail === "db-error") {
+          setLoading(false);
+          setProducts("fail");
+        } else if (res.data.length === 0) {
+          setLoading(false);
+          setProducts("no-data");
+        } else {
+          setLoading(false);
+          setProducts(res.data);
+          setCategoryTag(res.categoryName);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        setLoading(false);
+        setProducts("fail");
+      });
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <Layout loginState={props.login} page="products">
-      <section
-        id="products"
-        className="min-vh-75 text-light px-auto"
-        name="products"
-      >
-        <div className="row d-flex justify-content-center w-75 mx-auto">
-          <div className="text-center py-5 h2 fw-bolder h-auto">
-            {categoryTag.split("-").join(" ")}
-
-            {/* Todo: Get categoryname from backend */}
-          </div>
-          <div className="row d-flex justify-content-center">
-            <Product
-              seoTagline="bosch-washing-machine"
-              imgThumbnail={"IOT.jfif"}
-              productTitle="Bosch Washing machine"
-              productPrice="25000"
-            />
-            <Product
-              seoTagline="bosch-washing-machine"
-              imgThumbnail={"IOT.jfif"}
-              productTitle="Bosch Washing machine"
-              productPrice="25000"
-            />
-            <Product
-              seoTagline="bosch-washing-machine"
-              imgThumbnail={"IOT.jfif"}
-              productTitle="Bosch Washing machine"
-              productPrice="25000"
-            />
-          </div>
+      {loading ? (
+        <div
+          className="d-flex justify-content-center align-items-center"
+          style={{ height: "70vh", width: "90vw" }}
+        >
+          <Spinner animation="border" size="lg" className="text-light" />
         </div>
-      </section>
+      ) : (
+        <section
+          id="products"
+          className="min-vh-75 text-light px-auto"
+          name="products"
+        >
+          <div className="row d-flex justify-content-center w-75 mx-auto">
+            <div className="text-center py-5 h2 fw-bolder h-auto">
+              {categoryTag.split("-").join(" ")}
+            </div>
+            <div className="row d-flex justify-content-center">
+              {products === "no-data" ? (
+                <div className="my-4 fs-5 text-center">
+                  No Products Available
+                </div>
+              ) : products === "fail" ? (
+                <div className="my-4 fs-5 text-center">
+                  Seems like there was a problem. Please try again.
+                </div>
+              ) : (
+                products.map((product) => (
+                  <Product
+                    seoTagline={product.seoTagline}
+                    imgThumbnail={product.imageThumbnail}
+                    productTitle={product.productName}
+                    productPrice={product.productPrice}
+                  />
+                ))
+              )}
+            </div>
+          </div>
+        </section>
+      )}
     </Layout>
   );
 }

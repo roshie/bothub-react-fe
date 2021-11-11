@@ -1,9 +1,15 @@
 export function Category(props) {
   return (
-    <div className="card on-hover-scale w-auto m-2">
+    <div className="card on-hover-scale m-2 card-product">
       <div className="card-body text-center">
         <img
           src={props.imgPath}
+          style={{
+            minWidth: "160px",
+            maxWidth: "320px",
+            minHeight: "120px",
+            maxHeight: "240px",
+          }}
           className="card-img-top mb-2 radius-20"
           alt="Thumbnail"
         />
@@ -22,12 +28,18 @@ export function Category(props) {
 export function Product(props) {
   return (
     <div
-      className="card on-hover-scale cursor-pointer w-auto m-2"
+      className="card on-hover-scale cursor-pointer m-2 card-product"
       onClick={() => goTo(`/${props.seoTagline}`)}
     >
       <div className="card-body text-center">
         <img
           src={props.imgThumbnail}
+          style={{
+            minWidth: "160px",
+            maxWidth: "320px",
+            minHeight: "120px",
+            maxHeight: "240px",
+          }}
           className="card-img-top mb-2 radius-20"
           alt="..."
         />
