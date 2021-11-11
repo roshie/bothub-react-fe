@@ -28,6 +28,25 @@ export default class PrivateRoute extends React.Component {
     return Object.keys(routes).find((key) => routes[key] === path);
   };
 
+  setCategories = () => {
+    return fetch(`${backendAppUrl}/products/categories`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then(
+        (auth) => {
+          return auth.data;
+        },
+        (error) => {
+          console.log(error);
+          return null;
+        }
+      );
+  };
+
   componentDidMount() {
     const auth = getAuth();
 
@@ -56,15 +75,21 @@ export default class PrivateRoute extends React.Component {
                     });
                     localStorage.uid = data.uid;
                     localStorage.idToken = data.idToken;
-                  } else this.setUserFalse(auth.categories);
+                  } else this.setUserFalse(auth.categories.data);
                 },
                 (error) => {
-                  this.setUserFalse(null);
                   console.log(error);
+                  this.setCategories().then((data) => {
+                    this.setUserFalse(data);
+                  });
                 }
               );
           });
-      } else this.setUserFalse(null);
+      } else {
+        this.setCategories().then((data) => {
+          this.setUserFalse(data);
+        });
+      }
     });
   }
 
@@ -97,11 +122,30 @@ export default class PrivateRoute extends React.Component {
       if (user) {
         return <Component login={true} user={user} {...propData} />;
       } else if (this.props.shouldLogin === true) {
-        return (
-          <Redirect
-            to={`${routes.login}?redirect=${this.getPageName(this.props.path)}`}
-          />
-        );
+        var getParams = "";
+        var getParamValues = "";
+        if (
+          this.props.path === "/category/:categoryTag" ||
+          this.props.path === "/:productSeoTagline"
+        ) {
+          getParams = "pathParam";
+          getParamValues = window.location.pathname.split("/").pop();
+        } else {
+          const params = new URLSearchParams(window.location.search);
+          for (const param of params) {
+            getParams = getParams + ";" + param[0];
+            getParamValues = getParamValues + ";" + param[1];
+          }
+          getParams = getParams.slice(1);
+          getParamValues = getParamValues.slice(1);
+        }
+        const url = `${routes.login}?redirect=${
+          this.getPageName(this.props.path) +
+          (getParams !== ""
+            ? `&params=${getParams}&values=${getParamValues}`
+            : "")
+        }`;
+        return <Redirect to={url} />;
       } else {
         return <Component login={false} {...propData} />;
       }
