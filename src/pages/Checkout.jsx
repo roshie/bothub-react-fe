@@ -1,33 +1,178 @@
 import { Product } from "./components/Cards";
 import Layout from "./components/Layout";
-import { Form, Row, Col, Button } from "react-bootstrap";
-import React, { useState } from "react";
+import { Form, Row, Col, Button, Spinner } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { backendAppUrl, getRequestParams } from "../config";
+import { getAuth, getIdToken, sendEmailVerification } from "@firebase/auth";
 
 export default function Checkout(props) {
+  const auth = getAuth();
+  const [loading, setLoading] = useState(true);
+  const [btnLoading, setBtnLoading] = useState(false);
+  const [errorMsg, setErrMsg] = useState(null);
+  const [product, setProduct] = useState({});
+  const [emailVerified, setEmailVerified] = useState(false);
+  const [hasMailSent, setSent] = useState(false);
   const [state, setState] = useState({
-      
-    
-    email:'',
-    phoneNumber:'',
-    address:'',
-    city:'',
-    state:'',
-    country:'',
-    pincode:'',
-    landmark:''
-})
+    email: "",
+    phoneNumber: "",
+    address: "",
+    city: "",
+    state: "",
+    country: "",
+    pincode: "",
+    landmark: "",
+  });
 
+  useEffect(() => {
+    if (auth.currentUser.emailVerified && !emailVerified)
+      setEmailVerified(auth.currentUser.emailVerified);
+    // eslint-disable-next-line
+  }, [auth.currentUser.emailVerified]);
 
+  useEffect(() => {
+    const productId = new URLSearchParams(window.location.search).get("pid");
+    fetch(`${backendAppUrl}/products?productId=${productId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then(
+        (res) => {
+          document.title = `Not Found | Bothub`;
+          if (res.detail === "db-error" || res.data === null) {
+            setProduct("fail");
+            return null;
+          } else {
+            document.title = `Checkout | Bothub`;
+            setProduct(res.data);
+            return true;
+          }
+        },
+        (err) => {
+          console.log(err);
+          setProduct("fail");
+          return null;
+        }
+      )
+      .then((data) => {
+        if (data === null) setLoading(false);
+        else
+          fetch(
+            `${backendAppUrl}/users?uid=${localStorage.uid}&idToken=${localStorage.idToken}`,
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          )
+            .then((res) => res.json())
+            .then(
+              (result) => {
+                if (result.detail === "db-error") {
+                  setLoading(false);
+                  console.error("error");
+                } else {
+                  setState({
+                    email:
+                      result.email === null
+                        ? auth.currentUser.email
+                        : result.email,
+                    phoneNumber:
+                      result.mobileNumber === null ? "" : result.mobileNumber,
+                    address: result.address === null ? "" : result.address,
+                    city: result.city === null ? "" : result.city,
+                    state: result.state === null ? "" : result.state,
+                    country: result.country === null ? "" : result.country,
+                    pincode: result.pinCode === null ? "" : result.pinCode,
+                    landmark: result.landMark === null ? "" : result.landMark,
+                  });
+                }
+                setLoading(false);
+              },
+              (err) => {
+                console.log(err);
+                setLoading(false);
+              }
+            );
+      });
+    // eslint-disable-next-line
+  }, []);
 
+  const verifyEmail = () => {
+    sendEmailVerification(auth.currentUser).then(() => {
+      setSent(true);
+      setTimeout(() => {
+        setSent(false);
+      }, 10000);
+    });
+  };
 
-
+  const payNowButton = () => {
+    console.log("submit");
+    setBtnLoading(true);
+    setErrMsg(null);
+    setEmailVerified(auth.currentUser.emailVerified);
+    if (auth.currentUser.emailVerified) {
+      getIdToken(auth.currentUser)
+        .then((idToken) => {
+          const data = {
+            ...state,
+            productId: product.productId,
+            uid: localStorage.uid,
+            idToken,
+          };
+          return data;
+        })
+        .then((data) => {
+          fetch(`${backendAppUrl}/payments/order`, {
+            ...getRequestParams("POST", data),
+          })
+            .then((res) => res.json())
+            .then((res) => {
+              console.log(res);
+              setBtnLoading(false);
+              if (res.status === "created") {
+              } else {
+                setErrMsg(
+                  "There was a problem while placing your order. Please try again later"
+                );
+              }
+            })
+            .catch((err) => {
+              console.error(err);
+              setBtnLoading(false);
+              setErrMsg(
+                "There was a problem while placing your order. Please try again later"
+              );
+            });
+        });
+    } else {
+      setBtnLoading(false);
+      setErrMsg("Please verify your Email!");
+    }
+  };
 
   return (
     <Layout loginState={props.login} page="checkout">
-      <section id="shippingAddress">
-        <div className="min-vh-100 d-flex justify-content-center align-items-center flex-column">
+      <section
+        id="shippingAddress"
+        className="min-vh-100 d-flex justify-content-center align-items-center flex-column"
+      >
+        {loading ? (
+          <Spinner animation="border" size="lg" className="text-light" />
+        ) : product === "fail" ? (
+          <div className="my-4 fs-5 text-center">
+            Oops there was a problem while processing. Please try again.
+          </div>
+        ) : (
           <Form
-            onSubmit={() => false}
+            onSubmit={(e) => {
+              e.preventDefault();
+            }}
             className="row w-lg-75 justify-content-center my-5"
           >
             <div className="col-12 col-md-6 p-2 h-auto">
@@ -40,12 +185,14 @@ export default function Checkout(props) {
                     <Form.Group className="mb-3">
                       <Form.Label>Address</Form.Label>
                       <Form.Control
-                        type="email"
+                        type="text-field"
                         required
                         className="bg-primary border-primary text-light"
                         placeholder="No. 4, Park Street"
                         value={state.address}
-                        onChange={(e)=>{setState({...state,address:e.target.value})}}
+                        onChange={(e) => {
+                          setState({ ...state, address: e.target.value });
+                        }}
                       />
                     </Form.Group>
                   </Row>
@@ -54,12 +201,14 @@ export default function Checkout(props) {
                       <Form.Group className="mb-3">
                         <Form.Label>City</Form.Label>
                         <Form.Control
-                          type="email"
+                          type="text-field"
                           required
                           className="bg-primary border-primary text-light"
                           placeholder="Coimbatore"
                           value={state.city}
-                        onChange={(e)=>{setState({...state,city:e.target.value})}}
+                          onChange={(e) => {
+                            setState({ ...state, city: e.target.value });
+                          }}
                         />
                       </Form.Group>
                     </Col>
@@ -67,12 +216,14 @@ export default function Checkout(props) {
                       <Form.Group className="mb-3">
                         <Form.Label>State</Form.Label>
                         <Form.Control
-                          type="email"
+                          type="text-field"
                           required
                           className="bg-primary border-primary text-light"
                           placeholder="Tamil Nadu"
                           value={state.state}
-                        onChange={(e)=>{setState({...state,state:e.target.value})}}
+                          onChange={(e) => {
+                            setState({ ...state, state: e.target.value });
+                          }}
                         />
                       </Form.Group>
                     </Col>
@@ -82,12 +233,14 @@ export default function Checkout(props) {
                       <Form.Group className="mb-3">
                         <Form.Label>Country</Form.Label>
                         <Form.Control
-                          type="email"
+                          type="text-field"
                           required
                           className="bg-primary border-primary text-light"
                           placeholder="India"
                           value={state.country}
-                        onChange={(e)=>{setState({...state,country:e.target.value})}}
+                          onChange={(e) => {
+                            setState({ ...state, country: e.target.value });
+                          }}
                         />
                       </Form.Group>
                     </Col>
@@ -95,12 +248,14 @@ export default function Checkout(props) {
                       <Form.Group className="mb-3">
                         <Form.Label>Pincode</Form.Label>
                         <Form.Control
-                          type="email"
+                          type="text-field"
                           required
                           className="bg-primary border-primary text-light"
                           placeholder="650000"
                           value={state.pincode}
-                        onChange={(e)=>{setState({...state,pincode:e.target.value})}}
+                          onChange={(e) => {
+                            setState({ ...state, pincode: e.target.value });
+                          }}
                         />
                       </Form.Group>
                     </Col>
@@ -109,12 +264,14 @@ export default function Checkout(props) {
                     <Form.Group className="mb-3">
                       <Form.Label>Landmark</Form.Label>
                       <Form.Control
-                        type="email"
+                        type="text-field"
                         required
                         className="bg-primary border-primary text-light"
                         placeholder="Near Park Cafe"
                         value={state.landmark}
-                        onChange={(e)=>{setState({...state,landmark:e.target.value})}}
+                        onChange={(e) => {
+                          setState({ ...state, landmark: e.target.value });
+                        }}
                       />
                     </Form.Group>
                   </Row>
@@ -131,34 +288,49 @@ export default function Checkout(props) {
                           type="email"
                           required
                           readOnly
+                          isValid={emailVerified}
+                          isInvalid={!emailVerified}
                           className="bg-primary border-primary text-light"
                           placeholder="mail@example.com"
                           value={state.email}
-                        onChange={(e)=>{setState({...state,email:e.target.value})}}
+                          onChange={(e) => {
+                            setState({ ...state, email: e.target.value });
+                          }}
                         />
                         <Button
                           size="sm"
-                          variant="secondary"
+                          variant={emailVerified ? "success" : "secondary"}
                           className="py-0 ms-2"
+                          disabled={emailVerified}
+                          onClick={verifyEmail}
                         >
-                          Verify
+                          {emailVerified ? "Verified" : "Verify"}
                         </Button>
                       </div>
-                      <div className="text-success small text-end">
-                        {"Mail Sent! Check your inbox."}
-                      </div>
+                      {hasMailSent && (
+                        <div className="text-success small text-end">
+                          {"Mail Sent! Check your inbox."}
+                        </div>
+                      )}
+                      {!emailVerified && (
+                        <Form.Text>
+                          The Email hasn't verified yet. Please click on verify
+                        </Form.Text>
+                      )}
                     </Form.Group>
                   </Row>
                   <Row>
                     <Form.Group className="mb-3">
                       <Form.Label>Phone Number</Form.Label>
                       <Form.Control
-                        type="email"
+                        type="tel"
                         required
                         className="bg-primary border-primary text-light"
                         placeholder="9876543210"
                         value={state.phoneNumber}
-                        onChange={(e)=>{setState({...state,phoneNumber:e.target.value})}}
+                        onChange={(e) => {
+                          setState({ ...state, phoneNumber: e.target.value });
+                        }}
                       />
                     </Form.Group>
                   </Row>
@@ -173,10 +345,11 @@ export default function Checkout(props) {
                 <div className="row my-2 px-1">
                   <Row className="justify-content-center">
                     <Product
-                      url={`/${"bosch-washing-machine"}`}
-                      imgThumbnail="IOT.jfif"
-                      productTitle="Bosch Washing Machine"
-                      productPrice="999999"
+                      seoTagline={product.seoTagline}
+                      imgThumbnail={product.imageThumbnail}
+                      productTitle={product.productName}
+                      productPrice={product.productPrice}
+                      newTab={true}
                     />
                   </Row>
                   <Row className="p-5">
@@ -185,26 +358,46 @@ export default function Checkout(props) {
                         <div>Quantity </div> <div>1</div>
                       </div>
                       <div className="d-flex justify-content-between mb-2 mt-3">
-                        <div>Price (&#x20B9;)</div> <div>{"99999"}</div>
+                        <div>Price (&#x20B9;)</div>{" "}
+                        <div>{product.productPrice}</div>
                       </div>
                       <div className="d-flex justify-content-between mt-2 mb-3">
                         <div>Delivery Charges (&#x20B9;)</div> <div>{"0"}</div>
                       </div>
                       <div className="d-flex justify-content-between my-3 py-1 fw-bold border-top border-primary">
-                        <div>Total</div> <div>{"99999"}</div>
+                        <div>Total</div> <div>{product.productPrice}</div>
                       </div>
                       <div className="d-flex justify-content-center">
-                        <Button className="w-50" variant="secondary">
-                          Pay Now
+                        <Button
+                          className="w-50"
+                          variant="secondary"
+                          onClick={payNowButton}
+                          disabled={btnLoading}
+                          type="submit"
+                        >
+                          {btnLoading ? (
+                            <Spinner
+                              animation="border"
+                              size="sm"
+                              className="text-light"
+                            />
+                          ) : (
+                            "Pay Now"
+                          )}
                         </Button>
                       </div>
+                      {errorMsg !== null && (
+                        <div className="d-flex justify-content-center mt-4 text-danger text-center">
+                          {errorMsg}
+                        </div>
+                      )}
                     </Col>
                   </Row>
                 </div>
               </div>
             </div>
           </Form>
-        </div>
+        )}
       </section>
     </Layout>
   );

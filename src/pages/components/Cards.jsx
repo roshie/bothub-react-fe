@@ -26,10 +26,15 @@ export function Category(props) {
 }
 
 export function Product(props) {
+  const extraParams =
+    props.newTab === true
+      ? { target: "_blank", rel: "noopener noreferrer" }
+      : {};
   return (
-    <div
-      className="card on-hover-scale cursor-pointer m-2 card-product"
-      onClick={() => goTo(`/${props.seoTagline}`)}
+    <a
+      className="card on-hover-scale cursor-pointer m-2 card-product text-decoration-none"
+      href={`/${props.seoTagline}`}
+      {...extraParams}
     >
       <div className="card-body text-center">
         <img
@@ -43,13 +48,13 @@ export function Product(props) {
           className="card-img-top mb-2 radius-20"
           alt="..."
         />
-        <h5 className="card-title my-3 fw-bold">{props.productTitle}</h5>
+        <h5 className="card-title my-3 fw-bold text-light on-hover-light">
+          {props.productTitle}
+        </h5>
         <h3 className="text-secondary my-2 fw-bold fs-5">
           &#x20B9; {props.productPrice}
         </h3>
       </div>
-    </div>
+    </a>
   );
 }
-
-const goTo = (url) => (window.location.href = url);

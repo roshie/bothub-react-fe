@@ -150,6 +150,8 @@ export default function UserDetails() {
                   <Form.Control
                     className="bg-primary border-primary text-light"
                     required
+                    isValid={emailSent === "verified"}
+                    isInvalid={emailSent !== "verified"}
                     type="email"
                     readOnly
                     placeholder="name@example.com"

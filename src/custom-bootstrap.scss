@@ -105,7 +105,7 @@ body {
 .on-hover-scale:hover {
   transition: all 0.3s ease;
   transform: scale(0.97);
-  box-shadow: 0 0 1rem #000 !important;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.712) !important;
 }
 
 .min-vh-75 {
