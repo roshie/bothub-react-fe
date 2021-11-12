@@ -4,10 +4,12 @@ import { Form, Row, Col, Button, Spinner } from "react-bootstrap";
 import React, { useEffect, useState } from "react";
 import { backendAppUrl, getRequestParams } from "../config";
 import { getAuth, getIdToken, sendEmailVerification } from "@firebase/auth";
+import { routes } from "../App";
 
 export default function Checkout(props) {
   const auth = getAuth();
   const [loading, setLoading] = useState(true);
+  const [paymentDone, setPaymentDone] = useState(false);
   const [btnLoading, setBtnLoading] = useState(false);
   const [errorMsg, setErrMsg] = useState(null);
   const [product, setProduct] = useState({});
@@ -23,6 +25,43 @@ export default function Checkout(props) {
     pincode: "",
     landmark: "",
   });
+
+  const showRazorpayFrame = (data) => {
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.onload = () => {
+      var options = {
+        key: "rzp_test_EzjBrDuqNGdChH",
+        amount: data.productPrice.toString(),
+        currency: "INR",
+        name: "Bothub",
+        description: "Complete your payment",
+        image: "https://bothub.vercel.app/3d-printer.png",
+        order_id: data.orderId,
+        handler: verifyRequest,
+        prefill: {
+          name: data.fullName,
+          email: data.email,
+          contact: state.phoneNumber,
+        },
+        notes: {
+          productName: data.productName,
+        },
+        theme: {
+          color: "#192245",
+        },
+      };
+      var rzpObj = new window.Razorpay(options);
+      rzpObj.open();
+    };
+    script.onerror = () => {
+      setErrMsg(
+        "There was a problem while placing your order. Please try again later"
+      );
+      console.log("Razorpay Error");
+    };
+    document.body.appendChild(script);
+  };
 
   useEffect(() => {
     if (auth.currentUser.emailVerified && !emailVerified)
@@ -111,6 +150,33 @@ export default function Checkout(props) {
     });
   };
 
+  const verifyRequest = (response) => {
+    setPaymentDone(true);
+    fetch(`${backendAppUrl}/payments/verify`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(response),
+    })
+      .then((res) => res.json())
+      .then(
+        (res) => {
+          console.log(res);
+          if (res.status === "verified") {
+            console.log("isPaid", res.isPaid);
+            window.location.href = `${routes.orderSummary}?orderId=${response.razorpay_order_id}`;
+          } else {
+            console.log("invalid request");
+            window.location.href = `${routes.orderSummary}?orderId=${response.razorpay_order_id}`;
+          }
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+  };
+
   const payNowButton = () => {
     console.log("submit");
     setBtnLoading(true);
@@ -121,6 +187,7 @@ export default function Checkout(props) {
         .then((idToken) => {
           const data = {
             ...state,
+            phoneNumber: state.phoneNumber,
             productId: product.productId,
             uid: localStorage.uid,
             idToken,
@@ -136,6 +203,7 @@ export default function Checkout(props) {
               console.log(res);
               setBtnLoading(false);
               if (res.status === "created") {
+                showRazorpayFrame(res.data);
               } else {
                 setErrMsg(
                   "There was a problem while placing your order. Please try again later"
@@ -168,7 +236,7 @@ export default function Checkout(props) {
           <div className="my-4 fs-5 text-center">
             Oops there was a problem while processing. Please try again.
           </div>
-        ) : (
+        ) : !paymentDone ? (
           <Form
             onSubmit={(e) => {
               e.preventDefault();
@@ -397,6 +465,22 @@ export default function Checkout(props) {
               </div>
             </div>
           </Form>
+        ) : (
+          <div className="row justify-content-center">
+            <div className="fs-1 fw-bold my-2 text-center">
+              Your order is being processed. Please stay here.
+            </div>
+            <div className="fs-5 text-center">
+              Do not click on back or refresh.
+            </div>
+            <div className="my-4 text-center">
+              <Spinner
+                animation="border"
+                size="lg"
+                className="text-light"
+              ></Spinner>
+            </div>
+          </div>
         )}
       </section>
     </Layout>
