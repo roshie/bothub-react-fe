@@ -12,6 +12,7 @@ export default class PrivateRoute extends React.Component {
       isLoaded: false,
       user: false,
       categories: null,
+      backendDown: false,
     };
   }
 
@@ -42,6 +43,7 @@ export default class PrivateRoute extends React.Component {
         },
         (error) => {
           console.log(error);
+          this.setState({ backendDown: true });
           return null;
         }
       );
@@ -82,6 +84,7 @@ export default class PrivateRoute extends React.Component {
                   this.setCategories().then((data) => {
                     this.setUserFalse(data);
                   });
+                  this.setState({ backendDown: true });
                 }
               );
           });
@@ -94,7 +97,7 @@ export default class PrivateRoute extends React.Component {
   }
 
   render() {
-    const { isLoaded, user } = this.state;
+    const { isLoaded, user, backendDown } = this.state;
 
     if (!isLoaded) {
       return (
@@ -106,49 +109,66 @@ export default class PrivateRoute extends React.Component {
         </div>
       );
     } else {
-      const Component = this.props.component;
-
-      const propData = {
-        ...this.props,
-      };
-
-      if (this.props.path === "/category/:categoryTag") {
-        propData.categoryTag = window.location.pathname.split("/").pop();
-      } else if (this.props.path === "/:productSeoTagline") {
-        propData.productSeoTagline = window.location.pathname.split("/").pop();
-      }
-      propData.categories = this.state.categories;
-
-      if (user) {
-        return <Component login={true} user={user} {...propData} />;
-      } else if (this.props.shouldLogin === true) {
-        var getParams = "";
-        var getParamValues = "";
-        if (
-          this.props.path === "/category/:categoryTag" ||
-          this.props.path === "/:productSeoTagline"
-        ) {
-          getParams = "pathParam";
-          getParamValues = window.location.pathname.split("/").pop();
-        } else {
-          const params = new URLSearchParams(window.location.search);
-          for (const param of params) {
-            getParams = getParams + ";" + param[0];
-            getParamValues = getParamValues + ";" + param[1];
-          }
-          getParams = getParams.slice(1);
-          getParamValues = getParamValues.slice(1);
-        }
-        const url = `${routes.login}?redirect=${
-          this.getPageName(this.props.path) +
-          (getParams !== ""
-            ? `&params=${getParams}&values=${getParamValues}`
-            : "")
-        }`;
-        return <Redirect to={url} />;
+      if (backendDown) {
+        return <BackendDownComponent />;
       } else {
-        return <Component login={false} {...propData} />;
+        const Component = this.props.component;
+
+        const propData = {
+          ...this.props,
+        };
+
+        if (this.props.path === "/category/:categoryTag") {
+          propData.categoryTag = window.location.pathname.split("/").pop();
+        } else if (this.props.path === "/:productSeoTagline") {
+          propData.productSeoTagline = window.location.pathname
+            .split("/")
+            .pop();
+        }
+        propData.categories = this.state.categories;
+
+        if (user) {
+          return <Component login={true} user={user} {...propData} />;
+        } else if (this.props.shouldLogin === true) {
+          var getParams = "";
+          var getParamValues = "";
+          if (
+            this.props.path === "/category/:categoryTag" ||
+            this.props.path === "/:productSeoTagline"
+          ) {
+            getParams = "pathParam";
+            getParamValues = window.location.pathname.split("/").pop();
+          } else {
+            const params = new URLSearchParams(window.location.search);
+            for (const param of params) {
+              getParams = getParams + ";" + param[0];
+              getParamValues = getParamValues + ";" + param[1];
+            }
+            getParams = getParams.slice(1);
+            getParamValues = getParamValues.slice(1);
+          }
+          const url = `${routes.login}?redirect=${
+            this.getPageName(this.props.path) +
+            (getParams !== ""
+              ? `&params=${getParams}&values=${getParamValues}`
+              : "")
+          }`;
+          return <Redirect to={url} />;
+        } else {
+          return <Component login={false} {...propData} />;
+        }
       }
     }
   }
 }
+
+const BackendDownComponent = (props) => {
+  return (
+    <div className="min-vh-100 d-flex justify-content-center align-items-center flex-column">
+      <div className="row text-center fs-1 fw-bold">The backend is down</div>
+      <div className="row text-center fs-5 fw-bold">
+        Please turn on your backend server and refresh this page
+      </div>
+    </div>
+  );
+};
