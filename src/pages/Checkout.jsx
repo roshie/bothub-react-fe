@@ -233,9 +233,7 @@ export default function Checkout(props) {
         {loading ? (
           <Spinner animation="border" size="lg" className="text-light" />
         ) : product === "fail" ? (
-          <div className="my-4 fs-5 text-center">
-            Oops there was a problem while processing. Please try again.
-          </div>
+          <> {/* Return error500 component */}</>
         ) : !paymentDone ? (
           <Form
             onSubmit={(e) => {

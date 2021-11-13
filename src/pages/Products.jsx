@@ -63,9 +63,7 @@ export default function Products(props) {
                   No Products Available
                 </div>
               ) : products === "fail" ? (
-                <div className="my-4 fs-5 text-center">
-                  Seems like there was a problem. Please try again.
-                </div>
+                <> {/* Return error500 component */}</>
               ) : (
                 products.map((product) => (
                   <Product

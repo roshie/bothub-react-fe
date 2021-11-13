@@ -53,7 +53,6 @@ export default function OrderSummary(props) {
         (res) => {
           console.log(res);
           if (res.detail === "db-error" || res.detail === "forbidden") {
-            // set error500 page
             setError(true);
             setLoading(false);
           } else if (res.data === "no-data") {
@@ -61,7 +60,6 @@ export default function OrderSummary(props) {
               ...state,
               available: false,
             });
-            // set error404 page
           } else {
             const val = res.data;
             setState({
@@ -94,7 +92,6 @@ export default function OrderSummary(props) {
         },
         (err) => {
           console.log(err);
-          // set error500 page
           setError(true);
           setLoading(false);
         }
@@ -239,8 +236,7 @@ export default function OrderSummary(props) {
           </section>
         </Layout>
       ) : (
-        // 500 page here
-        <> </>
+        <> {/* Return error500 component */}</>
       )}
     </>
   );

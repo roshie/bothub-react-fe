@@ -24,7 +24,6 @@ export default function ViewOrders(props) {
         (res) => {
           console.log(res);
           if (res.detail === "db-error" || res.detail === "forbidden") {
-            // set error500 page
             setError(true);
             setLoading(false);
           } else {
@@ -35,7 +34,6 @@ export default function ViewOrders(props) {
         },
         (err) => {
           console.log(err);
-          // set error500 page
           setError(true);
           setLoading(false);
         }
@@ -44,57 +42,55 @@ export default function ViewOrders(props) {
 
   return (
     <>
-      {
-        !error ? (
-          <Layout loginState={props.login} page="viewOrders">
-            <section
-              id="viewOrders"
-              className="min-vh-100 text-light d-flex justify-content-center align-items-center"
-              name="viewOrders"
-            >
-              {" "}
-              {loading ? (
-                <Spinner animation="border" size="lg" className="text-light" />
-              ) : (
-                <div className="row m-auto w-md-75">
-                  <div
-                    className="text-center py-4 mt-2 h2"
-                    style={{ fontWeight: "bolder" }}
-                  >
-                    Your Orders
-                  </div>
-                  {orders === "no-data" ? (
-                    <div className="row text-center fs-5">
-                      You don't have any orders to display.
-                    </div>
-                  ) : (
-                    <div id="orders-holder">
-                      {orders.map((order) => {
-                        return (
-                          <OrderComponent
-                            productName={order.productName}
-                            orderDate={order.timeOrdered}
-                            imgThumbnail={order.imageThumbnail}
-                            status={order.shipping.status}
-                            link={
-                              order.shipping.status !== "NA"
-                                ? null
-                                : order.shipping.link
-                            }
-                            orderId={order.orderId}
-                          />
-                        );
-                      })}
-                    </div>
-                  )}
+      {!error ? (
+        <Layout loginState={props.login} page="viewOrders">
+          <section
+            id="viewOrders"
+            className="min-vh-100 text-light d-flex justify-content-center align-items-center"
+            name="viewOrders"
+          >
+            {" "}
+            {loading ? (
+              <Spinner animation="border" size="lg" className="text-light" />
+            ) : (
+              <div className="row m-auto w-md-75">
+                <div
+                  className="text-center py-4 mt-2 h2"
+                  style={{ fontWeight: "bolder" }}
+                >
+                  Your Orders
                 </div>
-              )}
-            </section>
-          </Layout>
-        ) : (
-          <></>
-        ) // Return error500
-      }
+                {orders === "no-data" ? (
+                  <div className="row text-center fs-5">
+                    You don't have any orders to display.
+                  </div>
+                ) : (
+                  <div id="orders-holder">
+                    {orders.map((order) => {
+                      return (
+                        <OrderComponent
+                          productName={order.productName}
+                          orderDate={order.timeOrdered}
+                          imgThumbnail={order.imageThumbnail}
+                          status={order.shipping.status}
+                          link={
+                            order.shipping.status !== "NA"
+                              ? null
+                              : order.shipping.link
+                          }
+                          orderId={order.orderId}
+                        />
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            )}
+          </section>
+        </Layout>
+      ) : (
+        <> {/* Return error500 component */}</>
+      )}
     </>
   );
 }

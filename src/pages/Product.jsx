@@ -84,9 +84,7 @@ export default function ProductPage(props) {
           <>
             <div className="row w-100 mt-3 mx-3 mb-2 justify-content-center">
               {prd === "fail" ? (
-                <div className="my-4 fs-5 text-center">
-                  Seems like there was a problem. Please try again.
-                </div>
+                <> {/* Return error500 component */}</>
               ) : prd === "no-data" ? (
                 <div className="my-4 fs-5 text-center">
                   Seems like the Product named{" "}
