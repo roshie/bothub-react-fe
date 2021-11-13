@@ -29,17 +29,23 @@ export default function Authenticate(props) {
   const getRedirectUrl = () => {
     const params = new URLSearchParams(props.location.search);
     if (!params.has("redirect")) return routes.home;
+
     const redirectTo = params.get("redirect");
     const queryParamValues = params.get("values");
+
     if (redirectTo === "products")
       return `/category/${queryParamValues.replace(";", "")}`;
     else if (redirectTo === "product")
       return `/${queryParamValues.replace(";", "")}`;
+
     const queryParams = params.get("params");
-    var url = `${routes[redirectTo]}?`;
-    queryParams.split(";").forEach((param, i) => {
-      url = url + param + "=" + queryParamValues.split(";")[i] + "&";
-    });
+    var url = routes[redirectTo];
+    if (queryParams !== null) {
+      url += "?";
+      queryParams.split(";").forEach((param, i) => {
+        url = url + param + "=" + queryParamValues.split(";")[i] + "&";
+      });
+    }
     return url;
   };
 
