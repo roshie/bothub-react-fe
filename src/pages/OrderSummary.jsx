@@ -106,7 +106,7 @@ export default function OrderSummary(props) {
   return (
     <>
       {!error ? (
-        <Layout>
+        <Layout loginState={props.login} page="orderSummary">
           <section
             id="shippingAddress"
             className="min-vh-100 d-flex justify-content-center align-items-center flex-column my-5 px-3"

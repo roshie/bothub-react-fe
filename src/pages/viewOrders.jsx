@@ -1,39 +1,101 @@
 import Layout from "./components/Layout";
-import { Button, Badge } from "react-bootstrap";
+import { Button, Badge, Spinner } from "react-bootstrap";
 import { routes } from "../App";
+import { useEffect, useState } from "react";
+import { getRequestParams, backendAppUrl } from "../config";
 
-export default function viewOrders(props) {
+export default function ViewOrders(props) {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const [orders, setOrders] = useState(null);
+
+  useEffect(() => {
+    document.title = `View Orders | Bothub`;
+
+    fetch(`${backendAppUrl}/orders/all`, {
+      ...getRequestParams("POST", {
+        uid: localStorage.uid,
+        idToken: localStorage.idToken,
+        user: 1,
+      }),
+    })
+      .then((res) => res.json())
+      .then(
+        (res) => {
+          console.log(res);
+          if (res.detail === "db-error" || res.detail === "forbidden") {
+            // set error500 page
+            setError(true);
+            setLoading(false);
+          } else {
+            const val = res;
+            setOrders(val);
+            setLoading(false);
+          }
+        },
+        (err) => {
+          console.log(err);
+          // set error500 page
+          setError(true);
+          setLoading(false);
+        }
+      );
+  });
+
   return (
-    <Layout loginState={props.login} page="viewOrders">
-      <section
-        id="viewOrders"
-        className="min-vh-100 text-light"
-        name="viewOrders"
-      >
-        <div className="row m-auto w-md-75">
-          <div
-            className="text-center py-4 mt-2 h2"
-            style={{ fontWeight: "bolder" }}
-          >
-            Your Orders
-          </div>
-          <div id="orders-holder">
-            <OrderComponent
-              productName="Bosch Washing Machine"
-              orderDate="15.05.21"
-              imgThumbnail="IOT.jfif"
-              status="Delivered"
-            />
-            <OrderComponent
-              productName="Bosch Washing Machine"
-              orderDate="15.05.21"
-              imgThumbnail="IOT.jfif"
-              status="Delivered"
-            />
-          </div>
-        </div>
-      </section>
-    </Layout>
+    <>
+      {
+        !error ? (
+          <Layout loginState={props.login} page="viewOrders">
+            <section
+              id="viewOrders"
+              className="min-vh-100 text-light d-flex justify-content-center align-items-center"
+              name="viewOrders"
+            >
+              {" "}
+              {loading ? (
+                <Spinner animation="border" size="lg" className="text-light" />
+              ) : (
+                <div className="row m-auto w-md-75">
+                  <div
+                    className="text-center py-4 mt-2 h2"
+                    style={{ fontWeight: "bolder" }}
+                  >
+                    Your Orders
+                  </div>
+                  {orders === "no-data" ? (
+                    <div className="row text-center fs-5">
+                      You don't have any orders to display.
+                    </div>
+                  ) : (
+                    <div id="orders-holder">
+                      {orders.map((order) => {
+                        return (
+                          <OrderComponent
+                            productName={order.productName}
+                            orderDate={order.timeOrdered}
+                            imgThumbnail={order.imageThumbnail}
+                            status={order.shipping.status}
+                            link={
+                              order.shipping.status !== "NA"
+                                ? null
+                                : order.shipping.link
+                            }
+                            orderId={order.orderId}
+                          />
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              )}
+            </section>
+          </Layout>
+        ) : (
+          <></>
+        ) // Return error500
+      }
+    </>
   );
 }
 
@@ -64,7 +126,7 @@ function OrderComponent(props) {
                   className="my-2 w-50"
                   size="sm"
                   onClick={() => {
-                    window.location.href = routes.orderSummary;
+                    window.location.href = `${routes.orderSummary}?orderId=${props.orderId}`;
                   }}
                 >
                   View Order Details
@@ -77,7 +139,18 @@ function OrderComponent(props) {
                 className="mw-75 p-2 my-2"
                 style={{ borderRadius: "15px" }}
               >
-                {props.status}
+                {props.status !== "NA" ? (
+                  props.status
+                ) : (
+                  <a
+                    href={props.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-decoration-none on-hover-light"
+                  >
+                    View Delivery Status Here
+                  </a>
+                )}
               </Badge>
             </div>
           </div>
