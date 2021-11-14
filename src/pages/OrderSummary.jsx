@@ -3,6 +3,7 @@ import Layout from "./components/Layout";
 import { Row, Col, Spinner, Button } from "react-bootstrap";
 import { Product } from "./components/Cards";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRupeeSign } from "@fortawesome/free-solid-svg-icons";
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import { getRequestParams, backendAppUrl } from "../config";
 import { Redirect } from "react-router";
@@ -130,11 +131,16 @@ export default function OrderSummary(props) {
                             <div>Quantity </div> <div>1</div>
                           </div>
                           <div className="d-flex justify-content-between mb-2 mt-3">
-                            <div>Price (&#x20B9;)</div>{" "}
+                            <div>
+                              Price (<FontAwesomeIcon icon={faRupeeSign} />)
+                            </div>{" "}
                             <div>{state.totalPrice}</div>
                           </div>
                           <div className="d-flex justify-content-between mt-2 mb-3">
-                            <div>Delivery Charges (&#x20B9;)</div>{" "}
+                            <div>
+                              Delivery Charges (
+                              <FontAwesomeIcon icon={faRupeeSign} />)
+                            </div>{" "}
                             <div>{"0"}</div>
                           </div>
                           <div className="d-flex justify-content-between my-3 py-1 fw-bold border-top border-primary">

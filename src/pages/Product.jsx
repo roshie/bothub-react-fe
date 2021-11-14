@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import { backendAppUrl } from "../config";
 import { routes } from "../App";
+import { faRupeeSign } from "@fortawesome/free-solid-svg-icons";
 
 export default function ProductPage(props) {
   const productSeoTagline = props.productSeoTagline;
@@ -123,8 +124,12 @@ export default function ProductPage(props) {
                         <div className="fs-3 fw-bolder m-2">
                           {prd.productName}
                         </div>
-                        <div className="fs-5 fw-bold m-2">
-                          Rs {prd.productPrice}
+                        <div className="m-2">
+                          <div className="fs-5 fw-bold">
+                            <FontAwesomeIcon icon={faRupeeSign} />{" "}
+                            {prd.productPrice}
+                          </div>
+                          <small>*Inclusive of all taxes</small>
                         </div>
                         <div className="fs-6 m-2">{prd.productDescription}</div>
                         <div className="d-flex m-2">

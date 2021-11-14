@@ -4,6 +4,8 @@ import { Form, Row, Col, Button, Spinner } from "react-bootstrap";
 import React, { useEffect, useState } from "react";
 import { backendAppUrl, getRequestParams } from "../config";
 import { getAuth, getIdToken, sendEmailVerification } from "@firebase/auth";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRupeeSign } from "@fortawesome/free-solid-svg-icons";
 import { routes } from "../App";
 
 export default function Checkout(props) {
@@ -424,11 +426,17 @@ export default function Checkout(props) {
                         <div>Quantity </div> <div>1</div>
                       </div>
                       <div className="d-flex justify-content-between mb-2 mt-3">
-                        <div>Price (&#x20B9;)</div>{" "}
+                        <div>
+                          Price (<FontAwesomeIcon icon={faRupeeSign} />)
+                        </div>{" "}
                         <div>{product.productPrice}</div>
                       </div>
                       <div className="d-flex justify-content-between mt-2 mb-3">
-                        <div>Delivery Charges (&#x20B9;)</div> <div>{"0"}</div>
+                        <div>
+                          Delivery Charges (
+                          <FontAwesomeIcon icon={faRupeeSign} />)
+                        </div>{" "}
+                        <div>{"0"}</div>
                       </div>
                       <div className="d-flex justify-content-between my-3 py-1 fw-bold border-top border-primary">
                         <div>Total</div> <div>{product.productPrice}</div>

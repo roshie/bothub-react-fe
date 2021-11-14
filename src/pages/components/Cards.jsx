@@ -1,3 +1,6 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRupeeSign } from "@fortawesome/free-solid-svg-icons";
+
 export function Category(props) {
   return (
     <div className="card on-hover-scale m-2 card-product">
@@ -52,7 +55,7 @@ export function Product(props) {
           {props.productTitle}
         </h5>
         <h3 className="text-secondary my-2 fw-bold fs-5">
-          &#x20B9; {props.productPrice}
+          <FontAwesomeIcon icon={faRupeeSign} /> {props.productPrice}
         </h3>
       </div>
     </a>
