@@ -44,7 +44,11 @@ export default function ViewOrders(props) {
   return (
     <>
       {!error ? (
-        <Layout loginState={props.login} page="viewOrders">
+        <Layout
+          loginState={props.login}
+          page="viewOrders"
+          categories={props.categories}
+        >
           <section
             id="viewOrders"
             className="min-vh-100 text-light d-flex justify-content-center align-items-center"
@@ -120,7 +124,7 @@ function OrderComponent(props) {
                 </div>
                 <Button
                   variant="secondary"
-                  className="my-2 w-50"
+                  className="my-2 w-auto"
                   size="sm"
                   onClick={() => {
                     window.location.href = `${routes.orderSummary}?orderId=${props.orderId}`;

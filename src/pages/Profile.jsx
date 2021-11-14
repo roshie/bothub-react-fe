@@ -194,7 +194,11 @@ export default function Profile(props) {
   };
 
   return (
-    <Layout loginState={props.login} page="profile">
+    <Layout
+      loginState={props.login}
+      page="profile"
+      categories={props.categories}
+    >
       <div className="d-flex align-items-center justify-content-center min-vh-100">
         {pageLoaded ? (
           <div className="col-12 col-lg-8">

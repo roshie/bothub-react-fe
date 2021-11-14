@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { routes } from "../../App";
 import logout from "../../logout";
 import { Modal } from "react-bootstrap";
+import React from "react";
 import {
   faEnvelope,
   faPhoneAlt,
@@ -27,6 +28,8 @@ export default function Layout(props) {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const pagesWithSidebar = ["products", "profile", "viewOrders"];
 
   const setAndClose = (e) => {
     setShow(false);
@@ -123,7 +126,7 @@ export default function Layout(props) {
                 className="text-light"
                 style={{ fontSize: "9px", textAlign: "end" }}
               >
-                Experience innovation
+                Experience <span className="text-secondary">innovation</span>
               </span>
             </span>
             <span className="navbar-brand mb-0 h1"></span>
@@ -153,7 +156,34 @@ export default function Layout(props) {
           <MenuItems {...props} navBar={false} />
         </Modal.Body>
       </Modal>
-      {props.children}
+      <section
+        className={`min-vh-100 d-flex justify-content-center ${
+          pagesWithSidebar.includes(props.page) ? "" : "d-none"
+        }`}
+      >
+        <div className="col-12 col-lg-9">{props.children}</div>
+        <div className="col-3 d-none d-lg-block p-4 py-5">
+          <div className="card h-100 w-100 d-flex flex-column">
+            <div className="fw-bold fs-4 text-center my-4">Categories</div>
+            {typeof props.categories !== "undefined" &&
+              props.categories.map((category) => {
+                return (
+                  <a
+                    className="my-2 mx-5 text-decoration-none text-light"
+                    href={`/category/${category.categoryName}`}
+                  >
+                    {category.categoryName.split("-").join(" ")}
+                  </a>
+                );
+              })}
+          </div>
+        </div>
+      </section>
+      <section
+        className={pagesWithSidebar.includes(props.page) ? "d-none" : ""}
+      >
+        {props.children}
+      </section>
 
       <footer className="bg-secondary h-auto py-5">
         <div className="foot bg-secondary shadow"></div>
@@ -265,7 +295,7 @@ export default function Layout(props) {
               Copyright &copy; 2021 | All Rights Reserved by{" "}
               <a
                 className="text-decoration-none text-light on-hover-primary"
-                href="/"
+                href={routes.home}
               >
                 BotHub.in
               </a>

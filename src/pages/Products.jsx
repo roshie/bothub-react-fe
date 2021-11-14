@@ -39,12 +39,13 @@ export default function Products(props) {
   }, []);
 
   return (
-    <Layout loginState={props.login} page="products">
+    <Layout
+      loginState={props.login}
+      page="products"
+      categories={props.categories}
+    >
       {loading ? (
-        <div
-          className="d-flex justify-content-center align-items-center"
-          style={{ height: "70vh", width: "90vw" }}
-        >
+        <div className="d-flex justify-content-center align-items-center min-vh-100">
           <Spinner animation="border" size="lg" className="text-light" />
         </div>
       ) : (
@@ -53,7 +54,7 @@ export default function Products(props) {
           className="min-vh-75 text-light px-auto"
           name="products"
         >
-          <div className="row d-flex justify-content-center w-75 mx-auto">
+          <div className="row d-flex justify-content-center w-100 mx-auto">
             <div className="text-center py-5 h2 fw-bolder h-auto">
               {categoryTag.split("-").join(" ")}
             </div>
