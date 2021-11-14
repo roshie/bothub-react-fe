@@ -71,15 +71,7 @@ export default function Layout(props) {
         >
           Categories
         </Item>
-        <Item
-          href={
-            props.page === "home"
-              ? "#threeDPrinting"
-              : `${routes.home}#threeDPrinting`
-          }
-          active={false}
-          onClick={setAndClose}
-        >
+        <Item href={routes.threeDPrinting} active={false} onClick={setAndClose}>
           3D Printing
         </Item>
         {props.loginState ? (
@@ -119,14 +111,22 @@ export default function Layout(props) {
             <span className="navbar-brand mb-0 d-flex flex-column">
               <Link to={routes.home} className="text-decoration-none">
                 <h3 className="fw-bold text-light mb-0 on-hover-secondary">
-                  BotHub.in
+                  B
+                  <span>
+                    <img
+                      src="favicon.ico"
+                      alt="O"
+                      style={{ height: "18px", margin: "2px" }}
+                    />
+                  </span>
+                  tHub.in
                 </h3>
               </Link>
               <span
                 className="text-light"
                 style={{ fontSize: "9px", textAlign: "end" }}
               >
-                Experience <span className="text-secondary">innovation</span>
+                Experience <span className="text-light">innovation</span>
               </span>
             </span>
             <span className="navbar-brand mb-0 h1"></span>

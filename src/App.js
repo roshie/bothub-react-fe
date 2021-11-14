@@ -10,6 +10,7 @@ import FirebaseAction from "./pages/firebaseAction";
 import viewOrders from './pages/viewOrders';
 import UserDetails from './pages/userDetails';
 import Error404 from './pages/Error404';
+import ThreeDPrinting from './pages/threeDPrinting'
 import PrivateRoute from "./PrivateRoute";
 import 'bootstrap/scss/bootstrap.scss'
 import './custom-bootstrap.scss';
@@ -18,6 +19,7 @@ import './App.scss';
 import { initializeApp } from "firebase/app";
 import Checkout from "./pages/Checkout";
 import OrderSummary from "./pages/OrderSummary";
+import { useEffect } from "react";
 
 
 // Firebase Config
@@ -46,11 +48,13 @@ export const routes = {
   verify: '/verify',
   forgotPassword: '/forgot-password',
   firebaseAction: '/firebase-action',
-  orderSummary: '/order-summary'
+  orderSummary: '/order-summary',
+  threeDPrinting: '/3d-printing'
 }
 
 function App() {
-  // Init Firebase
+
+    // Init Firebase
   initializeApp(firebaseConfig);
 
   return (
@@ -63,6 +67,7 @@ function App() {
         <PrivateRoute exact path={routes.login} component={Authenticate} page="login"/>
         <PrivateRoute exact path={routes.signUp} component={Authenticate} page="signUp"/>
         <PrivateRoute exact path={routes.home} component={Home} />
+        <PrivateRoute exact path={routes.threeDPrinting} component={ThreeDPrinting} />
         <PrivateRoute exact path={routes.profile} component={Profile} shouldLogin={true}/>
         <PrivateRoute exact path={routes.checkout} component={Checkout} shouldLogin={true} />
         <PrivateRoute exact path={routes.viewOrders} component={viewOrders} shouldLogin={true} />

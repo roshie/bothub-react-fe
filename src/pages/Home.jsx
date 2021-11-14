@@ -3,6 +3,7 @@ import { Category } from "./components/Cards";
 import { useEffect, useState, useLayoutEffect } from "react";
 import BackgroundSlider from "react-background-slider";
 import { Carousel, Form, FloatingLabel, Button } from "react-bootstrap";
+import { routes } from "../App";
 
 import img1 from "../assets/slideshow-1.jpg";
 import img2 from "../assets/slideshow-2.jpg";
@@ -142,12 +143,13 @@ function D3Printing(props) {
             We provied 3D Printing services
           </div>
           <div>
-            <Button
+            <a
               variant="secondary"
-              className="fw-bold my-2 mt-3 on-hover-light"
+              className="btn btn-secondary fw-bold my-2 mt-3 on-hover-light"
+              href={routes.threeDPrinting}
             >
               View Details
-            </Button>
+            </a>
           </div>
         </div>
         <div className="col-12 col-lg-6 text-center my-5">
