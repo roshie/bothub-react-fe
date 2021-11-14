@@ -38,7 +38,8 @@ export default function ViewOrders(props) {
           setLoading(false);
         }
       );
-  });
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <>
