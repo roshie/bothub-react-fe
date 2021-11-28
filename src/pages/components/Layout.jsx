@@ -111,23 +111,18 @@ export default function Layout(props) {
             <span className="navbar-brand mb-0 d-flex flex-column">
               <Link to={routes.home} className="text-decoration-none">
                 <h3 className="fw-bold text-light mb-0 on-hover-secondary">
-                  B
+                  
                   <span>
                     <img
-                      src="favicon.ico"
-                      alt="O"
-                      style={{ height: "18px", margin: "2px" }}
+                      className="bg-light w-100"
+                      src="BotHub.svg"
+                      alt="BotHub.in"
+                      style={{ height: "50px", margin: "2px"}}
                     />
                   </span>
-                  tHub.in
+                  
                 </h3>
               </Link>
-              <span
-                className="text-light"
-                style={{ fontSize: "9px", textAlign: "end" }}
-              >
-                Experience <span className="text-light">innovation</span>
-              </span>
             </span>
             <span className="navbar-brand mb-0 h1"></span>
             <span className="navbar-brand mb-0 h1 d-none d-md-block">

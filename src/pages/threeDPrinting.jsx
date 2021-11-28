@@ -1,15 +1,99 @@
 import Layout from "./components/Layout";
+import {Form, FloatingLabel} from "react-bootstrap";
 
 export default function ThreeDPrinting(props) {
   return (
     <Layout
       loginState={props.login}
       page="threeDPrinting"
-      categories={props.categories}
     >
       <section className="min-vh-100 d-flex justify-content-center align-items-center">
-        {/* put your code here */}
-        Hello from threeDPrinting
+      <div className="row w-75 justify-content-center h-100 w-100 mx-5 py-5">
+        <div className="col-12 col-lg-6 text-center my-5">
+          <div className="card">
+            <div className="card-body">
+              <h3 className="card-title mt-3 fw-bolder">
+                Submit your 3D Graphics here!
+              </h3>
+              <Form className="mt-5 mb-4 mx-3">
+                <div className="row">
+                  <FloatingLabel
+                    controlId="floatingInput"
+                    className=" mb-3 col-md-6 text-light"
+                    label="&emsp;Full Name"
+                  >
+                    <Form.Control
+                      className="bg-primary border-primary text-light"
+                      required
+                      type="text"
+                      placeholder="Joe Dohn"
+                    />
+                  </FloatingLabel>
+                  <FloatingLabel
+                    controlId="floatingInput"
+                    className="mb-3 col-md-6 text-light"
+                    label="&emsp;Mobile Number"
+                  >
+                    <Form.Control
+                      className="bg-primary border-primary text-light"
+                      required
+                      type="tel"
+                      placeholder="9080691390"
+                    />
+                  </FloatingLabel>
+                </div>
+                <FloatingLabel
+                  controlId="floatingInput"
+                  className="mb-3 text-light"
+                  label="Email"
+                >
+                  <Form.Control
+                    className="bg-primary border-primary text-light"
+                    required
+                    type="email"
+                    placeholder="johndoe@gmail.com"
+                  />
+                </FloatingLabel>
+                <FloatingLabel
+                  controlId="floatingTextarea2"
+                  className="mb-3 text-light"
+                  label="Any Instructions"
+                >
+                  <Form.Control
+                    className="bg-primary border-primary text-light"
+                    required
+                    as="textarea"
+                    style={{ height: "100px" }}
+                    placeholder="Any Instructions..."
+                  />
+                </FloatingLabel>
+                <div class="form-group mb-3 d-flex">
+                  <p className="p-3">Upload Files</p><br/>
+                  <input type="file" class="on-hover-secondary p-3" id="fileupload"/>
+                </div>
+                <div className="text-center">
+                  <a
+                    href="mailto:bothub.zue@gmail.com"
+                    className="btn btn-secondary fw-bold my-2 fs-5 bg-gradient on-hover-light"
+                  >
+                    Submit
+                  </a>
+                </div>
+              </Form>
+            </div>
+          </div>
+        </div>
+        <div className="col-12 col-lg-6 d-flex justify-content-center flex-column align-items-center my-5">
+          <div className="fw-bold text-light tagline text-center">
+          3D Printing
+          </div>
+          <div className="fw-bold text-light mt-4 fs-4">Upload Your Files and Details here for Printing</div>
+          <div className="text-light mb-2 mt-2 fs-5 text-center">We do the perfect and high quality 3D Printing Models for you.Give your details in the respective text boxes and upload your 3D model in the upload files.</div>
+        </div>
+      </div>
+      </section>
+      <section className="">
+        
       </section>
     </Layout>
   );

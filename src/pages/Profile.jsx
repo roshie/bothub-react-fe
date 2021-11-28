@@ -89,7 +89,8 @@ export default function Profile(props) {
           console.log(err);
           setPageLoaded(true);
         }
-      );
+      )
+      .catch((error)=>console.log(error))
     //eslint-disable-next-line
   }, []);
   const submitPersonalInfo = () => {
