@@ -10,6 +10,7 @@ import FirebaseAction from "./pages/firebaseAction";
 import viewOrders from './pages/viewOrders';
 import UserDetails from './pages/userDetails';
 import Error404 from './pages/Error404';
+import Error500 from './pages/Error500';
 import ThreeDPrinting from './pages/threeDPrinting'
 import PrivateRoute from "./PrivateRoute";
 import 'bootstrap/scss/bootstrap.scss'
@@ -19,7 +20,7 @@ import './App.scss';
 import { initializeApp } from "firebase/app";
 import Checkout from "./pages/Checkout";
 import OrderSummary from "./pages/OrderSummary";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 
 
 // Firebase Config
@@ -39,6 +40,7 @@ export const routes = {
   signUp: '/sign-up',
   home: '/',
   error404: '/error404',
+  error500: '/error500',
   idToken: '/idToken',
   profile: '/profile',
   product: '/:productSeoTagline',
@@ -64,6 +66,7 @@ function App() {
         <Route exact path={routes.forgotPassword} component={ForgotPassword}/>
         <Route exact path={routes.firebaseAction} component={FirebaseAction}/>
         <Route exact path={routes.error404} component={Error404}/>
+        <Route exact path={routes.error500} component={Error500}/>
         <PrivateRoute exact path={routes.login} component={Authenticate} page="login"/>
         <PrivateRoute exact path={routes.signUp} component={Authenticate} page="signUp"/>
         <PrivateRoute exact path={routes.home} component={Home} />
@@ -76,6 +79,7 @@ function App() {
         <PrivateRoute exact path={routes.products} component={Products} />
         <PrivateRoute exact path={routes.product} component={ProductPage} />
         <Redirect to={routes.error404} component={Error404} />
+        <Redirect to={routes.error500} component={Error500} />
         {/* Add more ... */}
       </Switch>
     </Router>

@@ -3,6 +3,8 @@ import { Product } from "./components/Cards";
 import Layout from "./components/Layout";
 import { backendAppUrl } from "../config";
 import { Spinner } from "react-bootstrap";
+import { routes } from "../App.js";
+import { Redirect } from "react-router";
 
 export default function Products(props) {
   const [categoryTag, setCategoryTag] = useState(props.categoryTag);
@@ -64,7 +66,7 @@ export default function Products(props) {
                   No Products Available
                 </div>
               ) : products === "fail" ? (
-                <> {/* Return error500 component */}</>
+                <Redirect to={routes.error500} />
               ) : (
                 products.map((product) => (
                   <Product

@@ -2,7 +2,7 @@ import Layout from "./components/Layout";
 import { Category } from "./components/Cards";
 import { useEffect, useState, useLayoutEffect } from "react";
 import BackgroundSlider from "react-background-slider";
-import { Carousel, Form, FloatingLabel, Button } from "react-bootstrap";
+import { Carousel, Form, FloatingLabel,Row} from "react-bootstrap";
 import { routes } from "../App";
 
 import img1 from "../assets/slideshow-1.jpg";
@@ -130,7 +130,7 @@ function D3Printing(props) {
   return (
     <section
       id="threeDPrinting"
-      className="min-vh-100 text-light bg-info d-flex justify-content-center align-items-center"
+      className="min-vh-100 text-light d-flex justify-content-center align-items-center"
       name="threeDPrinting"
     >
       <div className="row w-75 justify-content-center h-100 w-100 mx-5 py-5">
@@ -164,7 +164,7 @@ function Ideas(props) {
   return (
     <section
       id="ideas"
-      className="min-vh-100 text-light d-flex justify-content-center align-items-center"
+      className="min-vh-100 text-light bg-info d-flex justify-content-center align-items-center"
       name="idea"
     >
       <div className="row w-75 justify-content-center h-100 w-100 mx-5 py-5">
@@ -175,7 +175,7 @@ function Ideas(props) {
                 Submit your Ideas here!
               </h3>
               <Form className="mt-5 mb-4 mx-3">
-                <div className="row">
+                <Row>
                   <FloatingLabel
                     controlId="floatingInput"
                     className=" mb-3 col-md-6 text-light"
@@ -184,7 +184,7 @@ function Ideas(props) {
                     <Form.Control
                       className="bg-primary border-primary text-light"
                       required
-                      type="text"
+                      type="text-field"
                       placeholder="Joe Dohn"
                     />
                   </FloatingLabel>
@@ -200,7 +200,7 @@ function Ideas(props) {
                       placeholder="9080691390"
                     />
                   </FloatingLabel>
-                </div>
+                </Row>
                 <FloatingLabel
                   controlId="floatingInput"
                   className="mb-3 text-light"
@@ -258,9 +258,9 @@ export default function Home(props) {
   return (
     <Layout loginState={props.login} page="home">
       <LandingPage />
+      <Ideas />
       <Categories categories={props.categories} />
       <D3Printing />
-      <Ideas />
     </Layout>
   );
 }

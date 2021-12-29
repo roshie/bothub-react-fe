@@ -1,5 +1,5 @@
 import Layout from "./components/Layout";
-import {Form, FloatingLabel} from "react-bootstrap";
+import {Form, FloatingLabel, Row} from "react-bootstrap";
 
 export default function ThreeDPrinting(props) {
   return (
@@ -16,7 +16,7 @@ export default function ThreeDPrinting(props) {
                 Submit your 3D Graphics here!
               </h3>
               <Form className="mt-5 mb-4 mx-3">
-                <div className="row">
+                <Row>
                   <FloatingLabel
                     controlId="floatingInput"
                     className=" mb-3 col-md-6 text-light"
@@ -41,7 +41,7 @@ export default function ThreeDPrinting(props) {
                       placeholder="9080691390"
                     />
                   </FloatingLabel>
-                </div>
+                </Row>
                 <FloatingLabel
                   controlId="floatingInput"
                   className="mb-3 text-light"
@@ -67,7 +67,7 @@ export default function ThreeDPrinting(props) {
                     placeholder="Any Instructions..."
                   />
                 </FloatingLabel>
-                <div class="form-group mb-3 d-flex">
+                <div class="bg-primary border-primary text-light mb-3 d-flex">
                   <p className="p-3">Upload Files</p><br/>
                   <input type="file" class="on-hover-secondary p-3" id="fileupload"/>
                 </div>
