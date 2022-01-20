@@ -14,6 +14,7 @@ export const backendAppUrl = "https://bothub-be.herokuapp.com"
 export function getRequestParams(method, data) {
     return {
         method, 
+        mode: 'cors',
         headers: {
         'Content-Type': 'application/json'
         },
