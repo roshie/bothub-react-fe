@@ -199,6 +199,7 @@ export default function Checkout(props) {
         .then((data) => {
           fetch(`${backendAppUrl}/payments/order`, {
             ...getRequestParams("POST", data),
+            mode: 'no-cors'
           })
             .then((res) => res.json())
             .then((res) => {
