@@ -226,9 +226,13 @@ export default function OrderSummary(props) {
                           >
                             Download Invoice
                           </Button>
+                          <a 
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            href="https://chat.whatsapp.com/CbkoquUVanC1LEQWb9s1bq">
                           <button className="btn btn-whatsapp on-hover-light m-2">
                             <FontAwesomeIcon icon={faWhatsapp} /> Contact Us
-                          </button>
+                          </button></a>
                         </div>
                       </div>
                     </div>

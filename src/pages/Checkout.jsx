@@ -113,7 +113,8 @@ export default function Checkout(props) {
             .then((res) => res.json())
             .then(
               (result) => {
-                if (result.detail === "db-error") {
+                console.log(result)
+                if ('detail' in result && result.detail === "db-error") {
                   setLoading(false);
                   console.error("error");
                 } else {

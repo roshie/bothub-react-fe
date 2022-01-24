@@ -142,9 +142,13 @@ export default function ProductPage(props) {
                           >
                             Buy Now
                           </Button>
+                          <a 
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            href="https://chat.whatsapp.com/CbkoquUVanC1LEQWb9s1bq">
                           <button className="btn btn-whatsapp on-hover-light m-2">
                             <FontAwesomeIcon icon={faWhatsapp} /> Customize
-                          </button>
+                          </button></a>
                         </div>
                       </div>
                     </div>
