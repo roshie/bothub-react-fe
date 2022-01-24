@@ -246,7 +246,7 @@ export default function OrderSummary(props) {
           </section>
         </Layout>
       ) : (
-        <> {/* Return error500 component */}</>
+        <Redirect to={routes.error500} />
       )}
     </>
   );

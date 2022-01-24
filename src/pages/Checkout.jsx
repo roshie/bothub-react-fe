@@ -7,6 +7,7 @@ import { getAuth, getIdToken, sendEmailVerification } from "@firebase/auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRupeeSign } from "@fortawesome/free-solid-svg-icons";
 import { routes } from "../App";
+import { Redirect } from "react-router";
 
 export default function Checkout(props) {
   const auth = getAuth();
@@ -236,7 +237,7 @@ export default function Checkout(props) {
         {loading ? (
           <Spinner animation="border" size="lg" className="text-light" />
         ) : product === "fail" ? (
-          <> {/* Return error500 component */}</>
+          <Redirect to={routes.error500} />
         ) : !paymentDone ? (
           <Form
             onSubmit={(e) => {

@@ -8,6 +8,7 @@ import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import { backendAppUrl } from "../config";
 import { routes } from "../App";
 import { faRupeeSign } from "@fortawesome/free-solid-svg-icons";
+import { Redirect } from "react-router";
 
 export default function ProductPage(props) {
   const productSeoTagline = props.productSeoTagline;
@@ -85,7 +86,7 @@ export default function ProductPage(props) {
           <>
             <div className="row w-100 mt-3 mx-3 mb-2 justify-content-center">
               {prd === "fail" ? (
-                <> {/* Return error500 component */}</>
+                <Redirect to={routes.error500} />
               ) : prd === "no-data" ? (
                 <div className="my-4 fs-5 text-center">
                   Seems like the Product named{" "}

@@ -3,6 +3,7 @@ import { Button, Badge, Spinner } from "react-bootstrap";
 import { routes } from "../App";
 import { useEffect, useState } from "react";
 import { getRequestParams, backendAppUrl } from "../config";
+import { Redirect } from "react-router";
 
 export default function ViewOrders(props) {
   const [loading, setLoading] = useState(true);
@@ -94,7 +95,7 @@ export default function ViewOrders(props) {
           </section>
         </Layout>
       ) : (
-        <> {/* Return error500 component */}</>
+        <Redirect to={routes.error500} />
       )}
     </>
   );
