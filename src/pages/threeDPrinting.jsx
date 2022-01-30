@@ -1,4 +1,6 @@
 import Layout from "./components/Layout";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import {Form, FloatingLabel, Row} from "react-bootstrap";
 
 export default function ThreeDPrinting(props) {
@@ -76,7 +78,7 @@ export default function ThreeDPrinting(props) {
                     href="mailto:bothub.zue@gmail.com"
                     className="btn btn-secondary fw-bold my-2 fs-5 bg-gradient on-hover-light"
                   >
-                    Submit
+                    Proceed to Pay
                   </a>
                 </div>
               </Form>
@@ -89,6 +91,15 @@ export default function ThreeDPrinting(props) {
           </div>
           <div className="fw-bold text-light mt-4 fs-4">Upload Your Files and Details here for Printing</div>
           <div className="text-light mb-2 mt-2 fs-5 text-center">We do the perfect and high quality 3D Printing Models for you.Give your details in the respective text boxes and upload your 3D model in the upload files.</div>
+          <div className="text-light mb-2 mt-2 fs-5 text-center">For more information</div>
+          <a 
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://chat.whatsapp.com/CbkoquUVanC1LEQWb9s1bq">
+            <button className="btn btn-whatsapp on-hover-light m-2 my-2">
+            <FontAwesomeIcon icon={faWhatsapp} /> Connect With Us
+            </button>
+          </a>
         </div>
       </div>
       </section>

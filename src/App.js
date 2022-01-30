@@ -8,6 +8,7 @@ import Profile from "./pages/Profile";
 import Authenticate, { ForgotPassword } from './pages/Authenticate';
 import FirebaseAction from "./pages/firebaseAction";
 import viewOrders from './pages/viewOrders';
+import AdminOrders from './pages/adminOrders';
 import UserDetails from './pages/userDetails';
 import Error404 from './pages/Error404';
 import Error500 from './pages/Error500';
@@ -51,7 +52,9 @@ export const routes = {
   forgotPassword: '/forgot-password',
   firebaseAction: '/firebase-action',
   orderSummary: '/order-summary',
-  threeDPrinting: '/3d-printing'
+  threeDPrinting: '/3d-printing',
+  //Admin Routes
+  adminOrders: '/admin/orders'
 }
 
 function App() {
@@ -78,6 +81,8 @@ function App() {
         <PrivateRoute exact path={routes.verify} component={UserDetails} shouldLogin={true}/>
         <PrivateRoute exact path={routes.products} component={Products} />
         <PrivateRoute exact path={routes.product} component={ProductPage} />
+        {/* Admin Pages */}
+        <PrivateRoute exact path={routes.adminOrders} component={AdminOrders} shouldLogin={true} />
         <Redirect to={routes.error404} component={Error404} />
         <Redirect to={routes.error500} component={Error500} />
         {/* Add more ... */}
