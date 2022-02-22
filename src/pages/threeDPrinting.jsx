@@ -66,11 +66,11 @@ export default function ThreeDPrinting(props) {
                     required
                     as="textarea"
                     style={{ height: "100px" }}
-                    placeholder="Any Instructions..."
+                    placeholder="Any Instructions"
                   />
                 </FloatingLabel>
                 <div class="bg-primary border-primary text-light mb-3 d-flex">
-                  <p className="p-3">Upload Files</p><br/>
+                  <p className="p-3">Upload Files (if you want to)</p><br/>
                   <input type="file" class="on-hover-secondary p-3" id="fileupload"/>
                 </div>
                 <div className="text-center">
@@ -78,7 +78,7 @@ export default function ThreeDPrinting(props) {
                     href="mailto:bothub.zue@gmail.com"
                     className="btn btn-secondary fw-bold my-2 fs-5 bg-gradient on-hover-light"
                   >
-                    Proceed to Pay
+                    Submit
                   </a>
                 </div>
               </Form>
@@ -90,7 +90,7 @@ export default function ThreeDPrinting(props) {
           3D Printing
           </div>
           <div className="fw-bold text-light mt-4 fs-4">Upload Your Files and Details here for Printing</div>
-          <div className="text-light mb-2 mt-2 fs-5 text-center">We do the perfect and high quality 3D Printing Models for you.Give your details in the respective text boxes and upload your 3D model in the upload files.</div>
+          <div className="text-light mb-2 mt-2 fs-5 text-center">We do the perfect and high quality 3D Printing Models for you.Give your details in the respective text boxes and upload your 3D model in the upload files, only if you want to.</div>
           <div className="text-light mb-2 mt-2 fs-5 text-center">For more information</div>
           <a 
             target="_blank"

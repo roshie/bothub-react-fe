@@ -3,6 +3,7 @@ import { Category } from "./components/Cards";
 import { useEffect, useState, useLayoutEffect } from "react";
 import BackgroundSlider from "react-background-slider";
 import { Carousel, Form, FloatingLabel,Row} from "react-bootstrap";
+import emailjs from "emailjs-com";
 import { routes } from "../App";
 
 import img1 from "../assets/slideshow-1.jpg";
@@ -161,6 +162,20 @@ function D3Printing(props) {
 }
 
 function Ideas(props) {
+
+  //Email
+function sendEmail(e) {
+  e.preventDefault();
+
+  emailjs.sendForm('gmail', 'Idea', e.target, 'user_7XB3XS38prREIcbKimuFi')
+    .then((result) => {
+        console.log(result.text);
+    }, (error) => {
+        console.log(error.text);
+    });
+    e.target.reset()
+}
+
   return (
     <section
       id="ideas"
@@ -174,12 +189,13 @@ function Ideas(props) {
               <h3 className="card-title mt-3 fw-bolder">
                 Submit your Ideas here!
               </h3>
-              <Form className="mt-5 mb-4 mx-3">
+              <Form className="mt-5 mb-4 mx-3" onSubmit={sendEmail}>
                 <Row>
                   <FloatingLabel
                     controlId="floatingInput"
                     className=" mb-3 col-md-6 text-light"
                     label="&emsp;Full Name"
+                    name="name"
                   >
                     <Form.Control
                       className="bg-primary border-primary text-light"
@@ -192,6 +208,7 @@ function Ideas(props) {
                     controlId="floatingInput"
                     className="mb-3 col-md-6 text-light"
                     label="&emsp;Mobile Number"
+                    name="mobile"
                   >
                     <Form.Control
                       className="bg-primary border-primary text-light"
@@ -205,6 +222,7 @@ function Ideas(props) {
                   controlId="floatingInput"
                   className="mb-3 text-light"
                   label="Email"
+                  name="email"
                 >
                   <Form.Control
                     className="bg-primary border-primary text-light"
@@ -217,6 +235,7 @@ function Ideas(props) {
                   controlId="floatingTextarea2"
                   className="mb-3 text-light"
                   label="Your Ideas"
+                  name="ideas"
                 >
                   <Form.Control
                     className="bg-primary border-primary text-light"
