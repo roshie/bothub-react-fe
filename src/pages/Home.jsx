@@ -195,26 +195,28 @@ function sendEmail(e) {
                     controlId="floatingInput"
                     className=" mb-3 col-md-6 text-light"
                     label="&emsp;Full Name"
-                    name="name"
+                    
                   >
                     <Form.Control
                       className="bg-primary border-primary text-light"
                       required
                       type="text-field"
                       placeholder="Joe Dohn"
+                      name="name"
                     />
                   </FloatingLabel>
                   <FloatingLabel
                     controlId="floatingInput"
                     className="mb-3 col-md-6 text-light"
                     label="&emsp;Mobile Number"
-                    name="mobile"
+                    
                   >
                     <Form.Control
                       className="bg-primary border-primary text-light"
                       required
                       type="tel"
                       placeholder="9080691390"
+                      name="mobile"
                     />
                   </FloatingLabel>
                 </Row>
@@ -222,20 +224,21 @@ function sendEmail(e) {
                   controlId="floatingInput"
                   className="mb-3 text-light"
                   label="Email"
-                  name="email"
+                  
                 >
                   <Form.Control
                     className="bg-primary border-primary text-light"
                     required
                     type="email"
                     placeholder="johndoe@gmail.com"
+                    name="email"
                   />
                 </FloatingLabel>
                 <FloatingLabel
                   controlId="floatingTextarea2"
                   className="mb-3 text-light"
                   label="Your Ideas"
-                  name="ideas"
+                  
                 >
                   <Form.Control
                     className="bg-primary border-primary text-light"
@@ -243,15 +246,16 @@ function sendEmail(e) {
                     as="textarea"
                     style={{ height: "100px" }}
                     placeholder="I have a Brilliant Idea..."
+                    name="ideas"
                   />
                 </FloatingLabel>
                 <div className="text-center">
-                  <a
-                    href="mailto:bothub.zue@gmail.com"
+                  <button
                     className="btn btn-secondary fw-bold my-2 fs-5 bg-gradient on-hover-light"
+                    type="submit"
                   >
                     Submit
-                  </a>
+                  </button>
                 </div>
               </Form>
             </div>
