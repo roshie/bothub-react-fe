@@ -4,25 +4,22 @@ import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import {Form, FloatingLabel, Row} from "react-bootstrap";
 
 
-// import { Swiper, SwiperSlide } from "swiper/react";
-// import "swiper/swiper.min.css";
-// import "swiper/components/effect-coverflow/effect-coverflow.min.css";
-// import "swiper/components/pagination/pagination.min.css";
-// import "swiper/components/navigation/navigation.min.css";
-// import "./styles.css";
-// import SwiperCore, {
-//   EffectCoverflow,
-//   Pagination,
-//   Navigation
-// } from "swiper/core";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/swiper.min.css";
+import "swiper/components/effect-coverflow/effect-coverflow.min.css";
+import "swiper/components/pagination/pagination.min.css";
+import "swiper/components/navigation/navigation.min.css";
+import "./styles.css";
+import SwiperCore, {
+  EffectCoverflow,
+  Pagination,
+  Navigation
+} from "swiper/core";
 
-// SwiperCore.use([EffectCoverflow, Pagination, Navigation]);
+SwiperCore.use([EffectCoverflow, Pagination, Navigation]);
 
 
-// import img1 from "../assets/slideshow-1.jpg";
-// import img2 from "../assets/slideshow-2.jpg";
-// import img3 from "../assets/slideshow-3.jpg";
-// import img4 from "../assets/slideshow-4.jpg";
+
 
 
 
@@ -93,7 +90,7 @@ export default function ThreeDPrinting(props) {
                   />
                 </FloatingLabel>
                 <div class="bg-primary border-primary text-light mb-3 d-flex">
-                  <p className="p-3">Upload Files (if you want to)</p><br/>
+                  <p className="p-3">Upload Files(optional)</p><br/><br/>
                   <input type="file" class="on-hover-secondary p-3" id="fileupload"/>
                 </div>
                 <div className="text-center">
@@ -127,17 +124,8 @@ export default function ThreeDPrinting(props) {
       </div>
       </section>
 
-    <section className="vh-100" id="home" name="home">
+    <section className="vh-90">
     <div className="row m-auto w-75">
-       {/* <div className="container">
-      <div className="title_wrapper">
-        <div className="reactLogo">
-          <img src="images/react.png" />
-        </div>
-        <div className="title_">
-          <span>React</span>Swiper Slider
-        </div>
-      </div>
       <Swiper
         navigation={true}
         effect={"coverflow"}
@@ -157,28 +145,28 @@ export default function ThreeDPrinting(props) {
         className="mySwiper"
       >
         <SwiperSlide>
-          <img src="images/1.jpg" />
+          <img src="example.jpg" alt="img"/>
         </SwiperSlide>
         <SwiperSlide>
-          <img src="images/2.jpg" />
+          <img src="example.jpg" alt="img"/>
         </SwiperSlide>
         <SwiperSlide>
-          <img src="images/3.jpg" />
+          <img src="example.jpg" alt="img"/>
         </SwiperSlide>
         <SwiperSlide>
-          <img src="images/4.jpg" />
+          <img src="example.jpg" alt="img"/>
         </SwiperSlide>
         <SwiperSlide>
-          <img src="images/5.jpg" />
+          <img src="example.jpg" alt="img"/>
         </SwiperSlide>
         <SwiperSlide>
-          <img src="images/6.jpg" />
+          <img src="example.jpg" alt="img"/>
         </SwiperSlide>
       </Swiper>
-    </div> */}
     </div>
 </section>
-    </Layout>
+
+</Layout>
     
   );
 }
