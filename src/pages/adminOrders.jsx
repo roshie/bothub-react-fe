@@ -1,5 +1,5 @@
 import Layout from "./components/Layout";
-import { Button, Badge, Spinner } from "react-bootstrap";
+import { Button, Badge, Spinner, Navbar, Container } from "react-bootstrap";
 import { routes } from "../App";
 import { useEffect, useState } from "react";
 import { getRequestParams, backendAppUrl } from "../config";
@@ -53,9 +53,39 @@ export default function AdminOrders(props) {
         >
           <section
             id="adminOrders"
+            style={{padding: 100}}
             className="min-vh-100 text-light d-flex justify-content-center align-items-center"
             name="adminOrders"
           >
+             <div className="col-12 col-lg-3 card on-hover-scale justify-content-center align-items-center padding-100 card-product">
+                      <Navbar>
+                        <Container>
+                          <Navbar.Brand href="#home">Brand link</Navbar.Brand>
+                        </Container>
+                      </Navbar>
+                      <br />
+                      <Navbar>
+                        <Container>
+                          <Navbar.Brand href="#home">Brand text</Navbar.Brand>
+                        </Container>
+                      </Navbar>
+                      <br />
+                      <Navbar>
+                        <Container>
+                          <Navbar.Brand href="#home">Brand text</Navbar.Brand>
+                        </Container>
+                      </Navbar>
+                      <br />
+                      <Navbar>
+                        <Container>
+                          <Navbar.Brand href="#home">
+                            
+                          React Bootstrap
+                          </Navbar.Brand>
+                        </Container>
+                      </Navbar>
+             </div>
+
             {" "}
             {loading ? (
               <Spinner animation="border" size="lg" className="text-light" />
@@ -104,6 +134,9 @@ export default function AdminOrders(props) {
 
 function OrderComponent(props) {
   return (
+<>
+   
+
     <div className="card p-2 p-md-3 w-100 my-3">
       <div className="d-flex">
         <div className="col-4 p-0 d-none d-sm-block my-auto">
@@ -160,5 +193,6 @@ function OrderComponent(props) {
         </div>
       </div>
     </div>
+</>
   );
 }

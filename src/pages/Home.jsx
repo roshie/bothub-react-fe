@@ -55,7 +55,7 @@ function LandingPage(props) {
             </div>
           </div>
           <div className="col-12 col-lg-6 text-center d-none d-lg-block px-0 overflow-hidden">
-            <Carousel className="h-100 w-100">
+            <Carousel fade className="h-100 w-100"style={{zIndex: 0}}>
               <Carousel.Item className="h-100">
                 <img
                   src={img1}
