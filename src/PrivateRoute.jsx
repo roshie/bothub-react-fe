@@ -165,9 +165,9 @@ export default class PrivateRoute extends React.Component {
 const BackendDownComponent = (props) => {
   return (
     <div className="min-vh-100 d-flex justify-content-center align-items-center flex-column">
-      <div className="row text-center fs-1 fw-bold">The backend is down</div>
+      <div className="row text-center fs-1 fw-bold">Uh Oh! Seems like we're facing some problem.</div>
       <div className="row text-center fs-5 fw-bold">
-        Please turn on your backend server and refresh this page
+        Please try again after sometime.
       </div>
     </div>
   );
