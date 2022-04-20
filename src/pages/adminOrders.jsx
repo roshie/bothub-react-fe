@@ -11,7 +11,7 @@ export default function AdminOrders(props) {
   const [orders, setOrders] = useState(null);
 
   useEffect(() => {
-    document.title = `View Orders | Bothub`;
+    document.title = `ADMIN | Bothub`;
 
     fetch(`${backendAppUrl}/orders/all`, {
       ...getRequestParams("POST", {
@@ -51,14 +51,19 @@ export default function AdminOrders(props) {
           page="AdminOrders"
           categories={props.categories}
         >
+            
           <section
             id="adminOrders"
-            style={{padding: 100}}
+            style={{padding: 80}}
             className="min-vh-100 text-light d-flex justify-content-center align-items-center"
             name="adminOrders"
           >
-             <div className="col-12 col-lg-3 card on-hover-scale justify-content-center align-items-center card-product">
-                      <br />
+
+        <div className="col-12 col-lg-3">
+            <div style={{position: "fixed", top: 150, padding: 50}}>
+             <div className="card on-hover-scale justify-content-center align-items-center card-product" style={{padding: 50}}>
+               
+                      
                       <Navbar>
                         <Container>
                           <Navbar.Brand href={routes.adminOrders} className="text-light">
@@ -98,9 +103,11 @@ export default function AdminOrders(props) {
                           </Navbar.Brand>
                         </Container>
                       </Navbar>
-                      <br />
+                     
+                      </div>
              </div>
-
+             </div>
+            
             {" "}
             {loading ? (
               <Spinner animation="border" size="lg" className="text-light" />
