@@ -57,33 +57,48 @@ export default function AdminOrders(props) {
             className="min-vh-100 text-light d-flex justify-content-center align-items-center"
             name="adminOrders"
           >
-             <div className="col-12 col-lg-3 card on-hover-scale justify-content-center align-items-center padding-100 card-product">
-                      <Navbar>
-                        <Container>
-                          <Navbar.Brand href="#home">Brand link</Navbar.Brand>
-                        </Container>
-                      </Navbar>
+             <div className="col-12 col-lg-3 card on-hover-scale justify-content-center align-items-center card-product">
                       <br />
                       <Navbar>
                         <Container>
-                          <Navbar.Brand href="#home">Brand text</Navbar.Brand>
-                        </Container>
-                      </Navbar>
-                      <br />
-                      <Navbar>
-                        <Container>
-                          <Navbar.Brand href="#home">Brand text</Navbar.Brand>
-                        </Container>
-                      </Navbar>
-                      <br />
-                      <Navbar>
-                        <Container>
-                          <Navbar.Brand href="#home">
-                            
-                          React Bootstrap
+                          <Navbar.Brand href={routes.adminOrders} className="text-light">
+                            Orders
                           </Navbar.Brand>
                         </Container>
                       </Navbar>
+                      <br />
+                      <Navbar>
+                        <Container>
+                          <Navbar.Brand href="#home"className="text-light">
+                            Upload-Prop
+                          </Navbar.Brand>
+                        </Container>
+                      </Navbar>
+                      <br />
+                      <Navbar>
+                        <Container>
+                          <Navbar.Brand href="#home" className="text-light">
+                            Upload-Cat
+                          </Navbar.Brand>
+                        </Container>
+                      </Navbar>
+                      <br />
+                      <Navbar>
+                        <Container>
+                          <Navbar.Brand href="#home" className="text-light"> 
+                          Remove Prop
+                          </Navbar.Brand>
+                        </Container>
+                      </Navbar>
+                      <br />
+                      <Navbar>
+                        <Container>
+                          <Navbar.Brand href="#home" className="text-light">
+                            Update-Prop
+                          </Navbar.Brand>
+                        </Container>
+                      </Navbar>
+                      <br />
              </div>
 
             {" "}
